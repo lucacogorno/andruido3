@@ -21,9 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main"
-        android:id="@+id/include4" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -32,16 +29,18 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
+    <include
+        android:id="@+id/include4"
+        layout="@layout/content_main" />
+
     <TextView
         android:id="@+id/toolbar_title"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="56dp"
         android:layout_gravity="top|center_horizontal"
-        android:text="SuperShop"
         android:gravity="center"
+        android:text="SuperShop"
         android:textColor="@color/colorWhite"
-        android:textSize="25dp"
-        app:layout_anchor="@+id/include4"
-        app:layout_anchorGravity="top|center_horizontal" />
+        android:textSize="25dp" />
 
 </android.support.design.widget.CoordinatorLayout>
