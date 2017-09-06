@@ -47,6 +47,9 @@ public class MainFragment extends Fragment {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.d("POSITION", Integer.toString(position));
+                    Log.d("ID", Long.toString(id));
+                    //Position e id indicano l'id nella tabella sul database -1 (per esempio per avere id 1 devo fare position +1)
                     android.app.FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new ItemFragment()).addToBackStack(null).commit();
 

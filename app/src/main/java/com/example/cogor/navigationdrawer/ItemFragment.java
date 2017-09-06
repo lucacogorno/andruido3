@@ -33,7 +33,7 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
         View view = inflater.inflate(R.layout.fragment_item, container, false);
 
         TextView title = (TextView) view.findViewById(R.id.itemname);
-        title.setText("ProvaGiga");
+        TextView descr = (TextView) view.findViewById(R.id.itemdescr);
 
 
         return view;
