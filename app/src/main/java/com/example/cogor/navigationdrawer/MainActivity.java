@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         android.app.FragmentManager fragmentManager = getFragmentManager();
 
-        if (id == R.id.nav_first_layout) {
+        if (id == R.id.nav_registration) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new FirstFragment()).commit();
         } else if (id == R.id.nav_second_layout) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new SecondFragment()).commit();

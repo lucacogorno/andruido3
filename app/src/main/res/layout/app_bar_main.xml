@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/side_nav_bar"
-
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -32,15 +31,5 @@
     <include
         android:id="@+id/include4"
         layout="@layout/content_main" />
-
-    <TextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="top|center_horizontal"
-        android:gravity="center"
-        android:text="SuperShop"
-        android:textColor="@color/colorWhite"
-        android:textSize="25dp" />
 
 </android.support.design.widget.CoordinatorLayout>
