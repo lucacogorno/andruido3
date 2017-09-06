@@ -1,4 +1,4 @@
-package com.example.cogor.lpaaproject;
+package com.example.cogor.navigationdrawer;
 
 import android.app.Fragment;
 import android.os.Bundle;
