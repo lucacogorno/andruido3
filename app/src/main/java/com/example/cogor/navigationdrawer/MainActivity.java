@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ListView lv;
-    ArrayList<String> stringItems;
-    ArrayList<Item> items;
+  // ArrayList<String> stringItems;
+  // ArrayList<Item> items;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+/*
           lv = (ListView) findViewById(R.id.listView);
         stringItems = new ArrayList<>();
         try {
@@ -74,8 +76,9 @@ public class MainActivity extends AppCompatActivity
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //ItemFragment itemFragment = (ItemFragment) getFragmentManager().findFragmentById(R.id.itemfragment);
-                        //getFragmentManager().beginTransaction().replace(R.id.itemfragment, itemFragment, itemFragment.getClass().getSimpleName()).addToBackStack(null).commit();
+                       android.app.FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new ItemFragment()).addToBackStack(null).commit();
+
                 }
             });
         } catch (InterruptedException e) {
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
+       */
      //Rimosso per ora perchè copriva la listview
 
     /*
