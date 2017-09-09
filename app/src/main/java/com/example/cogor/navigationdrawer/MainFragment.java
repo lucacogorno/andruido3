@@ -32,8 +32,8 @@ public class MainFragment extends Fragment {
         lv = (ListView) myView.findViewById(R.id.listView);
         stringItems = new ArrayList<>();
         try {
+
             items = new GetItems().execute().get();
-            Log.d("AFTER GET", items.get(0).name);
 
             for(int i=0; i<items.size(); i++)
             {
@@ -47,11 +47,13 @@ public class MainFragment extends Fragment {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.d("POSITION", Integer.toString(position));
-                    Log.d("ID", Long.toString(id));
+                    ItemFragment itemFragment = new ItemFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("arg", position);
+                    itemFragment.setArguments(bundle);
                     //Position e id indicano l'id nella tabella sul database -1 (per esempio per avere id 1 devo fare position +1)
                     android.app.FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, new ItemFragment()).addToBackStack(null).commit();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, itemFragment).addToBackStack(null).commit();
 
                 }
             });

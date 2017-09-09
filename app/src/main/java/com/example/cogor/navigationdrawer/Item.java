@@ -7,25 +7,44 @@ import android.util.Log;
  */
 
 public class Item {
-    public String name;
-    public String quantity;
-    public String price;
+  private String name;
+  private String quantity;
+  private String price;
+  private String description;
 
-    public Item(String name, String quantity, String price)
+    public Item(String name, String quantity, String price, String description)
     {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
-
-        Log.d("INSIDE ITEM", name + quantity + price);
+        this.description = description;
     }
 
     public Item(String name) {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
     public String toString()
     {
         return name + ", " + quantity + ", " + price;
     }
+
+
+
 }
