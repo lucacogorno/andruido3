@@ -3,10 +3,10 @@ package com.example.cogor.navigationdrawer;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity
         if(sharedPreferences.contains("Username")) {
             navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
             navigationView.getMenu().findItem(R.id.myData).setTitle(sharedPreferences.getString("Username", null));
+            if(sharedPreferences.getBoolean("isVendor", false))
+            {
+                navigationView.getMenu().findItem((R.id.AdminArea)).setVisible(true);
+            }
         }
         else
         {
@@ -103,17 +107,25 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         android.app.FragmentManager fragmentManager = getFragmentManager();
-
-        if (id == R.id.nav_registration) {
-
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).commit();
-
-        } else if (id == R.id.nav_login) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
-        } else if (id == R.id.nav_third_layout) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new ThirdFragment()).addToBackStack(null).commit();
+        switch(id)
+        {
+            case R.id.nav_registration:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).commit();
+                break;
+            case R.id.nav_login:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_third_layout:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.nav_logout:
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Username").commit();
+                navigationView.getMenu().clear();
+                navigationView.inflateMenu(R.menu.activity_main_drawer);
+                break;
+            case R.id.AdminArea:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(null).commit();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

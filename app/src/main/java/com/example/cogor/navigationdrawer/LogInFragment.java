@@ -67,25 +67,27 @@ public class LogInFragment extends Fragment {
 
 
     public void logInTaskCall(String username, String password) throws ExecutionException, InterruptedException {
-       boolean response = new LogInTask(username, password).execute().get();
-        Log.d("ReturnedFromLogInTask", Boolean.toString(response));
-        if(!response)
-            Toast.makeText(myView.getContext(), "Log in failed", Toast.LENGTH_SHORT).show();
-        else
+       String response = new LogInTask(username, password).execute().get();
+
+        if(response.contains("true"))
         {
+            Log.d("Response", response);
             Toast.makeText(myView.getContext(), "Log in success", Toast.LENGTH_SHORT).show();
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
             prefs.edit().putString("Username", username).commit();
             getActivity().findViewById(R.id.nav_view);
-            NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);;
+            NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
             Menu menu = navigationView.getMenu();
-            MenuItem nav_login = menu.findItem(R.id.nav_login);
-            nav_login.setTitle(username);
-            MenuItem nav_logout = menu.findItem(R.id.nav_logout);
-            nav_logout.setVisible(true);
-            menu.findItem(R.id.nav_registration).setVisible(false);
+            menu.clear();
+            navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
+            navigationView.getMenu().findItem(R.id.myData).setTitle(username);
+            if(response.contains("1")) {
+                navigationView.getMenu().findItem(R.id.AdminArea).setVisible(true);
+                prefs.edit().putBoolean("isVendor", true).commit();
+            }
             getActivity().getFragmentManager().popBackStack();
         }
+        Toast.makeText(myView.getContext(), "Log in failed", Toast.LENGTH_SHORT).show();
     }
 
 
