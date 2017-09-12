@@ -1,10 +1,16 @@
 package com.example.cogor.navigationdrawer;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
+import java.util.zip.Inflater;
 
 /**
  * Created by cogor on 06/09/2017.
@@ -67,7 +74,17 @@ public class LogInFragment extends Fragment {
         else
         {
             Toast.makeText(myView.getContext(), "Log in success", Toast.LENGTH_SHORT).show();
-            //impostazioni nel caso di log in effettuato
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            prefs.edit().putString("Username", username).commit();
+            getActivity().findViewById(R.id.nav_view);
+            NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);;
+            Menu menu = navigationView.getMenu();
+            MenuItem nav_login = menu.findItem(R.id.nav_login);
+            nav_login.setTitle(username);
+            MenuItem nav_logout = menu.findItem(R.id.nav_logout);
+            nav_logout.setVisible(true);
+            menu.findItem(R.id.nav_registration).setVisible(false);
+            getActivity().getFragmentManager().popBackStack();
         }
     }
 

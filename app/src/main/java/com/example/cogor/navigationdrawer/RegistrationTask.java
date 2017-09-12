@@ -1,6 +1,7 @@
 package com.example.cogor.navigationdrawer;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * Created by cogor on 09/08/2017.
  */
 
-public class RegistrationTask extends AsyncTask<Object, Object, Boolean> {
+public class RegistrationTask extends AsyncTask<Object, Object, String> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/registration.php";
     private String password;
     private String username;
@@ -35,7 +36,7 @@ public class RegistrationTask extends AsyncTask<Object, Object, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(Object... params) {
+    protected String doInBackground(Object... params) {
         ArrayList<Item> temp;
         URL reqURL = null;
         String data = "";
@@ -68,10 +69,16 @@ public class RegistrationTask extends AsyncTask<Object, Object, Boolean> {
 
             while((line = reader.readLine()) != null)
             {
-                    sb.append(line + "\n");
+                    sb.append(line);
             }
 
-            return Boolean.parseBoolean(line);
+            Log.d("ReturnedFromRegTask", sb.toString());
+
+
+            if(sb.toString().equals("username"))
+            return "WrongUser";
+
+            return sb.toString();
 
 
         } catch (MalformedURLException e) {
@@ -79,6 +86,6 @@ public class RegistrationTask extends AsyncTask<Object, Object, Boolean> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return "false";
     }
 }

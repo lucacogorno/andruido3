@@ -72,7 +72,7 @@ public class LogInTask extends AsyncTask<Object, Object, Boolean> {
                     sb.append(line);
             }
 
-            Log.d("returnedFromLogIn", Boolean.toString(Boolean.parseBoolean(sb.toString())));
+            Log.d("returnedFromLogIn", sb.toString());
 
 
 

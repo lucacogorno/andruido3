@@ -83,16 +83,16 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <EditText
         android:id="@+id/rEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button"
+        android:ems="10"
+        android:inputType="textEmailAddress"
         android:layout_below="@+id/rUsername"
-        android:layout_marginEnd="59dp"
-        android:layout_marginTop="21dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"/>
+        android:layout_alignStart="@+id/rUsername"
+        android:layout_marginTop="12dp"
+        android:hint="Email"/>
 
 
 </RelativeLayout>

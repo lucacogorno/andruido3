@@ -1,7 +1,10 @@
 package com.example.cogor.navigationdrawer;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -20,8 +23,7 @@ public class MainActivity extends AppCompatActivity
 
     Toolbar toolbar;
     ListView lv;
-  // ArrayList<String> stringItems;
-  // ArrayList<Item> items;
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,61 +43,24 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-/*
-          lv = (ListView) findViewById(R.id.listView);
-        stringItems = new ArrayList<>();
-        try {
-            items = new GetItems().execute().get();
-            Log.d("AFTER GET", items.get(0).name);
-
-            for(int i=0; i<items.size(); i++)
-            {
-
-                stringItems.add(items.get(i).toString());
-            }
-
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringItems);
-            lv.setAdapter(arrayAdapter);
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                       android.app.FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, new ItemFragment()).addToBackStack(null).commit();
-
-                }
-            });
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if(sharedPreferences.contains("Username")) {
+            navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
+            navigationView.getMenu().findItem(R.id.myData).setTitle(sharedPreferences.getString("Username", null));
         }
-       */
-     //Rimosso per ora perchè copriva la listview
+        else
+        {
+            navigationView.inflateMenu(R.menu.activity_main_drawer);
 
-    /*
-        addItemButton = (Button) findViewById(R.id.button);
-
-        addItemButton.setOnClickListener(new View.OnClickListener()
-                                         {
-
-
-                                             @Override
-                                             public void onClick(View v) {
-                                                 Intent i = new Intent(getApplicationContext(), NewProductActivity.class);
-                                                 startActivity(i);
-                                             }
-                                         }
-        ); */
+        }
+        navigationView.setNavigationItemSelectedListener(this);
 
 
     }
@@ -140,13 +105,13 @@ public class MainActivity extends AppCompatActivity
         android.app.FragmentManager fragmentManager = getFragmentManager();
 
         if (id == R.id.nav_registration) {
-            setTitle("");
+
             fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).commit();
 
-        } else if (id == R.id.nav_second_layout) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).commit();
+        } else if (id == R.id.nav_login) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
         } else if (id == R.id.nav_third_layout) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new ThirdFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new ThirdFragment()).addToBackStack(null).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

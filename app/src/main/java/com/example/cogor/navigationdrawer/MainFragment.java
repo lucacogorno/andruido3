@@ -37,7 +37,6 @@ public class MainFragment extends Fragment {
 
             for(int i=0; i<items.size(); i++)
             {
-
                 stringItems.add(items.get(i).toString());
             }
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(myView.getContext(), android.R.layout.simple_list_item_1, stringItems);

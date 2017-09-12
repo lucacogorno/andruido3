@@ -3,6 +3,7 @@ package com.example.cogor.navigationdrawer;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,7 @@ public class RegistrationFragment extends Fragment {
 
                 if(!psw.equals(pswRep))
                 {
-                    Toast.makeText(myView.getContext(), "Passwords don't match", Toast.LENGTH_SHORT);
+                    Toast.makeText(myView.getContext(), "Passwords don't match", Toast.LENGTH_SHORT).show();
                 }
                 else {
                          try {
@@ -80,15 +81,23 @@ public class RegistrationFragment extends Fragment {
     }
 
     public void RegistrationTaskCall(String username, String password, String email, String birth) throws ExecutionException, InterruptedException {
-            boolean response = new RegistrationTask(username, password, email, birth).execute().get();
+            String response = new RegistrationTask(username, password, birth, email).execute().get();
 
-            if(!response)
+            if(response.equals("WrongUser")) {
+                Toast.makeText(myView.getContext(), "Existent username", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+            if(!Boolean.parseBoolean(response))
             {
-                Toast.makeText(myView.getContext(), "Registration Failed", Toast.LENGTH_SHORT);
+                Toast.makeText(myView.getContext(), "Registration Failed", Toast.LENGTH_SHORT).show();
             }
             else
             {
-                Toast.makeText(myView.getContext(), "Registration Success", Toast.LENGTH_SHORT);
+                Toast.makeText(myView.getContext(), "Registration Success", Toast.LENGTH_SHORT).show();
+                getActivity().getFragmentManager().popBackStack();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
             }
 
     }
