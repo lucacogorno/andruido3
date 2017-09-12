@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
  * Created by cogor on 06/09/2017.
  */
 
-public class SecondFragment extends Fragment {
+public class LogInFragment extends Fragment {
 
     View myView;
     TextView username;
@@ -36,7 +36,7 @@ public class SecondFragment extends Fragment {
         loginButton = (Button) myView.findViewById(R.id.signInButton);
 
 
-        Log.d("USername and psw", usr + " " + psw);
+        Log.d("Username and psw", usr + " " + psw);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

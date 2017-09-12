@@ -22,18 +22,16 @@ public class RegistrationTask extends AsyncTask<Object, Object, Boolean> {
     private String username;
     private String date;
     private String email;
-    private String passwordRep;
 
 
 
-    public RegistrationTask(String username, String password, String passwordRep, String date, String email)
+
+    public RegistrationTask(String username, String password, String date, String email)
     {
         this.username = username;
         this.password = password;
         this.date = date;
         this.email = email;
-        this.passwordRep = passwordRep;
-
     }
 
     @Override
@@ -42,10 +40,6 @@ public class RegistrationTask extends AsyncTask<Object, Object, Boolean> {
         URL reqURL = null;
         String data = "";
         BufferedReader reader;
-
-        if(password.equals(passwordRep)) {
-            return false;
-        }
 
 
         try {
@@ -57,8 +51,10 @@ public class RegistrationTask extends AsyncTask<Object, Object, Boolean> {
             urlConnection.setDoOutput(true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
 
-            data += "&" + URLEncoder.encode("Username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") +
-            "&" + URLEncoder.encode("Password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+            data +=       URLEncoder.encode("rUser", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") +
+                    "&" + URLEncoder.encode("rPsw", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") +
+                    "&" + URLEncoder.encode("rBirth", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8") +
+                    "&" + URLEncoder.encode("rEmail", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
 
             outputStreamWriter.write(data);
             outputStreamWriter.flush();

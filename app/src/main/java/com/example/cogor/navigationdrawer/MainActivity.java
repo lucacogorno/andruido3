@@ -1,12 +1,9 @@
 package com.example.cogor.navigationdrawer;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,12 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -149,10 +141,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_registration) {
             setTitle("");
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new FirstFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).commit();
 
         } else if (id == R.id.nav_second_layout) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new SecondFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).commit();
         } else if (id == R.id.nav_third_layout) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ThirdFragment()).commit();
         }
