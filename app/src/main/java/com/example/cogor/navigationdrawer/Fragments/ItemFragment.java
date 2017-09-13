@@ -69,7 +69,7 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
             @Override
             public void onClick(View v) {
                 myCart.addToCart(itemToAdd);
-                Log.d("Cart: ", myCart.getItems().toString());
+                Log.d("Cart: ", myCart.getCart().toString());
             }
         });
 

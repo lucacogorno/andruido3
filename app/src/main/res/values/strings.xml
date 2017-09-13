@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="welcome">Welcome!</string>
-    <string name="action_settings">Basket</string>
+    <string name="action_settings">Cart</string>
     <string name="prod_name">Product name</string>
     <string name="quantity">Quantity</string>
     <string name="price">Price</string>

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.example.cogor.navigationdrawer.Fragments.AdminFragment;
+import com.example.cogor.navigationdrawer.Fragments.CartFragment;
 import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Fragments.MainFragment;
 import com.example.cogor.navigationdrawer.Fragments.RegistrationFragment;
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new CartFragment()).addToBackStack(null).commit();
         }
 
         return super.onOptionsItemSelected(item);

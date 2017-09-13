@@ -68,14 +68,14 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
             Log.d("ItemTaskResp", result);
 
 
-            JSONObject jsonObject = new JSONObject(result);
-
+            JSONArray jsonResp = new JSONArray(result);
+            JSONObject jsonObject = jsonResp.getJSONObject(0);
             Item temp =  new Item(jsonObject.getInt("id"),
                     jsonObject.getString("name"),
                     jsonObject.getString("quantity"),
                     jsonObject.getString("price"),
                     jsonObject.getString("description"));
-
+            
 
            return temp;
 
