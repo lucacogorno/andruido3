@@ -74,13 +74,12 @@ public class MainFragment extends Fragment {
         }
 
         search = (SearchView) myView.findViewById(R.id.searchView);
-        new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InputMethodManager im = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                im.showSoftInput(search, 0);
+                search.setIconified(false);
             }
-        };
+        });
 
 
         return myView;

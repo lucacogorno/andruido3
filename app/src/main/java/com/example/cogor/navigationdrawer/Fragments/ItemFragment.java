@@ -34,8 +34,9 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
     Button addProdButton;
     TextView title;
     TextView descr;
+    TextView price;
     Cart myCart;
-    Item itemToAdd;
+    Item itemToShow;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +56,10 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
 
 
         try {
-            itemToAdd = new GetItemInfoTask(id).execute().get();
+            itemToShow = new GetItemInfoTask(id).execute().get();
 
-          //  title.setText(itemToShow.getName());
-           // descr.setText(itemToShow.getDescription());
+           title.setText(itemToShow.getName());
+           descr.setText(itemToShow.getDescription());
          } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -68,7 +69,7 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
         addProdButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                myCart.addToCart(itemToAdd);
+                myCart.addToCart(itemToShow);
                 Log.d("Cart: ", myCart.getCart().toString());
             }
         });
