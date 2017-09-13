@@ -49,9 +49,10 @@ public class MainFragment extends Fragment {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int itemId = items.get(position).getId();
                     ItemFragment itemFragment = new ItemFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("arg", position);
+                    bundle.putInt("arg", itemId);
                     itemFragment.setArguments(bundle);
                     //Position e id indicano l'id nella tabella sul database -1 (per esempio per avere id 1 devo fare position +1)
                     android.app.FragmentManager fragmentManager = getFragmentManager();

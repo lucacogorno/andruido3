@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     ListView lv;
     NavigationView navigationView;
-    static Cart cart;
+    public static Cart cart;
 
 
     @Override

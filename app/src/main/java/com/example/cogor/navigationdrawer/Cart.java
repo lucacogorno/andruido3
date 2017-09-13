@@ -19,7 +19,7 @@ public class Cart {
         cartMap = new LinkedHashMap<>();
     }
 
-    void addToCart(Item item)
+    public void addToCart(Item item)
     {
         if(cartMap.containsKey(item))
         cartMap.put(item, cartMap.get(item) + 1);
@@ -29,12 +29,12 @@ public class Cart {
         cart_Number += cartMap.get(item);
     }
 
-    int getQuantity(Item item)
+    public int getQuantity(Item item)
     {
         return cartMap.get(item);
     }
 
-    double getValue()
+    public double getValue()
     {
         return cart_Number;
     }

@@ -45,10 +45,12 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
                         jsonResp.getJSONObject(i).getString("price"));
                 temp.add(
 
-                        new Item(jsonResp.getJSONObject(i).getString("name"),
+                        new Item(jsonResp.getJSONObject(i).getInt("id"),
+                                jsonResp.getJSONObject(i).getString("name"),
                                 jsonResp.getJSONObject(i).getString("quantity"),
                                 jsonResp.getJSONObject(i).getString("price"),
-                                jsonResp.getJSONObject(i).getString("description"))
+                                jsonResp.getJSONObject(i).getString("description")
+                        )
                 );
             }
             return temp;

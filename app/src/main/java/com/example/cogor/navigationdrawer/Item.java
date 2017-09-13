@@ -7,13 +7,16 @@ import android.util.Log;
  */
 
 public class Item {
+
+  private int id;
   private String name;
   private String quantity;
   private String price;
   private String description;
 
-    public Item(String name, String quantity, String price, String description)
+    public Item(int id, String name, String quantity, String price, String description)
     {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -38,6 +41,10 @@ public class Item {
 
     public String getQuantity() {
         return quantity;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String toString()
