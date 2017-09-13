@@ -71,7 +71,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:background="@color/colorGrey"
+        android:background="@color/colorWhite"
         android:textColor="@color/colorPrimaryDark"
         android:layout_marginBottom="19dp"
         android:layout_alignParentBottom="true"
