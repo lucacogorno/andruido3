@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     ListView lv;
     NavigationView navigationView;
+    static Cart cart;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,14 +43,10 @@ public class MainActivity extends AppCompatActivity
         android.app.FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        cart = new Cart();
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         if(sharedPreferences.contains("Username")) {
             navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
             navigationView.getMenu().findItem(R.id.myData).setTitle(sharedPreferences.getString("Username", null));
-            if(sharedPreferences.getBoolean("isVendor", false))
+            if(sharedPreferences.getBoolean("isVendor", true))
             {
                 navigationView.getMenu().findItem((R.id.AdminArea)).setVisible(true);
             }

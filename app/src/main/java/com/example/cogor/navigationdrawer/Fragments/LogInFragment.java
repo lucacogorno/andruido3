@@ -15,8 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cogor.navigationdrawer.Tasks.LogInTask;
 import com.example.cogor.navigationdrawer.R;
+import com.example.cogor.navigationdrawer.Tasks.LogInTask;
+
 
 import java.util.concurrent.ExecutionException;
 
@@ -73,7 +74,6 @@ public class LogInFragment extends Fragment {
             Toast.makeText(myView.getContext(), "Log in success", Toast.LENGTH_SHORT).show();
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
             prefs.edit().putString("Username", username).commit();
-            getActivity().findViewById(R.id.nav_view);
             NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
             Menu menu = navigationView.getMenu();
             menu.clear();
