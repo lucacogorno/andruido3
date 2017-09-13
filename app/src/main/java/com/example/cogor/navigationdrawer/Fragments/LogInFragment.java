@@ -85,6 +85,8 @@ public class LogInFragment extends Fragment {
             }
             getActivity().getFragmentManager().popBackStack();
         }
+        else
+
         Toast.makeText(myView.getContext(), "Log in failed", Toast.LENGTH_SHORT).show();
     }
 

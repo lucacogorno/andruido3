@@ -58,20 +58,34 @@ public class RegistrationFragment extends Fragment {
                 birth = date.getText().toString();
                 mail = email.getText().toString();
 
-                if(!psw.equals(pswRep))
-                {
+                String email = mail.toString().trim();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+
+                String dataPattern = "^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$";
+
+
+
+                if (!email.matches(emailPattern)) {
+                    Toast.makeText(myView.getContext(), "not valid email", Toast.LENGTH_SHORT).show();
+                }
+                else if(!birth.matches(dataPattern)){
+                    Toast.makeText(myView.getContext(), "not valid date", Toast.LENGTH_SHORT).show();
+                }
+                else if (!psw.equals(pswRep)) {
                     Toast.makeText(myView.getContext(), "Passwords don't match", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                         try {
-                             RegistrationTaskCall(usr, psw, mail, birth);
-                         } catch (ExecutionException e) {
-                             e.printStackTrace();
-                         } catch (InterruptedException e) {
-                             e.printStackTrace();
-                         }
-                     }
+                    try {
+                        RegistrationTaskCall(usr, psw, mail, birth);
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
+
         });
 
 

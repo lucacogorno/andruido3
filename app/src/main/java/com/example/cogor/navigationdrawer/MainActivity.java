@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         if(sharedPreferences.contains("Username")) {
             navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
             navigationView.getMenu().findItem(R.id.myData).setTitle(sharedPreferences.getString("Username", null));
-            if(sharedPreferences.getBoolean("isVendor", true))
+            if(sharedPreferences.getBoolean("isVendor", false))
             {
                 navigationView.getMenu().findItem((R.id.AdminArea)).setVisible(true);
             }
@@ -113,8 +113,12 @@ public class MainActivity extends AppCompatActivity
         android.app.FragmentManager fragmentManager = getFragmentManager();
         switch(id)
         {
+            case R.id.Home:
+                fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).addToBackStack(null).commit();
+                break;
             case R.id.nav_registration:
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_login:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
