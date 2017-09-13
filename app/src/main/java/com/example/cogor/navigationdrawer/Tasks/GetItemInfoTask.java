@@ -65,9 +65,9 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
             Scanner s = new Scanner(response).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
 
+            Log.d("ItemTaskResp", result);
 
 
-            JSONArray jsonResp = new JSONArray(result);
             JSONObject jsonObject = new JSONObject(result);
 
             Item temp =  new Item(jsonObject.getInt("id"),
