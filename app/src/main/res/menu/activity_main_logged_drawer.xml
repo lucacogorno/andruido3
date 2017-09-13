@@ -3,22 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/Home"
+        android:icon="@drawable/ic_home_black"
         android:title="Home"
         android:visible="true"/>
 
     <item
         android:id="@+id/myData"
-        android:icon="@drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_person_black"
         android:title=""
         android:visible="true"/>
 
     <item android:id="@+id/AdminArea"
+        android:icon="@drawable/ic_star_border_black"
         android:title="Admin"
         android:visible="false"/>
 
 
     <item
         android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_exit_to_app_black"
         android:title="Logout"
         android:visible="true"/>
 </menu>

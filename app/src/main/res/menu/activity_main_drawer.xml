@@ -3,25 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/Home"
+        android:icon="@drawable/ic_home_black"
         android:title="Home"
         android:visible="true"/>
 
     <item
         android:id="@+id/nav_login"
-        android:icon="@drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_input_black_24dp"
         android:title="Login"
         android:visible="true"/>
 
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_registration"
+            android:icon="@drawable/ic_label_outline_black"
             android:title="Registration"
             android:visible="true"/>
-        <item
-            android:id="@+id/nav_third_layout"
-            android:title="Third Layout" />
-
-    </group>
 
     <item android:title="Communicate">
         <menu>

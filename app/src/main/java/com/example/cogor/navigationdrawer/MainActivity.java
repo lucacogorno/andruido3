@@ -123,9 +123,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_login:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
                 break;
-            case R.id.nav_third_layout:
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(null).commit();
-                break;
             case R.id.nav_logout:
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Username").commit();
                 navigationView.getMenu().clear();
@@ -136,6 +133,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.myData:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new UserFragment()).addToBackStack(null).commit();
+                break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
