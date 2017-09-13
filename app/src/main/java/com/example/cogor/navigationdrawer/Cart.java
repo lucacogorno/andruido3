@@ -2,6 +2,7 @@ package com.example.cogor.navigationdrawer;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by cogor on 13/09/2017.
@@ -27,6 +28,16 @@ public class Cart {
             cartMap.put(item, 1);
 
         cart_Number += cartMap.get(item);
+    }
+
+    public Set getItems()
+    {
+        return cartMap.keySet();
+    }
+
+    public Map getCart()
+    {
+        return cartMap;
     }
 
     public int getQuantity(Item item)

@@ -3,6 +3,7 @@ package com.example.cogor.navigationdrawer.Fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +69,7 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
             @Override
             public void onClick(View v) {
                 myCart.addToCart(itemToAdd);
+                Log.d("Cart: ", myCart.getItems().toString());
             }
         });
 
