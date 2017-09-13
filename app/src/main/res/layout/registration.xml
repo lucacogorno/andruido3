@@ -11,10 +11,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Name"
-
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp" />
+        android:layout_marginTop="17dp" />
 
     <EditText
         android:id="@+id/rBirthDay"
@@ -22,7 +23,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        android:hint="BirthDay"
+        android:hint="BirthDay (yyyy-mm-dd)"
+        android:textColorHint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
         android:layout_below="@+id/rName"
         android:layout_alignStart="@+id/rName" />
 
@@ -32,8 +35,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/colorWhite"
         android:hint="Username"
-        android:layout_marginTop="15dp"
+        android:textColorHint="@color/colorWhite"
         android:layout_below="@+id/rBirthDay"
         android:layout_alignStart="@+id/rBirthDay" />
 
@@ -43,10 +47,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:inputType="textPassword"
-        android:layout_above="@+id/rPasswordRep"
-        android:layout_alignStart="@+id/rUsername"
-        android:layout_marginBottom="16dp" />
+        android:layout_below="@+id/rEmail"
+        android:layout_alignStart="@+id/rEmail" />
 
     <EditText
         android:id="@+id/rPasswordRep"
@@ -54,10 +59,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="PasswordRep"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:inputType="textPassword"
-        android:layout_marginBottom="23dp"
-        android:layout_above="@+id/rButton"
-        android:layout_alignStart="@+id/rPassword" />
+        android:layout_below="@+id/rPassword"
+        android:layout_alignStart="@+id/rPassword"
+        android:layout_alignEnd="@+id/rPassword" />
 
     <Button
         android:id="@+id/rButton"
@@ -66,20 +73,17 @@
         android:text="Register"
         android:background="@color/colorGrey"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginBottom="31dp"
+        android:layout_marginBottom="19dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="240dp"
-        android:layout_height="60dp"
-        android:text="SuperShop"
-        android:textColor="@color/colorWhite"
-        android:textSize="50dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/ic_launcher"
         android:gravity="center"
         android:textStyle="italic"
-        android:layout_marginTop="14dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -89,10 +93,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:textColorHint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:hint="Email"
         android:layout_below="@+id/rUsername"
-        android:layout_alignStart="@+id/rUsername"
-        android:layout_marginTop="12dp"
-        android:hint="Email"/>
+        android:layout_alignStart="@+id/rUsername" />
 
 
 </RelativeLayout>

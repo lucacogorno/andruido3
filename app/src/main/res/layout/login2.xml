@@ -13,8 +13,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Username"
-        android:layout_marginTop="17dp"
-        android:layout_below="@+id/textView2"
+        android:layout_marginBottom="43dp"
+        android:layout_alignBottom="@+id/logPsw"
         android:layout_alignStart="@+id/logPsw" />
 
 
@@ -25,9 +25,9 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:layout_marginTop="70dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_above="@+id/signInButton"
+        android:layout_alignStart="@+id/signInButton"
+        android:layout_marginBottom="75dp" />
 
     <Button
         android:id="@+id/signInButton"
@@ -36,22 +36,9 @@
         android:text="Sign in"
         android:background="@color/colorGrey"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginTop="62dp"
-        android:layout_below="@+id/logPsw"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="240dp"
-        android:layout_height="60dp"
-        android:text="SuperShop"
-        android:textColor="@color/colorWhite"
-        android:textSize="50dp"
-        android:gravity="center"
-        android:textStyle="italic"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp" />
+        android:layout_marginBottom="143dp" />
 
 
 </RelativeLayout>
