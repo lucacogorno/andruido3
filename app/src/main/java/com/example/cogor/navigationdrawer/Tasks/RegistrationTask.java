@@ -1,7 +1,9 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.example.cogor.navigationdrawer.Item;
 
 import java.io.BufferedReader;
 import java.io.IOException;

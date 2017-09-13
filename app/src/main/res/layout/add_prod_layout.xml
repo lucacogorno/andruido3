@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,20 +7,15 @@
     android:weightSum="1">
 
     <EditText
-        android:id="@+id/inputName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/prod_name"
-        android:inputType="text" />
-
-    <EditText
         android:id="@+id/inputQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/quantity"
-        android:inputType="number" />
+        android:inputType="number"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/inputName"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/inputPrice"
@@ -28,7 +23,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/price"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/inputQuantity"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="33dp" />
 
     <EditText
         android:id="@+id/prod_descr"
@@ -38,12 +36,29 @@
         android:ems="10"
         android:hint="@string/descr"
         android:inputType="text"
-        android:selectAllOnFocus="true" />
+        android:selectAllOnFocus="true"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/inputPrice"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/addButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Product" />
+        android:text="Add Product"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
-</LinearLayout>
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/prod_name"
+        android:inputType="text"
+        android:layout_marginTop="62dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

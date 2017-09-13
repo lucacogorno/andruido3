@@ -1,8 +1,10 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.cogor.navigationdrawer.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +22,7 @@ import java.util.Scanner;
  * Created by cogor on 09/08/2017.
  */
 
-public class GetItems extends AsyncTask<Object, Object, ArrayList<Item>> {
+public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_items.php";
 
 
@@ -36,7 +38,6 @@ public class GetItems extends AsyncTask<Object, Object, ArrayList<Item>> {
             String result = s.hasNext() ? s.next() : "";
             JSONArray jsonResp = new JSONArray(result);
             temp = new ArrayList<>();
-            Log.d("RES", jsonResp.getJSONObject(0).getString("quantity"));
             for(int i = 0; i < jsonResp.length(); i++)
             {
                 Log.d("OUTSIDE ITEM", jsonResp.getJSONObject(i).getString("name")+

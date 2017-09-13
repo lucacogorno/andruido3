@@ -1,4 +1,4 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -16,20 +16,14 @@ import java.net.URLEncoder;
  * Created by cogor on 09/08/2017.
  */
 
-public class AddProdTask extends AsyncTask<Object, Object, String> {
-    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/create_product.php";
-    String name;
-    String quantity;
-    String price;
-    String descr;
+public class UserInfoTask extends AsyncTask<Object, Object, String> {
+    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_user_creds.php";
+    private String username;
 
 
-    public AddProdTask(String name, String quantity, String price, String descr)
+    public UserInfoTask(String username)
     {
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.descr = descr;
+        this.username = username;
 
     }
 
@@ -51,11 +45,8 @@ public class AddProdTask extends AsyncTask<Object, Object, String> {
             urlConnection.setDoOutput(true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
 
-            data += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +
-            "&" + URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(quantity, "UTF-8") +
-            "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") +
-            "&" + URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(descr, "UTF-8");
-            Log.d("OutputSent", data);
+            data += URLEncoder.encode("infoUser", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
+            Log.d("OutputSentUserInfo", data);
             outputStreamWriter.write(data);
             outputStreamWriter.flush();
 
@@ -66,12 +57,14 @@ public class AddProdTask extends AsyncTask<Object, Object, String> {
             StringBuilder sb = new StringBuilder();
             String line = null;
 
+
+
             while((line = reader.readLine()) != null)
             {
                     sb.append(line);
             }
 
-            Log.d("returnedFromAddProd", sb.toString());
+            Log.d("returnedFromLogIn", sb.toString());
 
             return sb.toString();
 

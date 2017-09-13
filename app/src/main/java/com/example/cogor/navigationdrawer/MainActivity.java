@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +16,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+
+import com.example.cogor.navigationdrawer.Fragments.AdminFragment;
+import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
+import com.example.cogor.navigationdrawer.Fragments.MainFragment;
+import com.example.cogor.navigationdrawer.Fragments.RegistrationFragment;
+import com.example.cogor.navigationdrawer.Fragments.UserFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -125,6 +130,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.AdminArea:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.myData:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new UserFragment()).addToBackStack(null).commit();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

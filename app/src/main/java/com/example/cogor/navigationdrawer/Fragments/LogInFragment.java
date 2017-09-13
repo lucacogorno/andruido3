@@ -1,7 +1,6 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Fragments;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,15 +9,16 @@ import android.support.design.widget.NavigationView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cogor.navigationdrawer.Tasks.LogInTask;
+import com.example.cogor.navigationdrawer.R;
+
 import java.util.concurrent.ExecutionException;
-import java.util.zip.Inflater;
 
 /**
  * Created by cogor on 06/09/2017.
@@ -42,8 +42,6 @@ public class LogInFragment extends Fragment {
         password = (TextView) myView.findViewById(R.id.logPsw);
         loginButton = (Button) myView.findViewById(R.id.signInButton);
 
-
-        Log.d("Username and psw", usr + " " + psw);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

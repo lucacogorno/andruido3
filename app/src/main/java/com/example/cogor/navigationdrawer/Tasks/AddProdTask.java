@@ -1,38 +1,35 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Created by cogor on 09/08/2017.
  */
 
-public class LogInTask extends AsyncTask<Object, Object, String> {
-    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/logIn.php";
-    private String password;
-    private String username;
+public class AddProdTask extends AsyncTask<Object, Object, String> {
+    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/create_product.php";
+    String name;
+    String quantity;
+    String price;
+    String descr;
 
 
-    public LogInTask(String username, String password)
+    public AddProdTask(String name, String quantity, String price, String descr)
     {
-        this.username = username;
-        this.password = password;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.descr = descr;
 
     }
 
@@ -54,8 +51,10 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
             urlConnection.setDoOutput(true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
 
-            data += URLEncoder.encode("lname", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") +
-            "&" + URLEncoder.encode("lpsw", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+            data += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +
+            "&" + URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(quantity, "UTF-8") +
+            "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") +
+            "&" + URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(descr, "UTF-8");
             Log.d("OutputSent", data);
             outputStreamWriter.write(data);
             outputStreamWriter.flush();
@@ -72,7 +71,7 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
                     sb.append(line);
             }
 
-            Log.d("returnedFromLogIn", sb.toString());
+            Log.d("returnedFromAddProd", sb.toString());
 
             return sb.toString();
 

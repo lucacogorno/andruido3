@@ -1,4 +1,4 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.cogor.navigationdrawer.Fragments.AddProdFragment;
+import com.example.cogor.navigationdrawer.R;
 
 /**
  * Created by cogor on 06/09/2017.

@@ -1,4 +1,4 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,8 +10,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
 
+import com.example.cogor.navigationdrawer.Tasks.GetItemsTask;
+import com.example.cogor.navigationdrawer.Item;
 import com.example.cogor.navigationdrawer.R;
 
 import java.util.concurrent.ExecutionException;
@@ -43,7 +44,7 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
 
 
         try {
-            Item itemToShow = new GetItems().execute().get().get(id);
+            Item itemToShow = new GetItemsTask().execute().get().get(id);
 
             title.setText(itemToShow.getName());
             descr.setText(itemToShow.getDescription());

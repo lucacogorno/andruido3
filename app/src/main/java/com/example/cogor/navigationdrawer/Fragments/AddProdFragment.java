@@ -1,4 +1,4 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.cogor.navigationdrawer.Tasks.AddProdTask;
+import com.example.cogor.navigationdrawer.R;
 
 import java.util.concurrent.ExecutionException;
 

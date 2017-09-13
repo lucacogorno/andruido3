@@ -1,15 +1,18 @@
-package com.example.cogor.navigationdrawer;
+package com.example.cogor.navigationdrawer.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.cogor.navigationdrawer.Tasks.GetItemsTask;
+import com.example.cogor.navigationdrawer.Item;
+import com.example.cogor.navigationdrawer.R;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -33,7 +36,7 @@ public class MainFragment extends Fragment {
         stringItems = new ArrayList<>();
         try {
 
-            items = new GetItems().execute().get();
+            items = new GetItemsTask().execute().get();
 
             for(int i=0; i<items.size(); i++)
             {
