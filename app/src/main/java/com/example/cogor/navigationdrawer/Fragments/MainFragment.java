@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.cogor.navigationdrawer.Tasks.GetItemsTask;
 import com.example.cogor.navigationdrawer.Item;
@@ -17,6 +20,9 @@ import com.example.cogor.navigationdrawer.R;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+import static com.example.cogor.navigationdrawer.R.id.editText;
+
 /**
  * Created by cogor on 06/09/2017.
  */
@@ -24,6 +30,7 @@ import java.util.concurrent.ExecutionException;
 public class MainFragment extends Fragment {
 
     ListView lv;
+    SearchView search;
     View myView;
     ArrayList<String> stringItems;
     ArrayList<Item> items;
@@ -65,6 +72,17 @@ public class MainFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+        search = (SearchView) myView.findViewById(R.id.searchView);
+        new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager im = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                im.showSoftInput(search, 0);
+            }
+        };
+
+
         return myView;
     }
 
