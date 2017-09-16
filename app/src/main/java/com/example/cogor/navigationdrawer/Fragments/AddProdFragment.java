@@ -52,7 +52,6 @@ public class AddProdFragment extends Fragment {
                 quantity = prodQuantity.getText().toString();
                 price = prodPrice.getText().toString();
                 descr = description.getText().toString();
-
                 try {
                     callAddProdTask(name, quantity, price, descr);
                 } catch (ExecutionException e) {
@@ -70,8 +69,7 @@ public class AddProdFragment extends Fragment {
 
 
     public void callAddProdTask(String name, String quantity, String price, String descr) throws ExecutionException, InterruptedException {
-       String response = new AddProdTask(name, quantity, price, descr).execute().get();
-        Log.d("AddResponse", response);
+       new AddProdTask(name, quantity, price, descr, myView).execute();
     }
 
 }

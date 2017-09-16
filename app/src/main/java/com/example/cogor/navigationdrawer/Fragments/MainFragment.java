@@ -39,40 +39,11 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.main_fragment, container, false);
-        lv = (ListView) myView.findViewById(R.id.listView);
-        stringItems = new ArrayList<>();
-        try {
+            //Task che riceve dal server le informazioni sui prodotti e li inserisce in una listview
+            new GetItemsTask(myView,getActivity()).execute();
 
-            items = new GetItemsTask().execute().get();
 
-            for(int i=0; i<items.size(); i++)
-            {
-                stringItems.add(items.get(i).toString());
-            }
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(myView.getContext(), android.R.layout.simple_list_item_1, stringItems);
-
-            lv.setAdapter(arrayAdapter);
-
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int itemId = items.get(position).getId();
-                    ItemFragment itemFragment = new ItemFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("arg", itemId);
-                    itemFragment.setArguments(bundle);
-                    //Position e id indicano l'id nella tabella sul database -1 (per esempio per avere id 1 devo fare position +1)
-                    android.app.FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, itemFragment).addToBackStack(null).commit();
-
-                }
-            });
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
+        //campo di ricerca
         search = (SearchView) myView.findViewById(R.id.searchView);
         search.setOnClickListener(new View.OnClickListener() {
             @Override

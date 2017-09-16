@@ -1,11 +1,14 @@
 package com.example.cogor.navigationdrawer;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,12 +20,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Fragments.AdminFragment;
 import com.example.cogor.navigationdrawer.Fragments.CartFragment;
 import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Fragments.MainFragment;
 import com.example.cogor.navigationdrawer.Fragments.RegistrationFragment;
 import com.example.cogor.navigationdrawer.Fragments.UserFragment;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +37,6 @@ public class MainActivity extends AppCompatActivity
     ListView lv;
     NavigationView navigationView;
     public static Cart cart;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,4 +145,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-}
+
+
+    }
+

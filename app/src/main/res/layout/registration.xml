@@ -27,7 +27,8 @@
         android:textColorHint="@color/colorWhite"
         android:textColor="@color/colorWhite"
         android:layout_below="@+id/rName"
-        android:layout_alignStart="@+id/rName" />
+        android:layout_alignStart="@+id/rName"
+        android:layout_alignEnd="@+id/rName" />
 
     <EditText
         android:id="@+id/rUsername"
@@ -97,7 +98,16 @@
         android:textColor="@color/colorWhite"
         android:hint="Email"
         android:layout_below="@+id/rUsername"
-        android:layout_alignStart="@+id/rUsername" />
+        android:layout_alignStart="@+id/rUsername"
+        android:layout_alignEnd="@+id/textView2" />
+
+    <Spinner
+        android:id="@+id/genderChoicer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rPassword"
+        android:layout_below="@+id/rUsername"
+        android:layout_alignEnd="@+id/rUsername" />
 
 
 </RelativeLayout>

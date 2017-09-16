@@ -1,10 +1,21 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cogor.navigationdrawer.Fragments.ItemFragment;
+import com.example.cogor.navigationdrawer.Fragments.MainFragment;
 import com.example.cogor.navigationdrawer.Item;
+import com.example.cogor.navigationdrawer.MainActivity;
+import com.example.cogor.navigationdrawer.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,11 +35,18 @@ import java.util.Scanner;
 
 public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_items.php";
+    View view;
+    Activity atv;
 
+    public GetItemsTask(View view, Activity atv)
+    {
+        this.view = view;
+        this.atv = atv;
+    }
 
     @Override
     protected ArrayList<Item> doInBackground(Object... params) {
-        ArrayList<Item> temp;
+        ArrayList<Item> temp = new ArrayList<>();
         URL reqURL = null;
         try {
             reqURL = new URL(requestURL);
@@ -37,7 +55,6 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
             Scanner s = new Scanner(response).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
             JSONArray jsonResp = new JSONArray(result);
-            temp = new ArrayList<>();
             for(int i = 0; i < jsonResp.length(); i++)
             {
                 Log.d("OUTSIDE ITEM", jsonResp.getJSONObject(i).getString("name")+
@@ -63,6 +80,42 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
         }
 
 
-        return null;
+        return temp;
+    }
+
+    @Override
+    protected void onPostExecute(final ArrayList<Item> items) {
+
+        final ArrayList<String> stringItems = new ArrayList<>();
+        ListView lv = (ListView) view.findViewById(R.id.listView);
+        if(items.size() == 0)
+        {
+            Toast.makeText(view.getContext(), "Connection Error", Toast.LENGTH_SHORT);
+            return;
+        }
+        for(int i=0; i<items.size(); i++)
+        {
+            stringItems.add(items.get(i).toString());
+        }
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, stringItems);
+
+        lv.setAdapter(arrayAdapter);
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemId = items.get(position).getId();
+                ItemFragment itemFragment = new ItemFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("arg", itemId);
+                itemFragment.setArguments(bundle);
+                //Position e id indicano l'id nella tabella sul database -1 (per esempio per avere id 1 devo fare position +1)
+                android.app.FragmentManager fragmentManager = atv.getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, itemFragment).addToBackStack(null).commit();
+
+            }
+        });
+
     }
 }

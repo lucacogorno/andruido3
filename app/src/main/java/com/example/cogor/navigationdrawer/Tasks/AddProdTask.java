@@ -2,6 +2,8 @@ package com.example.cogor.navigationdrawer.Tasks;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,30 +18,31 @@ import java.net.URLEncoder;
  * Created by cogor on 09/08/2017.
  */
 
-public class AddProdTask extends AsyncTask<Object, Object, String> {
+public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/create_product.php";
     String name;
     String quantity;
     String price;
     String descr;
+    View view;
 
 
-    public AddProdTask(String name, String quantity, String price, String descr)
+    public AddProdTask(String name, String quantity, String price, String descr, View view)
     {
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.descr = descr;
+        this.view = view;
 
     }
 
     @Override
-    protected String doInBackground(Object... params) {
+    protected Boolean doInBackground(Object... params) {
 
         URL reqURL = null;
         String data = "";
         BufferedReader reader;
-
 
 
         try {
@@ -73,7 +76,7 @@ public class AddProdTask extends AsyncTask<Object, Object, String> {
 
             Log.d("returnedFromAddProd", sb.toString());
 
-            return sb.toString();
+            return Boolean.parseBoolean(sb.toString());
 
 
         } catch (MalformedURLException e) {
@@ -81,6 +84,12 @@ public class AddProdTask extends AsyncTask<Object, Object, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "false";
+        return false;
+    }
+
+    @Override
+    protected void onPostExecute(Boolean b) {
+        if(b) Toast.makeText(view.getContext(), "Product added", Toast.LENGTH_SHORT);
+        else Toast.makeText(view.getContext(), "Product not added", Toast.LENGTH_SHORT);
     }
 }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -27,11 +28,8 @@ import java.util.concurrent.ExecutionException;
 
 public class UserFragment extends Fragment implements OnEditorActionListener, OnClickListener{
 
-    TextView UserTitle;
-    TextView BirthDay;
-    TextView UserEmail;
-    String username;
 
+    String username;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,21 +42,18 @@ public class UserFragment extends Fragment implements OnEditorActionListener, On
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.user_fragment, container, false);
-        UserTitle = (TextView) view.findViewById(R.id.userTitle);
-        BirthDay = (TextView) view.findViewById(R.id.userBirth);
-        UserEmail = (TextView) view.findViewById(R.id.userEmail);
+
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         username =  prefs.getString("Username", null);
-        try {
-            String response = new UserInfoTask(username).execute().get();
-            Log.d("UserInfoResp", response);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        TextView userTitle = (TextView) view.findViewById(R.id.userTitle);
+        userTitle.setText(username);
+
+
+
+            new UserInfoTask(username, view).execute();
+
 
         return view;
     }

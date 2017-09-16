@@ -50,13 +50,8 @@ public class LogInFragment extends Fragment {
                 usr = username.getText().toString();
                 psw = password.getText().toString();
 
-                try {
-                    logInTaskCall(usr, psw);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+                new LogInTask(usr, psw, myView, getActivity()).execute();
             }
         });
 
@@ -65,32 +60,7 @@ public class LogInFragment extends Fragment {
     }
 
 
-    public void logInTaskCall(String username, String password) throws ExecutionException, InterruptedException {
-       String response = new LogInTask(username, password).execute().get();
-
-        if(response.contains("true"))
-        {
-            Log.d("Response", response);
-            Toast.makeText(myView.getContext(), "Log in success", Toast.LENGTH_SHORT).show();
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-            prefs.edit().putString("Username", username).commit();
-            NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
-            Menu menu = navigationView.getMenu();
-            menu.clear();
-            navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
-            navigationView.getMenu().findItem(R.id.myData).setTitle(username);
-            if(response.contains("1")) {
-                navigationView.getMenu().findItem(R.id.AdminArea).setVisible(true);
-                prefs.edit().putBoolean("isVendor", true).commit();
-            }
-            getActivity().getFragmentManager().popBackStack();
-        }
-        else
-
-        Toast.makeText(myView.getContext(), "Log in failed", Toast.LENGTH_SHORT).show();
-    }
-
-
 }
+
 
 

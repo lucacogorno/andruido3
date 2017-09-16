@@ -1,9 +1,14 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Item;
+import com.example.cogor.navigationdrawer.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,16 +30,21 @@ public class RegistrationTask extends AsyncTask<Object, Object, String> {
     private String username;
     private String date;
     private String email;
+    private String gender;
+    View view;
+    Activity activity;
 
 
 
-
-    public RegistrationTask(String username, String password, String date, String email)
+    public RegistrationTask(String username, String password, String date, String email, String gender, View view, Activity activity)
     {
         this.username = username;
         this.password = password;
         this.date = date;
         this.email = email;
+        this.view = view;
+        this.activity = activity;
+        this.gender = gender;
     }
 
     @Override
@@ -57,7 +67,8 @@ public class RegistrationTask extends AsyncTask<Object, Object, String> {
             data +=       URLEncoder.encode("rUser", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") +
                     "&" + URLEncoder.encode("rPsw", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8") +
                     "&" + URLEncoder.encode("rBirth", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8") +
-                    "&" + URLEncoder.encode("rEmail", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                    "&" + URLEncoder.encode("rEmail", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8") +
+                    "&" + URLEncoder.encode("gender", "UTF-8") + "=" + URLEncoder.encode(gender, "UTF-8");
 
             outputStreamWriter.write(data);
             outputStreamWriter.flush();
@@ -89,5 +100,28 @@ public class RegistrationTask extends AsyncTask<Object, Object, String> {
             e.printStackTrace();
         }
         return "false";
+    }
+
+    @Override
+    protected void onPostExecute(String response) {
+        if(response.equals("WrongUser")) {
+            Toast.makeText(view.getContext(), "Existent username", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        if(!Boolean.parseBoolean(response))
+        {
+            Toast.makeText(view.getContext(), "Registration Failed", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(view.getContext(), "Registration Success", Toast.LENGTH_SHORT).show();
+            activity.getFragmentManager().popBackStack();
+            activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
+        }
+
+
+
     }
 }

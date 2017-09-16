@@ -1,10 +1,24 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.cogor.navigationdrawer.Cart;
+import com.example.cogor.navigationdrawer.Database.DbCart;
+import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Item;
+import com.example.cogor.navigationdrawer.MainActivity;
+import com.example.cogor.navigationdrawer.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +33,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Objects;
 import java.util.Scanner;
+
 
 /**
  * Created by cogor on 09/08/2017.
@@ -28,11 +44,14 @@ import java.util.Scanner;
 public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_item_info.php";
     private int id;
+    View view;
+    Activity activity;
 
-
-    public GetItemInfoTask(int id)
+    public GetItemInfoTask(int id, View view, Activity activity)
     {
         this.id = id;
+        this.view = view;
+        this.activity = activity;
     }
 
     @Override
@@ -88,4 +107,51 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
         }
         return null;
     }
+
+    @Override
+    protected void onPostExecute(final Item item) {
+        final Cart myCart = MainActivity.cart;
+
+        TextView title = (TextView) view.findViewById(R.id.itemname);
+       TextView descr = (TextView) view.findViewById(R.id.itemdescr);
+       final Button addProdButton = (Button) view.findViewById(R.id.addToCartButton);
+
+        title.setText(item.getName());
+        descr.setText(item.getDescription());
+
+        addProdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+                String username = prefs.getString("Username", null);
+
+                DbCartHelper dbCartHelper = new DbCartHelper(activity.getApplicationContext());
+                ContentValues contentValues = new ContentValues();
+                SQLiteDatabase db = dbCartHelper.getWritableDatabase();
+                String[] toCheck = new String[] {username, Integer.toString(item.getId())};
+                Cursor checkCursor = db.query(DbCart.CartInit.TABLE_NAME , null, "username = ? AND prodId = ?" , toCheck, null, null, null);
+                if(checkCursor.getCount() < 1) {
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_PRODID, item.getId());
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, 1);
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_USERNAME, username);
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, item.getPrice());
+                    db.insert(DbCart.CartInit.TABLE_NAME, null, contentValues);
+                }
+                else
+                {
+                    String[] toUpdate = new String[]{"quantity", "singleamount"};
+                    Cursor infoCursor = db.query(DbCart.CartInit.TABLE_NAME , toUpdate, "username = ? AND prodId = ?" , toCheck, null, null, null);
+                    infoCursor.moveToFirst();
+
+                    int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
+                    double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity +1);
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount + Double.parseDouble(item.getPrice()));
+                    db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodId = ?", toCheck);
+                }
+                db.close();
+    }});
+    }
+
 }

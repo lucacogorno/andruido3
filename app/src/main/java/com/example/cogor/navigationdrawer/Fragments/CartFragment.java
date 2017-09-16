@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.cogor.navigationdrawer.Item;
 import com.example.cogor.navigationdrawer.MainActivity;
 import com.example.cogor.navigationdrawer.R;
+import com.example.cogor.navigationdrawer.Tasks.CreateCartFromDbTask;
 import com.example.cogor.navigationdrawer.Tasks.GetItemsTask;
 
 import java.util.ArrayList;
@@ -35,16 +36,12 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_cart, container, false);
-        lv = (ListView) myView.findViewById(R.id.cartItems);
-        stringItems = MainActivity.cart.getCartItemsString();
 
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(myView.getContext(), android.R.layout.simple_list_item_1, stringItems);
 
-            lv.setAdapter(arrayAdapter);
 
-            totalAmount = (TextView) myView.findViewById(R.id.totalAmount);
-            double amount = MainActivity.cart.totalAmount();
-            totalAmount.setText(Double.toString(amount));
+        new CreateCartFromDbTask(getActivity(), myView).execute();
+
+
         return myView;
     }
 

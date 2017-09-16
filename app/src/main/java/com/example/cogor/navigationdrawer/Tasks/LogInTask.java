@@ -1,8 +1,16 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.View;
 import android.widget.Toast;
+
+import com.example.cogor.navigationdrawer.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,13 +35,15 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/logIn.php";
     private String password;
     private String username;
+    View view;
+    Activity activity;
 
-
-    public LogInTask(String username, String password)
+    public LogInTask(String username, String password, View view, Activity activity)
     {
         this.username = username;
         this.password = password;
-
+        this.view = view;
+        this.activity = activity;
     }
 
     @Override
@@ -84,4 +94,32 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
         }
         return "false";
     }
-}
+
+    @Override
+    protected void onPostExecute(String s) {
+        if(s.contains("true"))
+        {
+            Log.d("Response", s);
+            Toast.makeText(view.getContext(), "Log in success", Toast.LENGTH_SHORT).show();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+            prefs.edit().putString("Username", username).commit();
+            NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
+            Menu menu = navigationView.getMenu();
+            menu.clear();
+            navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
+            navigationView.getMenu().findItem(R.id.myData).setTitle(username);
+            if(s.contains("1")) {
+                navigationView.getMenu().findItem(R.id.AdminArea).setVisible(true);
+                prefs.edit().putBoolean("isVendor", true).commit();
+            }
+            activity.getFragmentManager().popBackStack();
+        }
+        else
+
+            Toast.makeText(view.getContext(), "Log in failed", Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    }
+
