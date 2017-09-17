@@ -12,7 +12,6 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:text="Username"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -22,20 +21,19 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:text="Birthday"
-        android:layout_below="@+id/userName"
-        android:layout_marginTop="49dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/userGender"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="21dp"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/userEmail"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:text="Email"
         android:layout_below="@+id/userName"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
         android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.TabLayout
@@ -64,9 +62,9 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:text="Gender"
-        android:layout_below="@+id/userBirth"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp"
         android:layout_alignParentEnd="true" />
 
     <TextView
@@ -78,6 +76,46 @@
         android:textSize="25dp"
         android:textColor="@color/colorWhite"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textColor="@drawable/side_nav_bar"
+        android:layout_above="@+id/userName"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/userName"
+        android:text="Email"
+        android:textColor="@drawable/side_nav_bar"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/userEmail"
+        android:text="Birthday"
+        android:textColor="@drawable/side_nav_bar"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textColor="@drawable/side_nav_bar"
+        android:layout_above="@+id/userGender"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
