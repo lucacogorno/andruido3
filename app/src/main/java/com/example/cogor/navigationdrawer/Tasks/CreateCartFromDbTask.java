@@ -10,10 +10,12 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.cogor.navigationdrawer.Database.DbCart;
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
+import com.example.cogor.navigationdrawer.Fragments.OrderInfoFragment;
 import com.example.cogor.navigationdrawer.R;
 
 import java.util.ArrayList;
@@ -57,6 +59,16 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, strings);
 
         lv.setAdapter(arrayAdapter);
+
+        Button confirmButton = (Button) view.findViewById(R.id.confirmOrder);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderInfoFragment()).commit();
+
+            }
+        });
 
 
     }
