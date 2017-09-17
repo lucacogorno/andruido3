@@ -7,65 +7,68 @@
     <EditText
         android:id="@+id/rName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Name"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
+        android:layout_marginTop="13dp"
         android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp" />
+        android:layout_alignStart="@+id/rUsername"
+        android:layout_alignEnd="@+id/rUsername" />
 
     <EditText
         android:id="@+id/rBirthDay"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="date"
         android:hint="BirthDay (yyyy-mm-dd)"
         android:textColorHint="@color/colorWhite"
         android:textColor="@color/colorWhite"
-        android:layout_below="@+id/rName"
-        android:layout_alignStart="@+id/rName"
-        android:layout_alignEnd="@+id/rName" />
+        android:layout_below="@+id/rUsername"
+        android:layout_alignStart="@+id/rEmail"
+        android:layout_alignEnd="@+id/rEmail" />
 
     <EditText
         android:id="@+id/rUsername"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/colorWhite"
         android:hint="Username"
         android:textColorHint="@color/colorWhite"
-        android:layout_below="@+id/rBirthDay"
-        android:layout_alignStart="@+id/rBirthDay" />
+        android:layout_below="@+id/rName"
+        android:layout_alignStart="@+id/rBirthDay"
+        android:layout_alignEnd="@+id/rBirthDay" />
 
     <EditText
         android:id="@+id/rPassword"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10"
         android:hint="Password"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="textPassword"
         android:layout_below="@+id/rEmail"
-        android:layout_alignStart="@+id/rEmail" />
+        android:layout_alignStart="@+id/rPasswordRep"
+        android:layout_alignEnd="@+id/rPasswordRep" />
 
     <EditText
         android:id="@+id/rPasswordRep"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10"
         android:hint="PasswordRep"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="textPassword"
         android:layout_below="@+id/rPassword"
-        android:layout_alignStart="@+id/rPassword"
-        android:layout_alignEnd="@+id/rPassword" />
+        android:layout_alignStart="@+id/rButton"
+        android:layout_alignEnd="@+id/rButton" />
 
     <Button
         android:id="@+id/rButton"
@@ -74,8 +77,8 @@
         android:text="Register"
         android:background="@color/colorWhite"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginBottom="19dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="62dp"
+        android:layout_below="@+id/rPasswordRep"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -85,29 +88,30 @@
         android:background="@mipmap/ic_launcher"
         android:gravity="center"
         android:textStyle="italic"
+        android:layout_marginTop="30dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
         android:id="@+id/rEmail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/colorWhite"
         android:textColor="@color/colorWhite"
         android:hint="Email"
-        android:layout_below="@+id/rUsername"
-        android:layout_alignStart="@+id/rUsername"
-        android:layout_alignEnd="@+id/textView2" />
+        android:layout_below="@+id/genderChoicer"
+        android:layout_alignStart="@+id/rPassword"
+        android:layout_alignEnd="@+id/rPassword" />
 
     <Spinner
         android:id="@+id/genderChoicer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/rPassword"
-        android:layout_below="@+id/rUsername"
-        android:layout_alignEnd="@+id/rUsername" />
+        android:layout_height="40dp"
+        android:layout_below="@+id/rBirthDay"
+        android:layout_alignStart="@+id/rBirthDay"
+        android:layout_alignEnd="@+id/rEmail" />
 
 
 </RelativeLayout>
