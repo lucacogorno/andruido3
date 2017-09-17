@@ -2,6 +2,7 @@ package com.example.cogor.navigationdrawer;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Fragments.AdminFragment;
@@ -105,7 +107,18 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            if(!prefs.contains("Logged") && !prefs.getBoolean("Logged", false))
+            {
+                Toast.makeText(getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
+
+            }
+            else
+            {
                 getFragmentManager().beginTransaction().replace(R.id.content_frame, new CartFragment()).addToBackStack(null).commit();
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -131,6 +144,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_logout:
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Username").commit();
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Logged").commit();
                 navigationView.getMenu().clear();
                 navigationView.inflateMenu(R.menu.activity_main_drawer);
                 break;

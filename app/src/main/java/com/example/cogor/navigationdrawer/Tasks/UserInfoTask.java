@@ -101,7 +101,7 @@ public class UserInfoTask extends AsyncTask<Object, Object, User> {
     @Override
     protected void onPostExecute(User user) {
         if(user == null)
-            Toast.makeText(view.getContext(), "Connection error", Toast.LENGTH_SHORT);
+            Toast.makeText(view.getContext(), "Connection error", Toast.LENGTH_SHORT).show();
         else
         {
            TextView userName = (TextView) view.findViewById(R.id.userName);

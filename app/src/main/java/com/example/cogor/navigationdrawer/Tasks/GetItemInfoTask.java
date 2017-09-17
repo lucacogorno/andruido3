@@ -128,11 +128,12 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
             public void onClick(View v) {
 
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-                if(!prefs.contains("Logged"))
+                if(!prefs.contains("Logged") && !prefs.getBoolean("Logged", false))
                 {
-                    Toast.makeText(activity.getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT);
+                    Toast.makeText(activity.getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
                    FragmentManager fragmentManager = activity.getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
+                    return;
 
                 }
 
