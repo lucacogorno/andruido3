@@ -15,7 +15,8 @@ public static class CartInit implements BaseColumns
 {
     public static final String TABLE_NAME = "cart";
     public static final String COLUMN_NAME_USERNAME = "username";
-    public static final String COLUMN_NAME_PRODID = "prodId";
+    public static final String COLUMN_NAME_PRODNAME = "prodname";
+    public static final String COLUMN_NAME_PRODID = "prodid";
     public static final String COLUMN_NAME_QUANTITY = "quantity";
     public static final String COLUMN_NAME_SINGLEAMOUNT = "singleamount";
 }
