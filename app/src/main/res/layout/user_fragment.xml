@@ -12,6 +12,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
+        android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -21,9 +22,9 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:layout_above="@+id/userGender"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/textView9"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="21dp"
         android:layout_alignParentEnd="true" />
 
     <TextView
@@ -31,9 +32,9 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:layout_below="@+id/userName"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/textView8"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="18dp"
         android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.TabLayout
@@ -51,6 +52,7 @@
         android:id="@+id/userImage"
         android:layout_width="140dp"
         android:layout_height="140dp"
+        android:layout_marginLeft="10dp"
         app:srcCompat="@mipmap/ic_launcher_round"
         android:layout_alignBottom="@+id/tabLayout"
         android:layout_centerHorizontal="true"
@@ -61,9 +63,9 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/textView10"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="25dp"
         android:layout_alignParentEnd="true" />
 
     <TextView
@@ -83,7 +85,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
-        android:textColor="@drawable/side_nav_bar"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimary"
         android:layout_above="@+id/userName"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
@@ -95,7 +98,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/userName"
         android:text="Email"
-        android:textColor="@drawable/side_nav_bar"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true" />
 
     <TextView
@@ -105,7 +109,8 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/userEmail"
         android:text="Birthday"
-        android:textColor="@drawable/side_nav_bar"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimary"
         android:layout_alignParentEnd="true" />
 
     <TextView
@@ -113,8 +118,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gender"
-        android:textColor="@drawable/side_nav_bar"
-        android:layout_above="@+id/userGender"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@+id/userBirth"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
