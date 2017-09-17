@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity
     ListView lv;
     NavigationView navigationView;
     public static Cart cart;
+    NavigationView welcomeText;
+    View header;
+    TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +64,17 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        welcomeText = (NavigationView) findViewById(R.id.nav_view);
+        header = welcomeText.getHeaderView(0);
+        text = (TextView) header.findViewById(R.id.welcome);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         if(sharedPreferences.contains("Username")) {
             navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
             navigationView.getMenu().findItem(R.id.myData).setTitle(sharedPreferences.getString("Username", null));
+
+            text.setText("Ciao, " + sharedPreferences.getString("Username", null));
             if(sharedPreferences.getBoolean("isVendor", false))
             {
                 navigationView.getMenu().findItem((R.id.AdminArea)).setVisible(true);
@@ -74,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         else
         {
             navigationView.inflateMenu(R.menu.activity_main_drawer);
-
+            text.setText("MyShop");
         }
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -113,7 +122,6 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
-
             }
             else
             {
@@ -147,6 +155,7 @@ public class MainActivity extends AppCompatActivity
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Logged").commit();
                 navigationView.getMenu().clear();
                 navigationView.inflateMenu(R.menu.activity_main_drawer);
+                text.setText("MyShop");
                 break;
             case R.id.AdminArea:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(null).commit();

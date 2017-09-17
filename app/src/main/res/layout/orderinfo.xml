@@ -11,7 +11,7 @@
         android:id="@+id/confirmOrder"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="confirm order"
+        android:text="buy"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:layout_alignParentBottom="true"

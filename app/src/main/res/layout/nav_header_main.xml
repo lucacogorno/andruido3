@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_view"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@drawable/side_nav_bar"
@@ -13,11 +14,11 @@
     android:weightSum="1">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/welcome"
         android:layout_width="match_parent"
         android:layout_height="83dp"
         android:paddingTop="31dp"
-        android:text="Ciao, "
+        android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="25dp"
         android:layout_weight="0.85" />

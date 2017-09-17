@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.R;
@@ -37,6 +38,9 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
     private String username;
     View view;
     Activity activity;
+    NavigationView welcomeText;
+    View header;
+    TextView text;
 
     public LogInTask(String username, String password, View view, Activity activity)
     {
@@ -104,6 +108,12 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
             prefs.edit().putString("Username", username).commit();
             prefs.edit().putBoolean("Logged", true).commit();
+
+            welcomeText = (NavigationView) activity.findViewById(R.id.nav_view);
+            header = welcomeText.getHeaderView(0);
+            text = (TextView) header.findViewById(R.id.welcome);
+            text.setText("Ciao, " + prefs.getString("Username", null));
+
             NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
             Menu menu = navigationView.getMenu();
             menu.clear();
