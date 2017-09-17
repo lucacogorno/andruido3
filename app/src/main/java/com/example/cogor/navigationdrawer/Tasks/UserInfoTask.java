@@ -101,7 +101,7 @@ public class UserInfoTask extends AsyncTask<Object, Object, User> {
     @Override
     protected void onPostExecute(User user) {
         if(user == null)
-            Toast.makeText(view.getContext(), "Connection error", Toast.LENGTH_SHORT);
+            Toast.makeText(view.getContext(), "Connection error", Toast.LENGTH_SHORT).show();
         else
         {
            TextView userName = (TextView) view.findViewById(R.id.userName);
@@ -109,10 +109,10 @@ public class UserInfoTask extends AsyncTask<Object, Object, User> {
            TextView userEmail = (TextView) view.findViewById(R.id.userEmail);
             TextView userGender = (TextView) view.findViewById(R.id.userGender);
 
-            userName.setText(user.getName());
-            birthDay.setText(user.getDate());
-            userEmail.setText(user.getEmail());
-            userGender.setText(user.getGender());
+            userName.setText("Username: " + user.getName());
+            birthDay.setText("Birthday: " + user.getDate());
+            userEmail.setText("Email: " + user.getEmail());
+            userGender.setText("Gender: " + user.getGender());
 
 
 
