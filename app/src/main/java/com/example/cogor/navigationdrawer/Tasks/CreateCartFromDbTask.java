@@ -40,7 +40,6 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
         SQLiteDatabase db = dbCartHelper.getReadableDatabase();
 
         Cursor checkCursor = db.query(DbCart.CartInit.TABLE_NAME , null, "username = ?" , new String[]{username}, null, null, null);
-        Log.d("CURSOR", Integer.toString(checkCursor.getCount()));
 
         while(checkCursor.moveToNext())
         {

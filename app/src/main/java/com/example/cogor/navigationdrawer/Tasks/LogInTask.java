@@ -103,6 +103,7 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
             Toast.makeText(view.getContext(), "Log in success", Toast.LENGTH_SHORT).show();
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
             prefs.edit().putString("Username", username).commit();
+            prefs.edit().putBoolean("Logged", true).commit();
             NavigationView navigationView = (NavigationView) activity.findViewById(R.id.nav_view);
             Menu menu = navigationView.getMenu();
             menu.clear();

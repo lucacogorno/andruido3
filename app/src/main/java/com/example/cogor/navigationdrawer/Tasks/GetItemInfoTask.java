@@ -1,6 +1,8 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -12,10 +14,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.Cart;
 import com.example.cogor.navigationdrawer.Database.DbCart;
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
+import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Item;
 import com.example.cogor.navigationdrawer.MainActivity;
 import com.example.cogor.navigationdrawer.R;
@@ -124,6 +128,14 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
             public void onClick(View v) {
 
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
+                if(!prefs.contains("Logged"))
+                {
+                    Toast.makeText(activity.getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT);
+                   FragmentManager fragmentManager = activity.getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
+
+                }
+
                 String username = prefs.getString("Username", null);
 
                 DbCartHelper dbCartHelper = new DbCartHelper(activity.getApplicationContext());
