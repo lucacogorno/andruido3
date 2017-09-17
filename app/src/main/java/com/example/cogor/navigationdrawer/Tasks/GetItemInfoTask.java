@@ -129,27 +129,32 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
                 DbCartHelper dbCartHelper = new DbCartHelper(activity.getApplicationContext());
                 ContentValues contentValues = new ContentValues();
                 SQLiteDatabase db = dbCartHelper.getWritableDatabase();
+
+
                 String[] toCheck = new String[] {username, Integer.toString(item.getId())};
-                Cursor checkCursor = db.query(DbCart.CartInit.TABLE_NAME , null, "username = ? AND prodId = ?" , toCheck, null, null, null);
+
+                Cursor checkCursor = db.query(DbCart.CartInit.TABLE_NAME , null, "username = ? AND prodid = ?" , toCheck, null, null, null);
                 if(checkCursor.getCount() < 1) {
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_PRODID, item.getId());
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, 1);
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_USERNAME, username);
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_PRODNAME, item.getName());
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, item.getPrice());
                     db.insert(DbCart.CartInit.TABLE_NAME, null, contentValues);
                 }
                 else
                 {
                     String[] toUpdate = new String[]{"quantity", "singleamount"};
-                    Cursor infoCursor = db.query(DbCart.CartInit.TABLE_NAME , toUpdate, "username = ? AND prodId = ?" , toCheck, null, null, null);
+                    Cursor infoCursor = db.query(DbCart.CartInit.TABLE_NAME , toUpdate, "username = ? AND prodid = ?" , toCheck, null, null, null);
                     infoCursor.moveToFirst();
 
                     int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                     double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity +1);
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount + Double.parseDouble(item.getPrice()));
-                    db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodId = ?", toCheck);
+                    db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
                 }
+
                 db.close();
     }});
     }

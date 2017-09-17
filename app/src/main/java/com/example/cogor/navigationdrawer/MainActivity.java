@@ -147,13 +147,5 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        DbCartHelper dbCartHelper = new DbCartHelper(getApplicationContext());
-        dbCartHelper.destroyDb(dbCartHelper.getWritableDatabase());
-        deleteDatabase("Dbcart.db");
-        Log.d("DB", "Database destroyed");
-    }
 }
 

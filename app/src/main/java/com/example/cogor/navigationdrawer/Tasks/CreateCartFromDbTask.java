@@ -45,7 +45,7 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
         while(checkCursor.moveToNext())
         {
 
-                toReturn.add(checkCursor.getInt(checkCursor.getColumnIndex("prodId")) + ", " + checkCursor.getDouble(checkCursor.getColumnIndex("singleamount")) + ", " + checkCursor.getInt(checkCursor.getColumnIndex("quantity")));
+                toReturn.add(checkCursor.getString(checkCursor.getColumnIndex("prodname")) + ", " + + checkCursor.getDouble(checkCursor.getColumnIndex("singleamount")) + ", " + checkCursor.getInt(checkCursor.getColumnIndex("quantity")));
         }
         db.close();
         return toReturn;
