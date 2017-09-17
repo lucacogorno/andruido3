@@ -110,7 +110,9 @@
         android:layout_height="40dp"
         android:layout_below="@+id/rBirthDay"
         android:layout_alignStart="@+id/rBirthDay"
-        android:layout_alignEnd="@+id/rEmail" />
+        android:layout_alignEnd="@+id/rEmail"
+        android:spinnerMode="dropdown"
+        />
 
 
 </RelativeLayout>
