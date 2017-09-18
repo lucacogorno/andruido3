@@ -31,11 +31,6 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
 
     View view;
     long id;
-    Button addProdButton;
-    TextView title;
-    TextView descr;
-    TextView price;
-    Item itemToShow;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
