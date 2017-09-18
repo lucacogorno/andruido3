@@ -3,24 +3,26 @@ package com.example.cogor.navigationdrawer.Fragments;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.cogor.navigationdrawer.Item;
 import com.example.cogor.navigationdrawer.R;
 import com.example.cogor.navigationdrawer.Tasks.CreateCartFromDbTask;
+import com.example.cogor.navigationdrawer.Tasks.ProcessOrderTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
+
 
 import java.util.ArrayList;
 
@@ -28,13 +30,18 @@ import java.util.ArrayList;
  * Created by cogor on 06/09/2017.
  */
 
-public class OrderInfoFragment extends Fragment{
+public class OrderInfoFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     ListView lv;
     View myView;
     TextView totalAmount;
     ArrayList<String> stringItems;
     ArrayList<Item> items;
+    Button confirmOrder;
+    String address;
+    GoogleApiClient mGoogleApiClient;
+    TextView addressBox;
+    ArrayList<String> permissions = new ArrayList<>();
 
 
     @Nullable
@@ -42,12 +49,74 @@ public class OrderInfoFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.orderinfo, container, false);
 
+        addressBox = (TextView) myView.findViewById(R.id.adressInserted);
 
 
+
+        confirmOrder = (Button) myView.findViewById(R.id.confirmOrder);
+        confirmOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                address = addressBox.getText().toString();
+                new ProcessOrderTask(address, myView, getActivity()).execute();
+            }
+        });
+
+
+
+/*
+
+
+        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return myView;
+        }
+
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+
+        mGoogleApiClient.connect();
+
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        Log.d("LOCATIONREQ", mLocationRequest.toString());
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(mLocationRequest);
+
+        PendingResult<LocationSettingsResult> result =
+                LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
+
+
+     */
 
         return myView;
     }
 
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
 
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.i("CONNECTIONFAILED", "Connection failed: ConnectionResult.getErrorCode() = "+ connectionResult.getErrorCode());
+    }
 }

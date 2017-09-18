@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cogor.navigationdrawer.Tasks.AddProdTask;
 import com.example.cogor.navigationdrawer.R;
+import com.example.cogor.navigationdrawer.Tasks.AddProdTask;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -22,11 +22,13 @@ import java.util.concurrent.ExecutionException;
  * Created by cogor on 06/09/2017.
  */
 
-public class AddProdFragment extends Fragment {
+public class EditProdFragment extends Fragment {
 
     View myView;
-    Button addButton;
-    Button scanIdButton;
+    Button editProdName;
+    Button editProdQuantity;
+    Button editProdPrice;
+    Button editProdDescr;
     TextView prodId;
     TextView prodName;
     TextView prodQuantity;
@@ -36,7 +38,6 @@ public class AddProdFragment extends Fragment {
     String quantity;
     String price;
     String descr;
-    String prodid;
 
 
 
@@ -44,40 +45,15 @@ public class AddProdFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.add_prod_layout, container, false);
-        addButton = (Button) myView.findViewById(R.id.deleteButton);
+
         prodName = (TextView) myView.findViewById(R.id.inputName);
         prodQuantity = (TextView) myView.findViewById(R.id.editQuantity);
         prodPrice = (TextView) myView.findViewById(R.id.editPrice);
         description = (TextView) myView.findViewById(R.id.editDescr);
-        scanIdButton = (Button) myView.findViewById(R.id.scanIdButton);
+
         prodId = (TextView) myView.findViewById(R.id.inoutProdId);
 
-        scanIdButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callIntentScan();
-            }
-        });
 
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name = prodName.getText().toString();
-                quantity = prodQuantity.getText().toString();
-                price = prodPrice.getText().toString();
-                descr = description.getText().toString();
-                prodid = prodId.getText().toString();
-                try {
-                    callAddProdTask(prodid, name, quantity, price, descr);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
 
         return myView;
     }
@@ -105,8 +81,5 @@ public class AddProdFragment extends Fragment {
     }
 
 
-    public void callAddProdTask(String id, String name, String quantity, String price, String descr) throws ExecutionException, InterruptedException {
-       new AddProdTask(id, name, quantity, price, descr, myView).execute();
-    }
 
 }

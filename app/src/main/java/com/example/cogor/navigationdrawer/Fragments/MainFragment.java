@@ -20,8 +20,6 @@ import com.example.cogor.navigationdrawer.R;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import static android.content.Context.INPUT_METHOD_SERVICE;
-import static com.example.cogor.navigationdrawer.R.id.editText;
 
 /**
  * Created by cogor on 06/09/2017.

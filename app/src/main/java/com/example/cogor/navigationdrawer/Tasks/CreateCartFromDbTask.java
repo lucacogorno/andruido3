@@ -1,13 +1,12 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -65,7 +64,7 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
             @Override
             public void onClick(View v) {
 
-                activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderInfoFragment()).commit();
+               activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderInfoFragment()).addToBackStack(null).commit();
 
             }
         });

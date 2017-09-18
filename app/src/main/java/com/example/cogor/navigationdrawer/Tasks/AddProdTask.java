@@ -24,11 +24,13 @@ public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
     String quantity;
     String price;
     String descr;
+    String id;
     View view;
 
 
-    public AddProdTask(String name, String quantity, String price, String descr, View view)
+    public AddProdTask(String id, String name, String quantity, String price, String descr, View view)
     {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
@@ -54,7 +56,8 @@ public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
             urlConnection.setDoOutput(true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
 
-            data += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +
+            data += URLEncoder.encode("prodid", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") +
+                    "&" + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +
             "&" + URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(quantity, "UTF-8") +
             "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") +
             "&" + URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(descr, "UTF-8");

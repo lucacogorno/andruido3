@@ -24,12 +24,22 @@
         android:layout_alignEnd="@+id/adminTitle" />
 
     <Button
-        android:id="@+id/editProductPriceButton"
+        android:id="@+id/editProductButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/addProdButton"
+        android:layout_alignStart="@+id/addProdButton"
         android:layout_below="@+id/addProdButton"
         android:layout_marginTop="54dp"
-        android:text="Scan Product"
-        android:layout_alignStart="@+id/addProdButton"
-        android:layout_alignEnd="@+id/addProdButton" />
+        android:text="Edit Product" />
+
+    <Button
+        android:id="@+id/manageOrdersButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="Manage Orders"
+        android:layout_below="@+id/editProductButton"
+        android:layout_alignStart="@+id/editProductButton"
+        android:layout_alignEnd="@+id/editProductButton" />
 </RelativeLayout>
