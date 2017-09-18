@@ -35,6 +35,8 @@ import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Fragments.MainFragment;
 import com.example.cogor.navigationdrawer.Fragments.RegistrationFragment;
 import com.example.cogor.navigationdrawer.Fragments.UserFragment;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity
     View header;
     TextView text;
     int permission;
+    public static FusedLocationProviderClient mFusedLocationClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         android.app.FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
 
         cart = new Cart();
 
