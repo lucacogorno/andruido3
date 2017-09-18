@@ -35,6 +35,7 @@ import java.util.Locale;
 import java.util.concurrent.Executor;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 /**
  * Created by cogor on 06/09/2017.
@@ -63,9 +64,9 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
         addressBox = (TextView) myView.findViewById(R.id.adressInserted);
 
         //
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        if (ActivityCompat.checkSelfPermission(getActivity(), ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getActivity(), ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{ACCESS_COARSE_LOCATION}, permission);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{ACCESS_FINE_LOCATION}, permission);
         }
         MainActivity.mFusedLocationClient.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
