@@ -27,6 +27,7 @@ import com.example.cogor.navigationdrawer.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -118,10 +119,12 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
 
         TextView title = (TextView) view.findViewById(R.id.itemname);
        TextView descr = (TextView) view.findViewById(R.id.itemdescr);
+        TextView singlePrice = (TextView) view.findViewById(R.id.singlePrice);
        final Button addProdButton = (Button) view.findViewById(R.id.addToCartButton);
 
         title.setText(item.getName());
         descr.setText(item.getDescription());
+        singlePrice.setText(item.getPrice());
 
         addProdButton.setOnClickListener(new View.OnClickListener() {
             @Override

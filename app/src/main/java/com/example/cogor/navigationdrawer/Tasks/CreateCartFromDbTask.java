@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.cogor.navigationdrawer.Database.DbCart;
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
@@ -26,10 +27,12 @@ import java.util.ArrayList;
 public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<String>>{
     Activity activity;
     View view;
+    double totalAmount;
     public CreateCartFromDbTask(Activity activity, View view)
     {
         this.activity = activity;
         this.view = view;
+        totalAmount = 0;
     }
 
     @Override
@@ -46,6 +49,7 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
         {
 
                 toReturn.add(checkCursor.getString(checkCursor.getColumnIndex("prodname")) + ", " + + checkCursor.getDouble(checkCursor.getColumnIndex("singleamount")) + ", " + checkCursor.getInt(checkCursor.getColumnIndex("quantity")));
+                totalAmount += checkCursor.getDouble(checkCursor.getColumnIndex("singleamount"));
         }
         db.close();
         return toReturn;
@@ -54,9 +58,9 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
     @Override
     protected void onPostExecute(ArrayList<String> strings) {
         ListView lv = (ListView) view.findViewById(R.id.cartItems);
-
+        TextView cartAmount = (TextView) view.findViewById(R.id.totalAmount);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, strings);
-
+        cartAmount.setText(Double.toString(totalAmount));
         lv.setAdapter(arrayAdapter);
 
         Button confirmButton = (Button) view.findViewById(R.id.confirmOrder);
