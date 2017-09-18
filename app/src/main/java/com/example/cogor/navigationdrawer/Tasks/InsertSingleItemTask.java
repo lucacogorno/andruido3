@@ -69,7 +69,7 @@ public class InsertSingleItemTask extends AsyncTask<Object, Object, Boolean> {
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
                 Log.d("CI PROVA", "prova");
                 data += URLEncoder.encode("orderid", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") +
-                        "&" + URLEncoder.encode("prodid", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(cursor.getInt(cursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_PRODID))), "UTF-8") +
+                        "&" + URLEncoder.encode("prodid", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(cursor.getLong(cursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_PRODID))), "UTF-8") +
                         "&" + URLEncoder.encode("prodname", "UTF-8") + "=" + URLEncoder.encode(cursor.getString(cursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_PRODNAME)), "UTF-8") +
                         "&" + URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(cursor.getInt(cursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY))), "UTF-8") +
                         "&" + URLEncoder.encode("singleamount", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(cursor.getDouble(cursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT))), "UTF-8");

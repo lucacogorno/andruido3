@@ -1,25 +1,13 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.ContentValues;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cogor.navigationdrawer.Cart;
-import com.example.cogor.navigationdrawer.Database.DbCart;
-import com.example.cogor.navigationdrawer.Database.DbCartHelper;
-import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Item;
-import com.example.cogor.navigationdrawer.MainActivity;
 import com.example.cogor.navigationdrawer.R;
 
 import org.json.JSONArray;

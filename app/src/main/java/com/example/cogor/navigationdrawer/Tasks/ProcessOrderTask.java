@@ -26,6 +26,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -38,6 +41,7 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
     double amount;
     String address;
     String result;
+    String date;
     View view;
     Cursor checkCursor;
     Activity activity;
@@ -61,6 +65,9 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         name = sharedPreferences.getString("Username", null);
 
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date now = new Date();
+        date = sdfDate.format(now);
 
 
         DbCartHelper dbHelper = new DbCartHelper(activity.getApplicationContext());
@@ -84,8 +91,9 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
 
             data += URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +
-            "&" + URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(Double.toString(amount), "UTF-8") +
-            "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8");
+                    "&" + URLEncoder.encode("amount", "UTF-8") + "=" + URLEncoder.encode(Double.toString(amount), "UTF-8") +
+                    "&" + URLEncoder.encode("address", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8") +
+                    "&" + URLEncoder.encode("orderdate", "UTF-8") + "=" + URLEncoder.encode(date, "UTF-8");
             Log.d("OutputSent", data);
             outputStreamWriter.write(data);
             outputStreamWriter.flush();
@@ -101,7 +109,7 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
             {
                     sb.append(line);
             }
-
+            Log.d("ORDERINSERTION", sb.toString());
             result = sb.toString();
 
             return Boolean.parseBoolean(sb.toString());

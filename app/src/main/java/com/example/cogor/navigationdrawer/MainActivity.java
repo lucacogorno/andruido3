@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     ListView lv;
     NavigationView navigationView;
-    public static Cart cart;
     NavigationView welcomeText;
     View header;
     TextView text;
@@ -73,9 +72,6 @@ public class MainActivity extends AppCompatActivity
         android.app.FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-
-        cart = new Cart();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

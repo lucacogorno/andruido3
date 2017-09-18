@@ -1,7 +1,6 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
@@ -9,14 +8,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cogor.navigationdrawer.Cart;
 import com.example.cogor.navigationdrawer.Database.DbCart;
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
@@ -27,18 +24,15 @@ import com.example.cogor.navigationdrawer.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -115,7 +109,7 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
 
     @Override
     protected void onPostExecute(final Item item) {
-        final Cart myCart = MainActivity.cart;
+
 
         TextView title = (TextView) view.findViewById(R.id.itemname);
        TextView descr = (TextView) view.findViewById(R.id.itemdescr);
