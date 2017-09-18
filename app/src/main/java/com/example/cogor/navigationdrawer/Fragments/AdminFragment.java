@@ -1,14 +1,8 @@
 package com.example.cogor.navigationdrawer.Fragments;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +26,7 @@ public class AdminFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.admin_layout, container, false);
-        editButton = (Button) myView.findViewById(R.id.editProductButton);
+        editButton = (Button) myView.findViewById(R.id.editProdButton);
         addProdButton = (Button) myView.findViewById(R.id.addProdButton);
         manageOrdersButton = (Button) myView.findViewById(R.id.manageOrdersButton);
 
@@ -48,7 +42,7 @@ public class AdminFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new AddProdFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new EditProdFragment()).addToBackStack(null).commit();
             }
         });
 

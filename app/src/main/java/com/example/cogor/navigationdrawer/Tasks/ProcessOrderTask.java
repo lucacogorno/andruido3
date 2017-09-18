@@ -120,9 +120,9 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
        boolean fromTask = false;
 
         try {
-            Log.d("Partenza task", "task " + result);
+
             fromTask = new InsertSingleItemTask(name, result, activity).execute().get();
-            Log.d("Dopo task", "qua ci arriva?");
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

@@ -22,8 +22,8 @@ import java.net.URLEncoder;
  * Created by cogor on 09/08/2017.
  */
 
-public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
-    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/create_product.php";
+public class EditProdTask extends AsyncTask<Object, Object, Boolean> {
+    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/update_product.php";
     String name;
     String quantity;
     String price;
@@ -33,7 +33,7 @@ public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
     View view;
 
 
-    public AddProdTask(String id, String name, String quantity, String price, String descr, View view, Activity activity)
+    public EditProdTask(String id, String name, String quantity, String price, String descr, View view, Activity activity)
     {
         this.id = id;
         this.name = name;
@@ -99,10 +99,10 @@ public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
     @Override
     protected void onPostExecute(Boolean b) {
         if(b) {
-            Toast.makeText(view.getContext(), "Product added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), "Product updated", Toast.LENGTH_SHORT).show();
             activity.getFragmentManager().popBackStack();
             activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, new AdminFragment()).commit();
         }
-        else Toast.makeText(view.getContext(), "Product not added", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(view.getContext(), "Product not updated", Toast.LENGTH_SHORT).show();
     }
 }

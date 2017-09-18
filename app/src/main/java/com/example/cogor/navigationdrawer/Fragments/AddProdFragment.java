@@ -47,7 +47,7 @@ public class AddProdFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.add_prod_layout, container, false);
         addButton = (Button) myView.findViewById(R.id.deleteButton);
-        prodName = (TextView) myView.findViewById(R.id.inputName);
+        prodName = (TextView) myView.findViewById(R.id.editName);
         prodQuantity = (TextView) myView.findViewById(R.id.editQuantity);
         prodPrice = (TextView) myView.findViewById(R.id.editPrice);
         description = (TextView) myView.findViewById(R.id.editDescr);
@@ -106,7 +106,7 @@ public class AddProdFragment extends Fragment {
 
 
     public void callAddProdTask(String id, String name, String quantity, String price, String descr) throws ExecutionException, InterruptedException {
-        new AddProdTask(id, name, quantity, price, descr, myView).execute();
+        new AddProdTask(id, name, quantity, price, descr, myView, getActivity()).execute();
     }
 
 

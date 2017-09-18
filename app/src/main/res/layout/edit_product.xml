@@ -13,10 +13,8 @@
         android:ems="10"
         android:hint="@string/quantity"
         android:inputType="number"
-        android:layout_above="@+id/editPrice"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="26dp"
-        android:layout_toStartOf="@+id/editQuantityButton" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/editPrice"
@@ -27,8 +25,7 @@
         android:inputType="numberDecimal"
         android:layout_above="@+id/editDescr"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="37dp"
-        android:layout_toStartOf="@+id/editProductButton" />
+        android:layout_marginBottom="17dp" />
 
     <EditText
         android:id="@+id/editDescr"
@@ -48,13 +45,13 @@
         android:id="@+id/deleteButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="31dp"
+        android:text="DELETE"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="36dp"
-        android:text="DELETE" />
+        android:layout_toEndOf="@+id/editProdId" />
 
     <EditText
-        android:id="@+id/inputName"
+        android:id="@+id/editName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -70,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scan Id"
-        android:layout_above="@+id/inputName"
+        android:layout_above="@+id/editName"
         android:layout_toStartOf="@+id/searchProdInfo"
         android:layout_marginBottom="43dp" />
 
@@ -83,40 +80,8 @@
         android:layout_alignBottom="@+id/scanIdButton"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:id="@+id/editProdNameButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/inputName"
-        android:layout_toEndOf="@+id/scanIdButton"
-        android:text="EDIT" />
-
-    <Button
-        android:id="@+id/editQuantityButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editQuantity"
-        android:layout_toEndOf="@+id/inputName"
-        android:text="EDIT" />
-
-    <Button
-        android:id="@+id/editProductButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editPrice"
-        android:layout_alignParentEnd="true"
-        android:text="EDIT" />
-
-    <Button
-        android:id="@+id/editDescriptionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editDescr"
-        android:layout_toEndOf="@+id/editPrice"
-        android:text="EDIT" />
-
     <EditText
-        android:id="@+id/prodId"
+        android:id="@+id/editProdId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/scanIdButton"
@@ -124,5 +89,24 @@
         android:ems="10"
         android:hint="Product Id"
         android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/editProdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editDescr"
+        android:layout_marginStart="36dp"
+        android:text="EDIT" />
+
+    <TextView
+        android:id="@+id/editProdTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="Edit Product"
+        android:textSize="30sp" />
 
 </RelativeLayout>

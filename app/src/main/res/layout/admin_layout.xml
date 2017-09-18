@@ -24,7 +24,7 @@
         android:layout_alignEnd="@+id/adminTitle" />
 
     <Button
-        android:id="@+id/editProductButton"
+        android:id="@+id/editProdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/addProdButton"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
         android:text="Manage Orders"
-        android:layout_below="@+id/editProductButton"
-        android:layout_alignStart="@+id/editProductButton"
-        android:layout_alignEnd="@+id/editProductButton" />
+        android:layout_below="@+id/editProdButton"
+        android:layout_alignStart="@+id/editProdButton"
+        android:layout_alignEnd="@+id/editProdButton" />
 </RelativeLayout>
