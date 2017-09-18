@@ -13,10 +13,13 @@ import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.Tasks.AddProdTask;
 import com.example.cogor.navigationdrawer.R;
+import com.example.cogor.navigationdrawer.Tasks.GetProdNameById;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+
 import java.util.concurrent.ExecutionException;
+
 
 /**
  * Created by cogor on 06/09/2017.
@@ -37,7 +40,6 @@ public class AddProdFragment extends Fragment {
     String price;
     String descr;
     String prodid;
-
 
 
     @Nullable
@@ -70,9 +72,7 @@ public class AddProdFragment extends Fragment {
                 prodid = prodId.getText().toString();
                 try {
                     callAddProdTask(prodid, name, quantity, price, descr);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
 
@@ -83,21 +83,21 @@ public class AddProdFragment extends Fragment {
     }
 
 
-
-    public void callIntentScan()
-    {
+    public void callIntentScan() {
         IntentIntegrator intentIntegrator = IntentIntegrator.forFragment(this);
         intentIntegrator.initiateScan();
+        //
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_LONG).show();
             } else {
-                    prodId.setText(result.getContents());
+                prodId.setText(result.getContents());
+                new GetProdNameById(result.getContents(), prodName).execute();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -106,7 +106,8 @@ public class AddProdFragment extends Fragment {
 
 
     public void callAddProdTask(String id, String name, String quantity, String price, String descr) throws ExecutionException, InterruptedException {
-       new AddProdTask(id, name, quantity, price, descr, myView).execute();
+        new AddProdTask(id, name, quantity, price, descr, myView).execute();
     }
+
 
 }
