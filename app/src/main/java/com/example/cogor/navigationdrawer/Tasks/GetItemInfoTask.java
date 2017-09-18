@@ -47,11 +47,11 @@ import java.util.Scanner;
 
 public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_item_info.php";
-    private int id;
+    private long id;
     View view;
     Activity activity;
 
-    public GetItemInfoTask(int id, View view, Activity activity)
+    public GetItemInfoTask(long id, View view, Activity activity)
     {
         this.id = id;
         this.view = view;
@@ -76,7 +76,7 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
             urlConnection.setDoOutput(true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
 
-            data += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(id), "UTF-8");
+            data += URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(Long.toString(id), "UTF-8");
             Log.d("OutputSentUserInfo", data);
             outputStreamWriter.write(data);
             outputStreamWriter.flush();
@@ -93,7 +93,7 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
 
             JSONArray jsonResp = new JSONArray(result);
             JSONObject jsonObject = jsonResp.getJSONObject(0);
-            Item temp =  new Item(jsonObject.getInt("id"),
+            Item temp =  new Item(jsonObject.getLong("id"),
                     jsonObject.getString("name"),
                     jsonObject.getString("quantity"),
                     jsonObject.getString("price"),
@@ -144,7 +144,7 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
                 SQLiteDatabase db = dbCartHelper.getWritableDatabase();
 
 
-                String[] toCheck = new String[] {username, Integer.toString(item.getId())};
+                String[] toCheck = new String[] {username, Long.toString(item.getId())};
 
                 Cursor checkCursor = db.query(DbCart.CartInit.TABLE_NAME , null, "username = ? AND prodid = ?" , toCheck, null, null, null);
                 if(checkCursor.getCount() < 1) {

@@ -57,12 +57,14 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
             JSONArray jsonResp = new JSONArray(result);
             for(int i = 0; i < jsonResp.length(); i++)
             {
-                Log.d("OUTSIDE ITEM", jsonResp.getJSONObject(i).getString("name")+
+                Log.d("OUTSIDE ITEM",
+                        jsonResp.getJSONObject(i).getInt("id") +
+                        jsonResp.getJSONObject(i).getString("name")+
                         jsonResp.getJSONObject(i).getString("quantity")+
                         jsonResp.getJSONObject(i).getString("price"));
                 temp.add(
 
-                        new Item(jsonResp.getJSONObject(i).getInt("id"),
+                        new Item(jsonResp.getJSONObject(i).getLong("id"),
                                 jsonResp.getJSONObject(i).getString("name"),
                                 jsonResp.getJSONObject(i).getString("quantity"),
                                 jsonResp.getJSONObject(i).getString("price"),
@@ -105,12 +107,11 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int itemId = items.get(position).getId();
+                long itemId = items.get(position).getId();
                 ItemFragment itemFragment = new ItemFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("arg", itemId);
+                bundle.putLong("arg", itemId);
                 itemFragment.setArguments(bundle);
-                //Position e id indicano l'id nella tabella sul database -1 (per esempio per avere id 1 devo fare position +1)
                 android.app.FragmentManager fragmentManager = atv.getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, itemFragment).addToBackStack(null).commit();
 

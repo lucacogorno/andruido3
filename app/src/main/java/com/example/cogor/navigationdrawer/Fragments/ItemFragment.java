@@ -30,7 +30,7 @@ import java.util.concurrent.ExecutionException;
 public class ItemFragment extends Fragment implements OnEditorActionListener, OnClickListener{
 
     View view;
-    int id;
+    long id;
     Button addProdButton;
     TextView title;
     TextView descr;
@@ -47,7 +47,7 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
 
         view = inflater.inflate(R.layout.fragment_item, container, false);
 
-        id = Integer.parseInt(getArguments().get("arg").toString());
+        id = Long.parseLong(getArguments().get("arg").toString());
 
 
 

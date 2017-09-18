@@ -8,13 +8,13 @@ import android.util.Log;
 
 public class Item {
 
-  private int id;
+  private long id;
   private String name;
   private String quantity;
   private String price;
   private String description;
 
-    public Item(int id, String name, String quantity, String price, String description)
+    public Item(long id, String name, String quantity, String price, String description)
     {
         this.id = id;
         this.name = name;
@@ -43,7 +43,7 @@ public class Item {
         return quantity;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
