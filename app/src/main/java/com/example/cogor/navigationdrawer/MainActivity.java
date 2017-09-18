@@ -1,14 +1,18 @@
 package com.example.cogor.navigationdrawer;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -43,10 +47,13 @@ public class MainActivity extends AppCompatActivity
     NavigationView welcomeText;
     View header;
     TextView text;
+    int permission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, permission);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -56,7 +63,6 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).commit();
 
         cart = new Cart();
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -70,18 +76,15 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if(sharedPreferences.contains("Username")) {
+        if (sharedPreferences.contains("Username")) {
             navigationView.inflateMenu(R.menu.activity_main_logged_drawer);
             navigationView.getMenu().findItem(R.id.myData).setTitle(sharedPreferences.getString("Username", null));
 
             text.setText("Ciao, " + sharedPreferences.getString("Username", null));
-            if(sharedPreferences.getBoolean("isVendor", false))
-            {
+            if (sharedPreferences.getBoolean("isVendor", false)) {
                 navigationView.getMenu().findItem((R.id.AdminArea)).setVisible(true);
             }
-        }
-        else
-        {
+        } else {
             navigationView.inflateMenu(R.menu.activity_main_drawer);
             text.setText("MyShop");
         }
@@ -117,14 +120,11 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            if(!prefs.contains("Logged") && !prefs.getBoolean("Logged", false))
-            {
+            if (!prefs.contains("Logged") && !prefs.getBoolean("Logged", false)) {
                 Toast.makeText(getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
-            }
-            else
-            {
+            } else {
                 getFragmentManager().beginTransaction().replace(R.id.content_frame, new CartFragment()).addToBackStack(null).commit();
             }
         }
@@ -138,8 +138,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         android.app.FragmentManager fragmentManager = getFragmentManager();
-        switch(id)
-        {
+        switch (id) {
             case R.id.Home:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).addToBackStack(null).commit();
