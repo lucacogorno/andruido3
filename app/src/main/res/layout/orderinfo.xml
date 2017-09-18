@@ -38,4 +38,25 @@
         android:layout_alignParentTop="true"
         android:text="Oder Information" />
 
+    <TextView
+        android:id="@+id/orderPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/orderInfoTitle"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="25dp"
+        android:text="PLEASE INSERT YOUR DELIVERY ADDRESS" />
+
+    <EditText
+        android:id="@+id/adressInserted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/orderPosition"
+        android:layout_below="@+id/orderPosition"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Address"
+        android:layout_alignEnd="@+id/orderPosition" />
+
 </RelativeLayout>

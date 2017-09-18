@@ -4,7 +4,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/adminTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -17,14 +17,14 @@
         android:id="@+id/addProdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
+        android:layout_below="@+id/adminTitle"
         android:layout_marginTop="55dp"
         android:text="Add Product"
-        android:layout_alignStart="@+id/textView5"
-        android:layout_alignEnd="@+id/textView5" />
+        android:layout_alignStart="@+id/adminTitle"
+        android:layout_alignEnd="@+id/adminTitle" />
 
     <Button
-        android:id="@+id/scanButton"
+        android:id="@+id/editProductPriceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/addProdButton"

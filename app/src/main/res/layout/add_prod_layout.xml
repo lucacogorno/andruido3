@@ -7,29 +7,29 @@
     android:weightSum="1">
 
     <EditText
-        android:id="@+id/inputQuantity"
+        android:id="@+id/editQuantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/quantity"
         android:inputType="number"
-        android:layout_marginTop="34dp"
-        android:layout_below="@+id/inputName"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/editPrice"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="26dp" />
 
     <EditText
-        android:id="@+id/inputPrice"
+        android:id="@+id/editPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/price"
         android:inputType="numberDecimal"
-        android:layout_below="@+id/inputQuantity"
+        android:layout_above="@+id/editDescr"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="33dp" />
+        android:layout_marginBottom="37dp" />
 
     <EditText
-        android:id="@+id/prod_descr"
+        android:id="@+id/editDescr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.16"
@@ -37,12 +37,12 @@
         android:hint="@string/descr"
         android:inputType="text"
         android:selectAllOnFocus="true"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/inputPrice"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/deleteButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="39dp" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/deleteButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Product"
@@ -57,8 +57,28 @@
         android:ems="10"
         android:hint="@string/prod_name"
         android:inputType="text"
-        android:layout_marginTop="62dp"
+        android:layout_above="@+id/editQuantity"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="19dp" />
+
+    <EditText
+        android:id="@+id/inoutProdId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Product Id"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="49dp"
+        android:layout_toStartOf="@+id/scanIdButton" />
+
+    <Button
+        android:id="@+id/scanIdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan Id"
+        android:layout_alignTop="@+id/inoutProdId"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
