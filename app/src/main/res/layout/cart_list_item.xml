@@ -17,30 +17,29 @@
         android:id="@+id/itemCartQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/itemCartAmount"
-        android:layout_alignStart="@+id/itemCartName"
         android:text="Quantity: "
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:layout_alignBaseline="@+id/incrementCart"
+        android:layout_alignBottom="@+id/incrementCart"
+        android:layout_alignStart="@+id/itemCartName" />
 
     <TextView
         android:id="@+id/itemCartAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Amount: "
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="28dp"
-        android:layout_below="@+id/itemCartName"
-        android:layout_toEndOf="@+id/itemCartName" />
+        android:layout_below="@+id/incrementCart"
+        android:layout_alignStart="@+id/itemCartQuantity" />
 
     <Button
         android:id="@+id/incrementCart"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/itemCartAmount"
-        android:layout_marginEnd="33dp"
-        android:layout_toStartOf="@+id/decrementCart"
+        android:layout_marginEnd="40dp"
         android:text="+"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_below="@+id/itemCartName"
+        android:layout_toStartOf="@+id/decrementCart" />
 
     <Button
         android:id="@+id/decrementCart"

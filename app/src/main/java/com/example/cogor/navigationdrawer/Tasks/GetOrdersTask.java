@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.Fragments.ItemFragment;
 import com.example.cogor.navigationdrawer.Item;
+import com.example.cogor.navigationdrawer.Order;
+import com.example.cogor.navigationdrawer.OrderListAdapter;
 import com.example.cogor.navigationdrawer.R;
 
 import org.json.JSONArray;
@@ -20,9 +22,11 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,42 +34,53 @@ import java.util.Scanner;
  * Created by cogor on 09/08/2017.
  */
 
-public class GetOrdersTask extends AsyncTask<Object, Object, ArrayList<Item>> {
-    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_items.php";
+public class GetOrdersTask extends AsyncTask<Object, Object, ArrayList<Order>> {
+    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_all_orders.php";
     View view;
     Activity atv;
+    String status;
 
-    public GetOrdersTask(View view, Activity atv)
+    public GetOrdersTask(View view, Activity atv, String status)
     {
         this.view = view;
         this.atv = atv;
+        this.status = status;
     }
 
     @Override
-    protected ArrayList<Item> doInBackground(Object... params) {
-        ArrayList<Item> temp = new ArrayList<>();
+    protected ArrayList<Order> doInBackground(Object... params) {
+        ArrayList<Order> temp = new ArrayList<>();
         URL reqURL = null;
+        String data = "";
         try {
             reqURL = new URL(requestURL);
             HttpURLConnection urlConnection = (HttpURLConnection) reqURL.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
+
+            data += URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
+
+            outputStreamWriter.write(data);
+            outputStreamWriter.flush();
+
+
             InputStream response = urlConnection.getInputStream();
             Scanner s = new Scanner(response).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
+            Log.d("ORDERSRESP", result);
             JSONArray jsonResp = new JSONArray(result);
             for(int i = 0; i < jsonResp.length(); i++)
             {
-                Log.d("OUTSIDE ITEM",
-                        jsonResp.getJSONObject(i).getInt("id") +
-                        jsonResp.getJSONObject(i).getString("name")+
-                        jsonResp.getJSONObject(i).getString("quantity")+
-                        jsonResp.getJSONObject(i).getString("price"));
+
                 temp.add(
 
-                        new Item(jsonResp.getJSONObject(i).getLong("id"),
-                                jsonResp.getJSONObject(i).getString("name"),
-                                jsonResp.getJSONObject(i).getString("quantity"),
-                                jsonResp.getJSONObject(i).getString("price"),
-                                jsonResp.getJSONObject(i).getString("description")
+                        new Order(jsonResp.getJSONObject(i).getInt("id"),
+                                jsonResp.getJSONObject(i).getString("username"),
+                                jsonResp.getJSONObject(i).getString("address"),
+                                jsonResp.getJSONObject(i).getDouble("amount"),
+                                jsonResp.getJSONObject(i).getString("date"),
+                                jsonResp.getJSONObject(i).getString("status")
                         )
                 );
             }
@@ -83,28 +98,23 @@ public class GetOrdersTask extends AsyncTask<Object, Object, ArrayList<Item>> {
     }
 
     @Override
-    protected void onPostExecute(final ArrayList<Item> items) {
+    protected void onPostExecute(final ArrayList<Order> orders) {
 
-        final ArrayList<String> stringItems = new ArrayList<>();
-        ListView lv = (ListView) view.findViewById(R.id.listView);
-        if(items.size() == 0)
+        ListView lv = (ListView) view.findViewById(R.id.ordered_listview);
+        if(orders.size() == 0)
         {
             Toast.makeText(view.getContext(), "Connection Error", Toast.LENGTH_SHORT);
             return;
         }
-        for(int i=0; i<items.size(); i++)
-        {
-            stringItems.add(items.get(i).toString());
-        }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, stringItems);
+        OrderListAdapter orderListAdapter = new OrderListAdapter(orders, atv);
 
-        lv.setAdapter(arrayAdapter);
+        lv.setAdapter(orderListAdapter);
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                long itemId = items.get(position).getId();
+                long itemId = orders.get(position).getOrderid();
                 ItemFragment itemFragment = new ItemFragment();
                 Bundle bundle = new Bundle();
                 bundle.putLong("arg", itemId);

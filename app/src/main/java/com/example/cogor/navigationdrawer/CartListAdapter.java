@@ -6,9 +6,7 @@ import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 import com.example.cogor.navigationdrawer.Database.DbCart;
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Fragments.CartFragment;
-import com.example.cogor.navigationdrawer.Fragments.ItemFragment;
 
 import java.util.ArrayList;
 

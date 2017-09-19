@@ -15,10 +15,6 @@ import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 
 
-/**
- * Created by marco on 18/09/17.
- */
-
 public class GetProdNameById extends AsyncTask<String, Object, String> {
     private String id;
     private TextView textView;
