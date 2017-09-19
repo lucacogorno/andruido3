@@ -20,18 +20,23 @@
         android:layout_below="@+id/adminTitle"
         android:layout_marginTop="55dp"
         android:text="Add Product"
-        android:layout_alignStart="@+id/adminTitle"
-        android:layout_alignEnd="@+id/adminTitle" />
+
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/editProdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/addProdButton"
-        android:layout_alignStart="@+id/addProdButton"
         android:layout_below="@+id/addProdButton"
         android:layout_marginTop="54dp"
-        android:text="Edit Product" />
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:text="Edit Product"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/manageOrdersButton"
@@ -39,7 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
         android:text="Manage Orders"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
         android:layout_below="@+id/editProdButton"
         android:layout_alignStart="@+id/editProdButton"
         android:layout_alignEnd="@+id/editProdButton" />
+
+
 </RelativeLayout>
