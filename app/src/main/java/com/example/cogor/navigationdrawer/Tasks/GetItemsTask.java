@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.cogor.navigationdrawer.Fragments.ItemFragment;
 import com.example.cogor.navigationdrawer.Fragments.MainFragment;
 import com.example.cogor.navigationdrawer.Item;
+import com.example.cogor.navigationdrawer.ItemListAdapter;
 import com.example.cogor.navigationdrawer.MainActivity;
 import com.example.cogor.navigationdrawer.R;
 
@@ -99,24 +100,11 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
         {
             stringItems.add(items.get(i).toString());
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, stringItems);
+        ItemListAdapter itemListAdapter = new ItemListAdapter(items, atv);
 
-        lv.setAdapter(arrayAdapter);
+        lv.setAdapter(itemListAdapter);
 
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                long itemId = items.get(position).getId();
-                ItemFragment itemFragment = new ItemFragment();
-                Bundle bundle = new Bundle();
-                bundle.putLong("arg", itemId);
-                itemFragment.setArguments(bundle);
-                android.app.FragmentManager fragmentManager = atv.getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, itemFragment).addToBackStack(null).commit();
-
-            }
-        });
+        lv.setItemsCanFocus(false);
 
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/itemCartName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:textSize="14sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/itemCartQuantity" />
+
+    <Button
+        android:id="@+id/viewDetailsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/itemCartQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price: "
+        android:textSize="12sp"
+        android:layout_alignBottom="@+id/viewDetailsButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="14dp" />
+</RelativeLayout>
