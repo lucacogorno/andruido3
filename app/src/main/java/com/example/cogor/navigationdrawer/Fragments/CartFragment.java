@@ -37,8 +37,6 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_cart, container, false);
 
-
-
         new CreateCartFromDbTask(getActivity(), myView).execute();
 
 

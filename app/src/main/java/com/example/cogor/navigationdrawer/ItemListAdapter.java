@@ -26,6 +26,7 @@ public class ItemListAdapter extends BaseAdapter{
         this.activity = activity;
     }
 
+
     @Override
     public int getCount() {
         return items.size();
@@ -46,8 +47,8 @@ public class ItemListAdapter extends BaseAdapter{
             View view = activity.getLayoutInflater().inflate(R.layout.main_list_item, null);
         final Item item = items.get(position);
 
-        TextView itemName = (TextView) view.findViewById(R.id.itemCartName);
-        TextView itemPrice = (TextView) view.findViewById(R.id.itemCartQuantity);
+        TextView itemName = (TextView) view.findViewById(R.id.itemListName);
+        TextView itemPrice = (TextView) view.findViewById(R.id.itemListQuantity);
         Button detailButton = (Button) view.findViewById(R.id.viewDetailsButton);
         itemName.setText(item.getName());
         itemPrice.append(item.getPrice());

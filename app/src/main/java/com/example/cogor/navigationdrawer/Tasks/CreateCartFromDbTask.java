@@ -7,12 +7,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.cogor.navigationdrawer.CartItem;
+import com.example.cogor.navigationdrawer.CartListAdapter;
 import com.example.cogor.navigationdrawer.Database.DbCart;
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Fragments.OrderInfoFragment;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
  * Created by cogor on 17/09/2017.
  */
 
-public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<String>>{
+public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<CartItem>>{
     Activity activity;
     View view;
     double totalAmount;
@@ -36,8 +39,8 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
     }
 
     @Override
-    protected ArrayList<String> doInBackground(Object... params) {
-        ArrayList<String> toReturn = new ArrayList<>();
+    protected ArrayList<CartItem> doInBackground(Object... params) {
+        ArrayList<CartItem> toReturn = new ArrayList<>();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         String username = prefs.getString("Username", null);
         DbCartHelper dbCartHelper = new DbCartHelper(activity.getApplicationContext());
@@ -47,8 +50,14 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
 
         while(checkCursor.moveToNext())
         {
+            Log.d("FROM SQLITE", checkCursor.getString(checkCursor.getColumnIndex("prodid")));
 
-                toReturn.add(checkCursor.getString(checkCursor.getColumnIndex("prodname")) + ", " + + checkCursor.getDouble(checkCursor.getColumnIndex("singleamount")) + ", " + checkCursor.getInt(checkCursor.getColumnIndex("quantity")));
+            toReturn.add(
+                        new CartItem(checkCursor.getString(checkCursor.getColumnIndex("prodid")),
+                                checkCursor.getString(checkCursor.getColumnIndex("username")),
+                                checkCursor.getString(checkCursor.getColumnIndex("prodname")),
+                                Integer.parseInt(checkCursor.getString(checkCursor.getColumnIndex("quantity"))),
+                                        checkCursor.getString(checkCursor.getColumnIndex("singleamount"))));
                 totalAmount += checkCursor.getDouble(checkCursor.getColumnIndex("singleamount"));
         }
         db.close();
@@ -56,13 +65,13 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<St
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> strings) {
+    protected void onPostExecute(ArrayList<CartItem> cartItems) {
         ListView lv = (ListView) view.findViewById(R.id.cartItems);
         TextView cartAmount = (TextView) view.findViewById(R.id.totalAmount);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, strings);
-        cartAmount.setText(Double.toString(totalAmount));
-        lv.setAdapter(arrayAdapter);
 
+        cartAmount.setText(Double.toString(totalAmount));
+        CartListAdapter cartListAdapter = new CartListAdapter(cartItems, activity);
+        lv.setAdapter(cartListAdapter);
         Button confirmButton = (Button) view.findViewById(R.id.confirmOrder);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override

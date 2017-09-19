@@ -3,23 +3,25 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/itemCartName"
+        android:id="@+id/itemListName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Item Name"
         android:textSize="14sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/itemCartQuantity" />
+        android:layout_alignTop="@+id/viewDetailsButton"
+        android:layout_alignStart="@+id/itemListQuantity" />
 
     <Button
         android:id="@+id/viewDetailsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Details"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="14dp" />
 
     <TextView
-        android:id="@+id/itemCartQuantity"
+        android:id="@+id/itemListQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Price: "

@@ -1,6 +1,7 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -45,7 +46,8 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
     View view;
     Cursor checkCursor;
     Activity activity;
-
+    DbCartHelper dbHelper;
+    SQLiteDatabase db;
 
     public ProcessOrderTask(String address, View view, Activity activity)
     {
@@ -53,6 +55,8 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
         this.activity = activity;
         amount = 0;
         this.address = address;
+
+
     }
 
     @Override
@@ -65,13 +69,14 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         name = sharedPreferences.getString("Username", null);
 
+        dbHelper = new DbCartHelper(activity.getApplicationContext());
+        db = dbHelper.getReadableDatabase();
+
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
         Date now = new Date();
         date = sdfDate.format(now);
 
 
-        DbCartHelper dbHelper = new DbCartHelper(activity.getApplicationContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         checkCursor = db.query(DbCart.CartInit.TABLE_NAME , null, "username = ?" , new String[]{name}, null, null, null);
 
@@ -112,7 +117,7 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
             Log.d("ORDERINSERTION", sb.toString());
             result = sb.toString();
 
-            return Boolean.parseBoolean(sb.toString());
+            return true;
 
 
         } catch (MalformedURLException e) {
@@ -130,7 +135,7 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
         try {
 
             fromTask = new InsertSingleItemTask(name, result, activity).execute().get();
-
+            db.delete(DbCart.CartInit.TABLE_NAME, "username = ?", new String[]{name});
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -138,8 +143,9 @@ public class ProcessOrderTask extends AsyncTask<Object, Object, Boolean> {
         }
 
         if(b && fromTask) {
-            Toast.makeText(view.getContext(), "Order processed, your order id is = " + result, Toast.LENGTH_SHORT);
+            Toast.makeText(view.getContext(), "Order processed, your order number is: " + result, Toast.LENGTH_SHORT).show();
+            activity.getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        else Toast.makeText(view.getContext(), "Error while processing", Toast.LENGTH_SHORT);
+        else Toast.makeText(view.getContext(), "Error while processing", Toast.LENGTH_SHORT).show();
     }
 }

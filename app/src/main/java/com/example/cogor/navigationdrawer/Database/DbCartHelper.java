@@ -29,6 +29,7 @@ public class DbCartHelper extends SQLiteOpenHelper {
         Log.d("CreatingTable", SQL_CREATE_TABLE);
             db.execSQL(SQL_CREATE_TABLE);
     }
+    
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

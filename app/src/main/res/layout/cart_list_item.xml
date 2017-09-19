@@ -6,6 +6,8 @@
         android:id="@+id/itemCartName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="17dp"
         android:text="Item Name"
         android:textSize="14sp"
         android:layout_alignParentTop="true"
@@ -15,18 +17,18 @@
         android:id="@+id/itemCartQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/itemCartAmount"
+        android:layout_alignStart="@+id/itemCartName"
         android:text="Quantity: "
-        android:textSize="12sp"
-        android:layout_alignTop="@+id/itemCartAmount"
-        android:layout_alignParentStart="true" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/itemCartAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Amount: "
-        android:layout_marginTop="21dp"
-        android:layout_marginStart="21dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="28dp"
         android:layout_below="@+id/itemCartName"
         android:layout_toEndOf="@+id/itemCartName" />
 

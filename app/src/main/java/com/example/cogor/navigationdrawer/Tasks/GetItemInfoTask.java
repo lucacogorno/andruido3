@@ -164,7 +164,7 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount + Double.parseDouble(item.getPrice()));
                     db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
                 }
-
+                Toast.makeText(activity.getApplicationContext(), "Added to cart", Toast.LENGTH_SHORT).show();
                 db.close();
     }});
     }
