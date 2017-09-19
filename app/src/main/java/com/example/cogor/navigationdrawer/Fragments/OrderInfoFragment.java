@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,17 @@ import com.example.cogor.navigationdrawer.Tasks.CreateCartFromDbTask;
 import com.example.cogor.navigationdrawer.Tasks.ProcessOrderTask;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 
@@ -32,7 +44,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executor;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -54,6 +65,8 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
     TextView addressBox;
     ArrayList<String> permissions = new ArrayList<>();
     int permission;
+    MapView mapView;
+    LatLng position;
 
 
     @Nullable
@@ -62,6 +75,9 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
         myView = inflater.inflate(R.layout.orderinfo, container, false);
 
         addressBox = (TextView) myView.findViewById(R.id.adressInserted);
+
+        mapView = (MapView) myView.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
 
         //
         if (ActivityCompat.checkSelfPermission(getActivity(), ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -73,6 +89,7 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
                     @Override
                     public void onSuccess(Location location) {
                         if (location != null) {
+                            position = new LatLng(location.getLatitude(), location.getLongitude());
                             String address = null;
                             Geocoder gcd = new Geocoder(getActivity(), Locale.getDefault());
                             List<Address> addresses;
@@ -86,9 +103,21 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
                                 e.printStackTrace();
                             }
                             addressBox.setText(address);
+                            mapView.getMapAsync(new OnMapReadyCallback() {
+                                @Override
+                                public void onMapReady(GoogleMap googleMap) {
+                                    Marker marker = googleMap.addMarker(new MarkerOptions().position(position));
+
+                                    //zoom to position with level 16
+                                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(position, 16);
+                                    googleMap.animateCamera(cameraUpdate);
+                                    mapView.onResume();
+                                }
+                            });
                         }
                     }
                 });
+
 
         confirmOrder = (Button) myView.findViewById(R.id.confirmOrder);
         confirmOrder.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +128,33 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
             }
         });
 
-
+        addressBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String address = v.getText().toString();
+                Geocoder gcd = new Geocoder(getActivity(), Locale.getDefault());
+                List<Address> addresses = new ArrayList<Address>();
+                try {
+                    addresses = gcd.getFromLocationName(address, 1);
+                    if (addresses.size() > 0) {
+                        address = addresses.get(0).getAddressLine(0);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                position = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+                mapView.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        Marker marker = googleMap.addMarker(new MarkerOptions().position(position));
+                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(position, 16);
+                        googleMap.animateCamera(cameraUpdate);
+                        mapView.onResume();
+                    }
+                });
+                return true;
+            }
+        });
 
 /*
 
@@ -156,4 +211,5 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.i("CONNECTIONFAILED", "Connection failed: ConnectionResult.getErrorCode() = " + connectionResult.getErrorCode());
     }
+
 }
