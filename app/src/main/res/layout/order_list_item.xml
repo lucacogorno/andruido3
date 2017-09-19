@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/orderNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Number: "
+        android:textSize="14sp"
+
+        android:layout_above="@+id/orderUser"
+        android:layout_alignStart="@+id/orderUser" />
+
+    <TextView
+        android:id="@+id/orderAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address: "
+        android:textSize="14sp"
+        android:layout_marginStart="14dp"
+        android:layout_below="@+id/orderDetails"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/orderUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User: "
+        android:layout_alignBaseline="@+id/orderDetails"
+        android:layout_alignBottom="@+id/orderDetails"
+        android:layout_alignEnd="@+id/orderDate" />
+
+    <Button
+        android:id="@+id/orderDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="details"
+        android:layout_marginTop="29dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/orderDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: "
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/orderAdress"
+        android:layout_alignStart="@+id/orderAdress" />
+
+</RelativeLayout>

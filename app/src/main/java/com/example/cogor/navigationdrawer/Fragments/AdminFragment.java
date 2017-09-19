@@ -49,7 +49,7 @@ public class AdminFragment extends Fragment {
         manageOrdersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new AddProdFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new ManageOrdersFragment()).addToBackStack(null).commit();
             }
         });
 

@@ -34,7 +34,7 @@ public class ManageOrdersFragment extends Fragment {
         orderedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderedOrderFragment()).addToBackStack(null).commit();
             }
         });
 
