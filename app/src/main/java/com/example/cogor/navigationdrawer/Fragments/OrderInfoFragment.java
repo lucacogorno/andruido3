@@ -138,20 +138,21 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
                     addresses = gcd.getFromLocationName(address, 1);
                     if (addresses.size() > 0) {
                         address = addresses.get(0).getAddressLine(0);
+                        position = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
+                        mapView.getMapAsync(new OnMapReadyCallback() {
+                            @Override
+                            public void onMapReady(GoogleMap googleMap) {
+                                Marker marker = googleMap.addMarker(new MarkerOptions().position(position));
+                                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(position, 16);
+                                googleMap.animateCamera(cameraUpdate);
+                                mapView.onResume();
+                            }
+                        });
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                position = new LatLng(addresses.get(0).getLatitude(), addresses.get(0).getLongitude());
-                mapView.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(GoogleMap googleMap) {
-                        Marker marker = googleMap.addMarker(new MarkerOptions().position(position));
-                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(position, 16);
-                        googleMap.animateCamera(cameraUpdate);
-                        mapView.onResume();
-                    }
-                });
+
                 return true;
             }
         });
