@@ -27,9 +27,9 @@
         android:text="Orderd orders"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"
+        android:layout_marginBottom="59dp"
         android:layout_above="@+id/deliveredOrdersButton"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="99dp"
         android:layout_alignParentEnd="true" />
 
     <Button
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:background="@color/colorPrimary"
-        android:layout_marginTop="97dp"
+        android:layout_marginTop="57dp"
         android:text="paiedOrders"
         android:layout_below="@+id/deliveredOrdersButton"
         android:layout_alignParentStart="true"
