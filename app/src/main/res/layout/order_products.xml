@@ -19,16 +19,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorGrey"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/nextStepOrder" />
 
     <Button
         android:id="@+id/nextStepOrder"
-        android:layout_width="wrap_content"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
+        android:text="Button"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="Button" />
+        android:layout_alignParentEnd="true" />
 
     <ListView
         android:id="@+id/order_products"
