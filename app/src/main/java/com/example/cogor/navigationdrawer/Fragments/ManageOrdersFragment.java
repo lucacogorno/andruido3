@@ -41,14 +41,14 @@ public class ManageOrdersFragment extends Fragment {
         deliveredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new DeliveredFragment()).addToBackStack(null).commit();
             }
         });
 
         paiedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaiedFragment()).addToBackStack(null).commit();
             }
         });
 

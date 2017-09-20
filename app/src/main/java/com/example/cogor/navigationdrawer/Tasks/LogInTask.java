@@ -123,7 +123,7 @@ public class LogInTask extends AsyncTask<Object, Object, String> {
                 navigationView.getMenu().findItem(R.id.AdminArea).setVisible(true);
                 prefs.edit().putBoolean("isVendor", true).commit();
             }
-            activity.getFragmentManager().popBackStack();
+            activity.getFragmentManager().popBackStack(null, activity.getFragmentManager().POP_BACK_STACK_INCLUSIVE);
         }
         else
 

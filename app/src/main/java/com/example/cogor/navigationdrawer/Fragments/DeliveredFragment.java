@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cogor.navigationdrawer.R;
+import com.example.cogor.navigationdrawer.Tasks.GetOrdersTask;
 
 /**
  * Created by cogor on 06/09/2017.
@@ -24,7 +25,7 @@ public class DeliveredFragment extends Fragment {
         myView = inflater.inflate(R.layout.delivered_fragment, container, false);
 
         
-
+        new GetOrdersTask(myView, getActivity(), "delivered").execute();
 
         return myView;
     }

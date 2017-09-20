@@ -1,11 +1,14 @@
 package com.example.cogor.navigationdrawer;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.cogor.navigationdrawer.Fragments.OrderProductsFragment;
 
 import java.util.ArrayList;
 
@@ -40,7 +43,7 @@ public class OrderListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-            View view = activity.getLayoutInflater().inflate(R.layout.order_list_item, null);
+            final View view = activity.getLayoutInflater().inflate(R.layout.order_list_item, null);
         final Order item = orders.get(position);
 
         TextView orderNumber = (TextView) view.findViewById(R.id.orderNumber);
@@ -57,7 +60,11 @@ public class OrderListAdapter extends BaseAdapter{
         detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Bundle bundle = new Bundle();
+                OrderProductsFragment orderProductsFragment = new OrderProductsFragment();
+                bundle.putInt("OrderId", item.getOrderid());
+                orderProductsFragment.setArguments(bundle);
+                activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, orderProductsFragment).commit();
             }
         });
 
