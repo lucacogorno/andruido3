@@ -25,8 +25,8 @@ public class OrderProductsFragment extends Fragment {
         myView = inflater.inflate(R.layout.order_products, container, false);
 
         Bundle bundle = getArguments();
-        int orderid = bundle.getInt("orderId");
-        new GetOrderProducts(myView, getActivity(), Integer.toString(orderid)).execute();
+        int orderid = bundle.getInt("OrderId");
+        new GetOrderProducts(myView, getActivity(), Integer.toString(orderid), "Ordered").execute();
 
 
         return myView;

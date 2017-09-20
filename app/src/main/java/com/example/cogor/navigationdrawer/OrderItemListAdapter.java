@@ -16,20 +16,20 @@ import java.util.ArrayList;
  * Created by cogor on 19/09/2017.
  */
 
-public class OrderItemListAdapter extends BaseAdapter{
+public class OrderItemListAdapter extends BaseAdapter {
 
-    ArrayList<Item> items;
+    ArrayList<OrderItem> orderItems;
     Activity activity;
-    public OrderItemListAdapter(ArrayList<Item> items, Activity activity)
-    {
-        this.items = items;
+
+    public OrderItemListAdapter(ArrayList<OrderItem> orderItems, Activity activity) {
+        this.orderItems = orderItems;
         this.activity = activity;
     }
 
 
     @Override
     public int getCount() {
-        return items.size();
+        return orderItems.size();
     }
 
     @Override
@@ -44,26 +44,20 @@ public class OrderItemListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-            View view = activity.getLayoutInflater().inflate(R.layout.main_list_item, null);
-        final Item item = items.get(position);
+        View view = activity.getLayoutInflater().inflate(R.layout.order_list_product, null);
+        final OrderItem orderItem = orderItems.get(position);
 
-        TextView itemName = (TextView) view.findViewById(R.id.itemListName);
-        TextView itemPrice = (TextView) view.findViewById(R.id.itemListQuantity);
-        Button detailButton = (Button) view.findViewById(R.id.viewDetailsButton);
-        itemName.setText(item.getName());
-        itemPrice.append(item.getPrice());
-        detailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ItemFragment itemFragment = new ItemFragment();
-                Bundle bundle = new Bundle();
-                bundle.putLong("arg", item.getId());
-                itemFragment.setArguments(bundle);
-                android.app.FragmentManager fragmentManager = activity.getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, itemFragment).addToBackStack(null).commit();
+        TextView itemListName = (TextView) view.findViewById(R.id.itemProductlistName);
+        TextView quantity = (TextView) view.findViewById(R.id.itemProductlistQuantity);
+        TextView amount = (TextView) view.findViewById(R.id.itemProductlistAmount);
 
-            }
-        });
+        itemListName.setText(orderItem.getProdName());
+        quantity.setText(String.valueOf(orderItem.getQuantity()));
+        amount.setText(String.valueOf(orderItem.getAmount()));
+
         return view;
     }
+
 }
+
+
