@@ -104,7 +104,14 @@ public class GetOrderProducts extends AsyncTask<Object, Object, ArrayList<OrderI
         Button nextStep = (Button) view.findViewById(R.id.nextStepOrder);
         ListView lv = (ListView) view.findViewById(R.id.order_products);
 
-        nextStep.setText("Delievered");
+        switch (status) {
+            case "ordered": nextStep.setText("Set Delievered");
+                    break;
+            case "delieverd": nextStep.setText("Set Paied");
+                break;
+            case "paied": nextStep.setText("Delete Order");
+        }
+
 
         if(orderItems.size() == 0)
         {
