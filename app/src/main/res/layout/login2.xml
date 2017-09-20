@@ -29,9 +29,8 @@
         android:inputType="textPassword"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:layout_marginBottom="127dp"
-        android:layout_above="@+id/signInButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/signInButton" />
 
     <Button
         android:id="@+id/signInButton"
