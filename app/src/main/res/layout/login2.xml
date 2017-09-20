@@ -15,9 +15,9 @@
         android:hint="Username"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:layout_below="@+id/textView2"
+        android:layout_above="@+id/logPsw"
         android:layout_alignStart="@+id/logPsw"
-        android:layout_marginTop="59dp" />
+        android:layout_marginBottom="53dp" />
 
 
     <EditText
@@ -29,7 +29,8 @@
         android:inputType="textPassword"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:layout_below="@+id/logUsername"
+        android:layout_marginBottom="127dp"
+        android:layout_above="@+id/signInButton"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -39,18 +40,8 @@
         android:text="Sign in"
         android:background="@color/colorWhite"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginTop="38dp"
-        android:layout_below="@+id/logPsw"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@mipmap/ic_launcher"
-        android:gravity="center"
-        android:textStyle="italic"
-        android:layout_alignParentTop="true"
+        android:layout_marginBottom="272dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 

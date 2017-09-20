@@ -13,10 +13,8 @@
         android:hint="Name"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/rUsername"
-        android:layout_alignEnd="@+id/rUsername" />
+        android:layout_above="@+id/rBirthDay"
+        android:layout_alignStart="@+id/rBirthDay" />
 
     <EditText
         android:id="@+id/rBirthDay"
@@ -27,9 +25,8 @@
         android:hint="BirthDay (yyyy-mm-dd)"
         android:textColorHint="@color/colorWhite"
         android:textColor="@color/colorWhite"
-        android:layout_below="@+id/rUsername"
-        android:layout_alignStart="@+id/rEmail"
-        android:layout_alignEnd="@+id/rEmail" />
+        android:layout_above="@+id/genderChoicer"
+        android:layout_alignStart="@+id/rPassword" />
 
     <EditText
         android:id="@+id/rUsername"
@@ -40,9 +37,8 @@
         android:textColor="@color/colorWhite"
         android:hint="Username"
         android:textColorHint="@color/colorWhite"
-        android:layout_below="@+id/rName"
-        android:layout_alignStart="@+id/rBirthDay"
-        android:layout_alignEnd="@+id/rBirthDay" />
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/rBirthDay" />
 
     <EditText
         android:id="@+id/rPassword"
@@ -53,9 +49,8 @@
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="textPassword"
-        android:layout_below="@+id/rEmail"
-        android:layout_alignStart="@+id/rPasswordRep"
-        android:layout_alignEnd="@+id/rPasswordRep" />
+        android:layout_below="@+id/rUsername"
+        android:layout_alignStart="@+id/rPasswordRep" />
 
     <EditText
         android:id="@+id/rPasswordRep"
@@ -67,29 +62,18 @@
         android:textColorHint="@color/colorWhite"
         android:inputType="textPassword"
         android:layout_below="@+id/rPassword"
-        android:layout_alignStart="@+id/rButton"
-        android:layout_alignEnd="@+id/rButton" />
+        android:layout_alignStart="@+id/rButton" />
 
     <Button
         android:id="@+id/rButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
         android:text="Register"
         android:background="@color/colorWhite"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_marginTop="37dp"
-        android:layout_below="@+id/rPasswordRep"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@mipmap/ic_launcher"
-        android:gravity="center"
-        android:textStyle="italic"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="213dp" />
 
     <EditText
         android:id="@+id/rEmail"
@@ -100,19 +84,33 @@
         android:textColorHint="@color/colorWhite"
         android:textColor="@color/colorWhite"
         android:hint="Email"
-        android:layout_below="@+id/genderChoicer"
-        android:layout_alignStart="@+id/rPassword"
-        android:layout_alignEnd="@+id/rPassword" />
+        android:layout_above="@+id/rUsername"
+        android:layout_alignStart="@+id/rUsername" />
 
     <Spinner
         android:id="@+id/genderChoicer"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/rBirthDay"
-        android:layout_alignStart="@+id/rBirthDay"
-        android:layout_alignEnd="@+id/rEmail"
         android:spinnerMode="dropdown"
-        />
+        android:layout_above="@+id/rPassword"
+        android:layout_marginBottom="29dp"
+        android:layout_alignEnd="@+id/rBirthDay"
+        android:layout_alignStart="@+id/rBirthDay" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rName"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:gravity="left|bottom"
+        android:textColor="@color/colorWhite"
+        android:layout_marginBottom="148dp"
+        android:text="Registration"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
