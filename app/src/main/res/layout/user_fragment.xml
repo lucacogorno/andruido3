@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGrey"
+    android:background="@color/colorWhite"
     android:weightSum="1">
 
 
@@ -13,7 +13,6 @@
         android:layout_height="50dp"
         android:textSize="18dp"
         android:paddingLeft="10dp"
-        android:gravity="center"
         android:background="@color/colorWhite"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/textView8"
@@ -24,12 +23,12 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="18dp"
-        android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:background="@color/colorWhite"
         android:layout_below="@+id/textView9"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/userEmail"
@@ -38,34 +37,33 @@
         android:textSize="18dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:gravity="center"
         android:background="@color/colorWhite"
         android:layout_below="@+id/textView8"
-        android:layout_alignEnd="@+id/textView9"
-        android:layout_alignStart="@+id/textView9" />
+        android:layout_alignStart="@+id/textView9"
+        android:layout_alignParentEnd="true" />
 
     <android.support.design.widget.TabLayout
         android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:background="@drawable/side_nav_bar"
 
+        android:id="@+id/tabLayout"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/tabLayout">
+        android:layout_alignParentEnd="true">
 
     </android.support.design.widget.TabLayout>
 
     <ImageView
         android:id="@+id/userImage"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         app:srcCompat="@mipmap/ic_launcher_round"
         android:layout_alignBottom="@+id/tabLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp" />
+        android:layout_marginBottom="31dp" />
 
     <TextView
         android:id="@+id/userGender"
@@ -75,19 +73,20 @@
         android:background="@color/colorWhite"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:gravity="center"
         android:layout_below="@+id/textView10"
-        android:layout_alignStart="@+id/textView10"
-        android:layout_alignEnd="@+id/userBirth" />
+        android:layout_alignEnd="@+id/userBirth"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/userTitle"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:text="My Profile"
+        android:textSize="40dp"
+        android:textStyle="bold"
         android:gravity="center"
-        android:textSize="25dp"
         android:textColor="@color/colorWhite"
+        android:layout_marginTop="81dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -100,11 +99,10 @@
         android:background="@color/colorWhite"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
         android:layout_above="@+id/userName"
-        android:layout_alignStart="@+id/userName"
-        android:layout_alignEnd="@+id/userName" />
+        android:layout_alignEnd="@+id/userName"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textView8"
@@ -112,7 +110,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/userName"
         android:text="Email"
-        android:gravity="center"
         android:background="@color/colorWhite"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
@@ -125,7 +122,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:gravity="center"
         android:background="@color/colorWhite"
         android:layout_below="@+id/userEmail"
         android:text="Birthday"
@@ -139,13 +135,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gender"
-        android:gravity="center"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:background="@color/colorWhite"
         android:textColor="@color/colorPrimaryDark"
         android:layout_below="@+id/userBirth"
-        android:layout_alignStart="@+id/userBirth"
-        android:layout_alignEnd="@+id/userBirth" />
+        android:layout_alignEnd="@+id/userBirth"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
