@@ -57,7 +57,7 @@ public class CartListAdapter extends BaseAdapter{
         TextView itemQuantity = (TextView) view.findViewById(R.id.itemCartQuantity);
         TextView itemAmount = (TextView) view.findViewById(R.id.itemCartAmount);
         Button increment = (Button) view.findViewById(R.id.incrementCart);
-        final Button decrement = (Button) view.findViewById(R.id.decrementCart);
+        Button decrement = (Button) view.findViewById(R.id.decrementCart);
         itemName.setText(item.getProdName());
         itemAmount.append(item.getAmount());
         itemQuantity.append(Integer.toString(item.getQuantity()));
