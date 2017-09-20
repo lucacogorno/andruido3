@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.Item;
 import com.example.cogor.navigationdrawer.MainActivity;
@@ -62,7 +64,7 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
     Button confirmOrder;
     String address;
     GoogleApiClient mGoogleApiClient;
-    TextView addressBox;
+    SearchView addressBox0;
     ArrayList<String> permissions = new ArrayList<>();
     int permission;
     MapView mapView;
@@ -73,9 +75,7 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.orderinfo, container, false);
-
-        addressBox = (TextView) myView.findViewById(R.id.adressInserted);
-
+        addressBox0 = (SearchView) myView.findViewById(R.id.addressInserted);
         mapView = (MapView) myView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
@@ -102,7 +102,9 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            addressBox.setText(address);
+                            addressBox0.setQuery(address, true);
+                            addressBox0.setIconified(false);
+
                             mapView.getMapAsync(new OnMapReadyCallback() {
                                 @Override
                                 public void onMapReady(GoogleMap googleMap) {
@@ -123,15 +125,15 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                address = addressBox.getText().toString();
+                address = addressBox0.getQuery().toString();
                 new ProcessOrderTask(address, myView, getActivity()).execute();
             }
         });
 
-        addressBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        addressBox0.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                String address = v.getText().toString();
+            public boolean onQueryTextSubmit(String query) {
+                String address = query;
                 Geocoder gcd = new Geocoder(getActivity(), Locale.getDefault());
                 List<Address> addresses = new ArrayList<Address>();
                 try {
@@ -149,51 +151,22 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
                             }
                         });
                     }
+                    else{
+                        Toast.makeText(myView.getContext(),"No match found.",Toast.LENGTH_SHORT).show();
+                        addressBox0.setQuery("",true);
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
                 return true;
             }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
         });
-
-/*
-
-
-        if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return myView;
-        }
-
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity().getApplicationContext())
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API).build();
-
-        mGoogleApiClient.connect();
-
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        Log.d("LOCATIONREQ", mLocationRequest.toString());
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(mLocationRequest);
-
-        PendingResult<LocationSettingsResult> result =
-                LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-
-
-     */
-
         return myView;
     }
 
