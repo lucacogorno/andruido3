@@ -1,7 +1,6 @@
 package com.example.cogor.navigationdrawer.Fragments;
 
 import android.app.Fragment;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -12,16 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.R;
 import com.example.cogor.navigationdrawer.Tasks.RegistrationTask;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by cogor on 06/09/2017.
@@ -29,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 public class RegistrationFragment extends Fragment {
 
-    private final String[] arraySpinner = new String[] {"m", "f"};
+    private final String[] arraySpinner = new String[]{"m", "f"};
 
     View myView;
     TextView username;
@@ -60,7 +55,6 @@ public class RegistrationFragment extends Fragment {
         genderChoicer = (Spinner) myView.findViewById(R.id.genderChoicer);
 
 
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(myView.getContext(),
                 android.R.layout.simple_spinner_item, arraySpinner);
 
@@ -81,7 +75,6 @@ public class RegistrationFragment extends Fragment {
         });
 
 
-
         rButton = (Button) myView.findViewById(R.id.rButton);
 
         rButton.setOnClickListener(new View.OnClickListener() {
@@ -100,28 +93,22 @@ public class RegistrationFragment extends Fragment {
                 String datePattern = "^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$";
 
 
-
                 if (!mail.matches(emailPattern)) {
                     Toast.makeText(myView.getContext(), "not valid email", Toast.LENGTH_SHORT).show();
-                }
-                else if(!birth.matches(datePattern)){
+                } else if (!birth.matches(datePattern)) {
                     Toast.makeText(myView.getContext(), "not valid date", Toast.LENGTH_SHORT).show();
-                }
-                else if (!psw.equals(pswRep)) {
+                } else if (!psw.equals(pswRep)) {
                     Toast.makeText(myView.getContext(), "Passwords don't match", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     new RegistrationTask(usr, psw, birth, mail, gender, myView, getActivity()).execute();
 
                 }
-                }
+            }
 
         });
 
 
-
-
         return myView;
     }
-    
+
 }

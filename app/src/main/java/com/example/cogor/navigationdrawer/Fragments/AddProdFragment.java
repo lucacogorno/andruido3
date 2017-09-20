@@ -1,13 +1,16 @@
 package com.example.cogor.navigationdrawer.Fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,11 +38,14 @@ public class AddProdFragment extends Fragment {
     TextView prodQuantity;
     TextView prodPrice;
     TextView description;
+    ImageView imageView;
     String name;
     String quantity;
     String price;
     String descr;
     String prodid;
+    Bitmap photo;
+    private static final int CAMERA_REQUEST = 1888;
 
 
     @Nullable
@@ -53,6 +59,7 @@ public class AddProdFragment extends Fragment {
         description = (TextView) myView.findViewById(R.id.editDescr);
         scanIdButton = (Button) myView.findViewById(R.id.scanIdButton);
         prodId = (TextView) myView.findViewById(R.id.inoutProdId);
+        imageView = (ImageView) myView.findViewById(R.id.imageView);
 
         scanIdButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +86,16 @@ public class AddProdFragment extends Fragment {
             }
         });
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            }
+        });
+
+
         return myView;
     }
 
@@ -91,17 +108,23 @@ public class AddProdFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-                prodId.setText(result.getContents());
-                new GetProdNameById(result.getContents(), prodName).execute();
-            }
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            photo = (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(photo);
         } else {
-            super.onActivityResult(requestCode, resultCode, data);
+            IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+            if (result != null) {
+                if (result.getContents() == null) {
+                    Toast.makeText(getActivity(), "Cancelled", Toast.LENGTH_LONG).show();
+                } else {
+                    prodId.setText(result.getContents());
+                    new GetProdNameById(result.getContents(), prodName).execute();
+                }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
         }
+
     }
 
 
