@@ -22,7 +22,6 @@
         android:layout_width="400dp"
         android:layout_height="50dp"
         android:background="@color/colorGrey"
-        android:text="Amount"
         android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
