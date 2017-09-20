@@ -9,14 +9,15 @@
         android:text="Item Name"
         android:textSize="14sp"
         android:layout_alignTop="@+id/viewDetailsButton"
-        android:layout_alignStart="@+id/itemListQuantity" />
+        android:layout_alignStart="@+id/itemListQuantity"
+        android:layout_toStartOf="@+id/viewDetailsButton" />
 
     <Button
         android:id="@+id/viewDetailsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Details"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"

@@ -5,50 +5,53 @@
 
     <TextView
         android:id="@+id/adminTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:text="Admin Area"
-        android:textSize="30sp" />
+        android:textSize="70sp"
+        android:gravity="left|bottom"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/addProdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/adminTitle"
-        android:layout_marginTop="55dp"
         android:text="Add Product"
 
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignBottom="@+id/editProdButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="91dp"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/editProdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/addProdButton"
-        android:layout_below="@+id/addProdButton"
-        android:layout_marginTop="54dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
         android:text="Edit Product"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="45dp"
+        android:layout_above="@+id/manageOrdersButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/manageOrdersButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
         android:text="Manage Orders"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
-        android:layout_below="@+id/editProdButton"
-        android:layout_alignStart="@+id/editProdButton"
-        android:layout_alignEnd="@+id/editProdButton" />
+        android:layout_marginBottom="344dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

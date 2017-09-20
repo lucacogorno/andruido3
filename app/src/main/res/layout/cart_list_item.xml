@@ -35,25 +35,25 @@
         android:id="@+id/incrementCart"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="40dp"
         android:text="+"
         android:textSize="18sp"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"
+        android:layout_marginEnd="14dp"
         android:layout_below="@+id/itemCartName"
-        android:layout_toStartOf="@+id/decrementCart" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/decrementCart"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/incrementCart"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="23dp"
+        android:layout_marginEnd="62dp"
         android:text="-"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_toStartOf="@+id/incrementCart"
+        android:layout_alignBottom="@+id/incrementCart" />
 
 </RelativeLayout>

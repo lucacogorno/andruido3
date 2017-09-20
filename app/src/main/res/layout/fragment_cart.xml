@@ -9,32 +9,31 @@
 
     <Button
         android:id="@+id/confirmOrder"
-        android:layout_width="200dp"
+        android:layout_width="530dp"
         android:layout_height="50dp"
         android:text="CONFIRM ORDER"
         android:textColor="@color/colorWhite"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/side_nav_bar"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/totalAmount"
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="50dp"
+        android:background="@color/colorGrey"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/confirmOrder"
-        android:background="@color/colorGrey"
-        android:text="Amount"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark" />
+        android:layout_toStartOf="@+id/confirmOrder" />
 
     <ListView
         android:id="@+id/cartItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/itemname"
-        android:layout_above="@+id/confirmOrder" />
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/confirmOrder"
+        android:layout_alignStart="@+id/totalAmount" />
 
 </RelativeLayout>

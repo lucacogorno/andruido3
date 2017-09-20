@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Scan Id"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
         android:layout_alignBottom="@+id/editProdId"
         android:layout_toStartOf="@+id/searchProdInfo" />
@@ -97,7 +97,7 @@
         android:id="@+id/editProdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
         android:text="EDIT"
         android:layout_alignParentBottom="true"

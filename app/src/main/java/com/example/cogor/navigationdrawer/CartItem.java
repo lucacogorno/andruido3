@@ -6,15 +6,14 @@ package com.example.cogor.navigationdrawer;
 
 public class CartItem {
 
-  private String id;
-  private String name;
-  private int quantity;
-  private String amount;
+    private String id;
+    private String name;
+    private double quantity;
+    private String amount;
     private String prodName;
 
 
-    public CartItem(String id, String name,String prodName, int quantity, String amount)
-    {
+    public CartItem(String id, String name, String prodName, int quantity, String amount) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -38,16 +37,13 @@ public class CartItem {
         return prodName;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
     public String getId() {
         return id;
     }
-
-
-
 
 
 }
