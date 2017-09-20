@@ -9,39 +9,50 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:text="Orders"
-        android:textSize="30dp"
+        android:textSize="70dp"
+        android:textColor="@color/colorPrimary"
+        android:gravity="left|bottom"
+        android:textStyle="bold"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/orderedOrdersButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Orderd orders"
-        android:layout_marginTop="74dp"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:layout_above="@+id/deliveredOrdersButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="99dp"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/deliveredOrdersButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/orderedOrdersButton"
-        android:layout_alignStart="@+id/orderedOrdersButton"
+        android:text="Delivered orders"
         android:layout_centerVertical="true"
-        android:text="Delivered orders" />
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:layout_alignStart="@+id/orderedOrdersButton"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/paiedOrdersButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/deliveredOrdersButton"
-        android:layout_alignStart="@+id/deliveredOrdersButton"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="97dp"
+        android:text="paiedOrders"
         android:layout_below="@+id/deliveredOrdersButton"
-        android:layout_marginTop="61dp"
-        android:text="paiedOrders" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

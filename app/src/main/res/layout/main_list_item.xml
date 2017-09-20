@@ -9,7 +9,8 @@
         android:text="Item Name"
         android:textSize="14sp"
         android:layout_alignTop="@+id/viewDetailsButton"
-        android:layout_alignStart="@+id/itemListQuantity" />
+        android:layout_alignStart="@+id/itemListQuantity"
+        android:layout_toStartOf="@+id/viewDetailsButton" />
 
     <Button
         android:id="@+id/viewDetailsButton"
