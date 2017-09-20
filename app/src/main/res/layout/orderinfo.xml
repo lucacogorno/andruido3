@@ -33,21 +33,26 @@
     <TextView
         android:id="@+id/orderInfoTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="Order Information"
+        android:textStyle="bold"
+        android:gravity="left|bottom"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25dp"
         android:textAlignment="center"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/orderPosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
         android:layout_below="@+id/orderInfoTitle"
-        android:layout_marginStart="13dp"
         android:layout_marginTop="25dp"
-        android:text="PLEASE INSERT YOUR DELIVERY ADDRESS" />
+        android:text="PLEASE INSERT YOUR DELIVERY ADDRESS"
+        android:layout_alignParentStart="true" />
 
     <SearchView
         android:id="@+id/addressInserted"
