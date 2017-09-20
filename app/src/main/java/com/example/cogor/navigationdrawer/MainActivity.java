@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Logged").commit();
                 navigationView.getMenu().clear();
                 navigationView.inflateMenu(R.menu.activity_main_drawer);
+                fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
                 text.setText("MyShop");
                 break;
             case R.id.AdminArea:
