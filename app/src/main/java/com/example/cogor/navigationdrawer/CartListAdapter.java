@@ -110,7 +110,7 @@ public class CartListAdapter extends BaseAdapter{
                     return;
                 }
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity - 1);
-                contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount + currentAmount/item.getQuantity());
+                contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount - currentAmount/item.getQuantity());
                 db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
                 reloadFrag(activity);
             }
