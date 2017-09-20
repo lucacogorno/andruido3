@@ -8,9 +8,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Ordered Orders"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
     <ListView
         android:id="@+id/ordered_listview"
