@@ -76,10 +76,9 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<Ca
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
         if(!prefs.contains("Username") || cartItems.isEmpty())
         {
-                Toast.makeText(activity.getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity.getApplicationContext(), "Your cart is empty", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = activity.getFragmentManager();
                 fragmentManager.popBackStack();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
                 return;
         }
 

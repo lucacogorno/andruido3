@@ -61,6 +61,7 @@ public class GetOrderProducts extends AsyncTask<Object, Object, ArrayList<Item>>
             InputStream response = urlConnection.getInputStream();
             Scanner s = new Scanner(response).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
+            Log.d("Prova", result);
             JSONArray jsonResp = new JSONArray(result);
             for(int i = 0; i < jsonResp.length(); i++)
             {
