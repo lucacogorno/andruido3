@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/side_nav_bar"
     android:weightSum="1">
 
 
@@ -13,7 +13,8 @@
         android:layout_height="50dp"
         android:textSize="25dp"
         android:paddingLeft="10dp"
-        android:background="@color/colorWhite"
+        android:background="@drawable/side_nav_bar"
+        android:textColor="@color/colorWhite"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/textView8"
         android:layout_alignStart="@+id/textView8" />
@@ -25,7 +26,8 @@
         android:textSize="25dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:background="@color/colorWhite"
+        android:background="@drawable/side_nav_bar"
+        android:textColor="@color/colorWhite"
         android:layout_below="@+id/textView9"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -37,7 +39,8 @@
         android:textSize="25dp"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:background="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/side_nav_bar"
         android:layout_below="@+id/textView8"
         android:layout_alignStart="@+id/textView9"
         android:layout_alignParentEnd="true" />
@@ -68,9 +71,10 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textSize="25dp"
-        android:background="@color/colorWhite"
+        android:background="@drawable/side_nav_bar"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
+        android:textColor="@color/colorWhite"
         android:layout_below="@+id/textView10"
         android:layout_alignEnd="@+id/userBirth"
         android:layout_alignParentStart="true" />
@@ -96,10 +100,10 @@
         android:text="Username"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:background="@color/colorWhite"
+        android:background="@drawable/side_nav_bar"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"
         android:layout_above="@+id/userName"
         android:layout_alignEnd="@+id/userName"
         android:layout_alignParentStart="true" />
@@ -111,11 +115,11 @@
         android:layout_below="@+id/userName"
         android:text="Email"
         android:textSize="30dp"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        android:background="@color/colorWhite"
+        android:background="@drawable/side_nav_bar"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
-        android:textColor="@color/colorPrimaryDark"
         android:layout_alignStart="@+id/userEmail"
         android:layout_alignEnd="@+id/userEmail" />
 
@@ -124,12 +128,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:background="@color/colorWhite"
+        android:background="@drawable/side_nav_bar"
         android:layout_below="@+id/userEmail"
         android:text="Birthday"
         android:textSize="30dp"
         android:paddingLeft="10dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"
         android:layout_alignEnd="@+id/userBirth"
         android:layout_alignStart="@+id/userBirth" />
 
@@ -142,8 +146,8 @@
         android:paddingTop="10dp"
         android:textStyle="bold"
         android:textSize="30dp"
-        android:background="@color/colorWhite"
-        android:textColor="@color/colorPrimaryDark"
+        android:background="@drawable/side_nav_bar"
+        android:textColor="@color/colorWhite"
         android:layout_below="@+id/userBirth"
         android:layout_alignEnd="@+id/userBirth"
         android:layout_alignParentStart="true" />

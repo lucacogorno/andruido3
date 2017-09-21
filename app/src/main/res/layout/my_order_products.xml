@@ -5,21 +5,22 @@
     <TextView
         android:id="@+id/myorderProductsTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:text="Order Products"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:gravity="left|bottom"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
+        android:paddingBottom="15dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentEnd="true" />
 
     <ListView
         android:id="@+id/my_order_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/deleteOrder"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/orderProductsTitle" />
+        android:layout_below="@+id/myorderProductsTitle" />
 
 </RelativeLayout>
