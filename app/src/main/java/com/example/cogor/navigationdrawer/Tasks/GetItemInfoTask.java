@@ -129,7 +129,7 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
         title.setText(item.getName());
         descr.setText(item.getDescription());
         singlePrice.setText(item.getPrice());
-        itemQuantity.setText(item.getQuantity());
+        itemQuantity.setText("Quantity: " + item.getQuantity());
         if(bitmap != null)
         imageView2.setImageBitmap(bitmap);
 
