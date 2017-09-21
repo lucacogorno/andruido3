@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.OrderItem;
@@ -34,13 +35,15 @@ public class GetOrderMyProducts extends AsyncTask<Object, Object, ArrayList<Orde
     View view;
     Activity atv;
     String orderid;
+    String totalOrderAmount;
 
 
-    public GetOrderMyProducts(View view, Activity atv, String orderid)
+    public GetOrderMyProducts(View view, Activity atv, String orderid, String orderAmount)
     {
         this.view = view;
         this.atv = atv;
         this.orderid = orderid;
+        this.totalOrderAmount = orderAmount;
     }
 
     @Override
@@ -99,12 +102,15 @@ public class GetOrderMyProducts extends AsyncTask<Object, Object, ArrayList<Orde
 
 
         ListView lv = (ListView) view.findViewById(R.id.my_order_products);
+        TextView orderAmount = (TextView) view.findViewById(R.id.totalAmountOrder);
 
         if(orderItems.size() == 0)
         {
             Toast.makeText(view.getContext(), "Connection Error", Toast.LENGTH_SHORT);
             return;
         }
+
+        orderAmount.setText(totalOrderAmount);
 
         OrderItemListAdapter orderItemListAdapter = new OrderItemListAdapter(orderItems, atv);
 

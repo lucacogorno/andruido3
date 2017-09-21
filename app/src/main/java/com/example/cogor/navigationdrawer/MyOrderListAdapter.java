@@ -64,6 +64,7 @@ public class MyOrderListAdapter extends BaseAdapter{
                 Bundle bundle = new Bundle();
                 MyOrderProductsFragment orderProductsFragment = new MyOrderProductsFragment();
                 bundle.putInt("OrderId", item.getOrderid());
+                bundle.putString("OrderAmount", String.valueOf(item.getAmount()));
                 orderProductsFragment.setArguments(bundle);
                 activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, orderProductsFragment).addToBackStack(MyOrderProductsFragment.class.getName()).commit();
             }

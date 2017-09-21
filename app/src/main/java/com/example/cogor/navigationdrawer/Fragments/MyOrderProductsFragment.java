@@ -27,7 +27,8 @@ public class MyOrderProductsFragment extends Fragment {
 
         Bundle bundle = getArguments();
         int orderid = bundle.getInt("OrderId");
-        new GetOrderMyProducts(myView, getActivity(), Integer.toString(orderid)).execute();
+        String amount = bundle.getString("OrderAmount");
+        new GetOrderMyProducts(myView, getActivity(), Integer.toString(orderid), amount).execute();
 
 
         return myView;

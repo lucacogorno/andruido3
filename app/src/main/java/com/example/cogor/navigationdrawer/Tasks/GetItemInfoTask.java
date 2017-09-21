@@ -122,12 +122,15 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
         TextView title = (TextView) view.findViewById(R.id.itemname);
         TextView descr = (TextView) view.findViewById(R.id.itemdescr);
         TextView singlePrice = (TextView) view.findViewById(R.id.singlePrice);
+        TextView itemQuantity = (TextView) view.findViewById(R.id.itemQuanityShop);
         final Button addProdButton = (Button) view.findViewById(R.id.addToCartButton);
         imageView2 = (ImageView) view.findViewById(R.id.imageView2);
 
         title.setText(item.getName());
         descr.setText(item.getDescription());
         singlePrice.setText(item.getPrice());
+        itemQuantity.setText(item.getQuantity());
+        if(bitmap != null)
         imageView2.setImageBitmap(bitmap);
 
         addProdButton.setOnClickListener(new View.OnClickListener() {
