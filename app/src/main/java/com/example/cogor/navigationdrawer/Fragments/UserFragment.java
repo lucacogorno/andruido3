@@ -5,7 +5,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,6 +18,11 @@ import android.widget.TextView;
 
 import com.example.cogor.navigationdrawer.R;
 import com.example.cogor.navigationdrawer.Tasks.UserInfoTask;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 /**
@@ -42,6 +49,9 @@ public class UserFragment extends Fragment {
         TextView userTitle = (TextView) view.findViewById(R.id.userTitle);
         userTitle.setText(username);
 
+        loadUserPic();
+
+
         userImage.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -54,14 +64,34 @@ public class UserFragment extends Fragment {
 
         new UserInfoTask(username, view).execute();
 
-
         return view;
+    }
+
+    public void loadUserPic() {
+        String photoPath = Environment.getExternalStorageDirectory()
+                + File.separator + "MyShopProfile.jpg";
+        photo = BitmapFactory.decodeFile(photoPath);
+        if (photo != null)
+            userImage.setImageBitmap(photo);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             photo = (Bitmap) data.getExtras().get("data");
             userImage.setImageBitmap(photo);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
+            File f = new File(Environment.getExternalStorageDirectory()
+                    + File.separator + "MyShopProfile.jpg");
+            try {
+                f.createNewFile();
+                FileOutputStream fo = new FileOutputStream(f);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 }
