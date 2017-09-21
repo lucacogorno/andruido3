@@ -107,7 +107,7 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
                             }
                             addressBox0.setQuery(address, true);
                             addressBox0.setIconified(false);
-
+                            addressBox0.clearFocus();
                             mapView.getMapAsync(new OnMapReadyCallback() {
                                 @Override
                                 public void onMapReady(GoogleMap googleMap) {
