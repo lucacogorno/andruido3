@@ -126,9 +126,9 @@ public class MainActivity extends AppCompatActivity
             if (!prefs.contains("Logged") && !prefs.getBoolean("Logged", false)) {
                 Toast.makeText(getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(LogInFragment.class.getName()).commit();
             } else {
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new CartFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new CartFragment()).addToBackStack(CartFragment.class.getName()).commit();
             }
         }
 
@@ -144,15 +144,15 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.Home:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).addToBackStack(MainFragment.class.getName()).commit();
                 break;
             case R.id.nav_registration:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).addToBackStack(RegistrationFragment.class.getName()).commit();
                 break;
             case R.id.nav_login:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(LogInFragment.class.getName()).commit();
                 break;
             case R.id.nav_logout:
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Username").commit();

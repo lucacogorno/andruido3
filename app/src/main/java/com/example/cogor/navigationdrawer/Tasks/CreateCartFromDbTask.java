@@ -90,7 +90,7 @@ public class CreateCartFromDbTask extends AsyncTask<Object, Object, ArrayList<Ca
             @Override
             public void onClick(View v) {
 
-               activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderInfoFragment()).addToBackStack(null).commit();
+               activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderInfoFragment()).addToBackStack(OrderInfoFragment.class.getName()).commit();
 
             }
         });
