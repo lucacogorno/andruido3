@@ -62,6 +62,7 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
     ArrayList<String> stringItems;
     ArrayList<Item> items;
     Button confirmOrder;
+    Button cancelOrder;
     String address;
     GoogleApiClient mGoogleApiClient;
     SearchView addressBox0;
@@ -75,9 +76,11 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.orderinfo, container, false);
+        cancelOrder = (Button) myView.findViewById(R.id.cancelOrder);
         addressBox0 = (SearchView) myView.findViewById(R.id.addressInserted);
         mapView = (MapView) myView.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
+
 
         //
         if (ActivityCompat.checkSelfPermission(getActivity(), ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -130,6 +133,12 @@ public class OrderInfoFragment extends Fragment implements GoogleApiClient.Conne
             }
         });
 
+        cancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              getFragmentManager().popBackStack(null, getFragmentManager().POP_BACK_STACK_INCLUSIVE);
+            }
+        });
         addressBox0.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

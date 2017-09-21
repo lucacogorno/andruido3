@@ -33,6 +33,7 @@ import com.example.cogor.navigationdrawer.Fragments.AdminFragment;
 import com.example.cogor.navigationdrawer.Fragments.CartFragment;
 import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Fragments.MainFragment;
+import com.example.cogor.navigationdrawer.Fragments.MyOrdersFragment;
 import com.example.cogor.navigationdrawer.Fragments.RegistrationFragment;
 import com.example.cogor.navigationdrawer.Fragments.UserFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -161,6 +162,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Username").commit();
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Logged").commit();
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("isVendor").commit();
                 navigationView.getMenu().clear();
                 navigationView.inflateMenu(R.menu.activity_main_drawer);
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -171,6 +173,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.myData:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new UserFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.myOrders:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new MyOrdersFragment()).addToBackStack(null).commit();
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

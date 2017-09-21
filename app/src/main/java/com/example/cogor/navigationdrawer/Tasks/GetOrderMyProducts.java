@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.cogor.navigationdrawer.Item;
-import com.example.cogor.navigationdrawer.ItemListAdapter;
 import com.example.cogor.navigationdrawer.OrderItem;
 import com.example.cogor.navigationdrawer.OrderItemListAdapter;
 import com.example.cogor.navigationdrawer.R;
@@ -31,20 +29,18 @@ import java.util.Scanner;
  * Created by cogor on 09/08/2017.
  */
 
-public class GetOrderProducts extends AsyncTask<Object, Object, ArrayList<OrderItem>> {
+public class GetOrderMyProducts extends AsyncTask<Object, Object, ArrayList<OrderItem>> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_order_products.php";
     View view;
     Activity atv;
     String orderid;
-    String status;
 
 
-    public GetOrderProducts(View view, Activity atv, String orderid, String status)
+    public GetOrderMyProducts(View view, Activity atv, String orderid)
     {
         this.view = view;
         this.atv = atv;
         this.orderid = orderid;
-        this.status = status;
     }
 
     @Override
@@ -101,17 +97,8 @@ public class GetOrderProducts extends AsyncTask<Object, Object, ArrayList<OrderI
     @Override
     protected void onPostExecute(final ArrayList<OrderItem> orderItems) {
 
-        Button nextStep = (Button) view.findViewById(R.id.nextStepOrder);
+
         ListView lv = (ListView) view.findViewById(R.id.order_products);
-
-        switch (status) {
-            case "ordered": nextStep.setText("Set Delievered");
-                    break;
-            case "delieverd": nextStep.setText("Set Paied");
-                break;
-            case "paied":
-        }
-
 
         if(orderItems.size() == 0)
         {
