@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         Log.d("length out", "" + fm.getBackStackEntryCount());
-        if (fm.getBackStackEntryCount() > 2) {
+        if (fm.getBackStackEntryCount() > 1) {
             //do nothing you are on other fragments according to your work flow
         } else {
             // you are in your activity two or one so pop the fragment
