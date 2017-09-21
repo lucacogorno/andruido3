@@ -2,16 +2,12 @@ package com.example.cogor.navigationdrawer;
 
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -28,7 +24,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Fragments.AdminFragment;
 import com.example.cogor.navigationdrawer.Fragments.CartFragment;
 import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
@@ -38,8 +33,6 @@ import com.example.cogor.navigationdrawer.Fragments.RegistrationFragment;
 import com.example.cogor.navigationdrawer.Fragments.UserFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
@@ -105,6 +98,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        Log.d("length out", "" + fm.getBackStackEntryCount());
+        if (fm.getBackStackEntryCount() > 2) {
+            //do nothing you are on other fragments according to your work flow
+        } else {
+            // you are in your activity two or one so pop the fragment
+            fm.popBackStack();
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
