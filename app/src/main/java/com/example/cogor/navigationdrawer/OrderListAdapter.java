@@ -65,7 +65,7 @@ public class OrderListAdapter extends BaseAdapter{
                 bundle.putInt("OrderId", item.getOrderid());
                 bundle.putString("OrderStatus", item.getStatus());
                 orderProductsFragment.setArguments(bundle);
-                activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, orderProductsFragment).commit();
+                activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, orderProductsFragment).addToBackStack(OrderProductsFragment.class.getName()).commit();
             }
         });
 

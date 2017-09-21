@@ -165,11 +165,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.AdminArea:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(AdminFragment.class.getName()).commit();
                 break;
             case R.id.myData:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new UserFragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new UserFragment()).addToBackStack(UserFragment.class.getName()).commit();
                 break;
             case R.id.myOrders:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);

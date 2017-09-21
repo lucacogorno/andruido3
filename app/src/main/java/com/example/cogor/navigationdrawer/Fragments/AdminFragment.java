@@ -34,7 +34,7 @@ public class AdminFragment extends Fragment {
         addProdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new AddProdFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new AddProdFragment()).addToBackStack(AddProdFragment.class.getName()).commit();
             }
         });
 
@@ -42,14 +42,14 @@ public class AdminFragment extends Fragment {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new EditProdFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new EditProdFragment()).addToBackStack(EditProdFragment.class.getName()).commit();
             }
         });
 
         manageOrdersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new ManageOrdersFragment()).addToBackStack(null).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new ManageOrdersFragment()).addToBackStack(ManageOrdersFragment.class.getName()).commit();
             }
         });
 

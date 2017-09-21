@@ -34,21 +34,21 @@ public class ManageOrdersFragment extends Fragment {
         orderedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderedOrderFragment()).addToBackStack(null).commit();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new OrderedOrderFragment()).addToBackStack(OrderedOrderFragment.class.getName()).commit();
             }
         });
 
         deliveredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new DeliveredFragment()).addToBackStack(null).commit();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new DeliveredFragment()).addToBackStack(DeliveredFragment.class.getName()).commit();
             }
         });
 
         paiedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaiedFragment()).addToBackStack(null).commit();
+                getActivity().getFragmentManager().beginTransaction().replace(R.id.content_frame, new PaiedFragment()).addToBackStack(PaiedFragment.class.getName()).commit();
             }
         });
 
