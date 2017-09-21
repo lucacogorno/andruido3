@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.cogor.navigationdrawer.Fragments.MyOrderProductsFragment;
 import com.example.cogor.navigationdrawer.Fragments.OrderProductsFragment;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class MyOrderListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                OrderProductsFragment orderProductsFragment = new OrderProductsFragment();
+                MyOrderProductsFragment orderProductsFragment = new MyOrderProductsFragment();
                 bundle.putInt("OrderId", item.getOrderid());
                 orderProductsFragment.setArguments(bundle);
                 activity.getFragmentManager().beginTransaction().replace(R.id.content_frame, orderProductsFragment).commit();

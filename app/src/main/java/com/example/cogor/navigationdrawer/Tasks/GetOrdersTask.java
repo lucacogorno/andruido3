@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -99,8 +100,9 @@ public class GetOrdersTask extends AsyncTask<Object, Object, ArrayList<Order>> {
 
     @Override
     protected void onPostExecute(final ArrayList<Order> orders) {
-
+        String intoButton;
         ListView lv = (ListView) view.findViewById(R.id.ordered_listview);
+
         if(orders.size() == 0)
         {
             Toast.makeText(view.getContext(), "Connection Error", Toast.LENGTH_SHORT);
@@ -109,6 +111,7 @@ public class GetOrdersTask extends AsyncTask<Object, Object, ArrayList<Order>> {
         OrderListAdapter orderListAdapter = new OrderListAdapter(orders, atv);
 
         lv.setAdapter(orderListAdapter);
+
 
 
 
