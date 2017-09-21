@@ -33,6 +33,7 @@ import com.example.cogor.navigationdrawer.Fragments.AdminFragment;
 import com.example.cogor.navigationdrawer.Fragments.CartFragment;
 import com.example.cogor.navigationdrawer.Fragments.LogInFragment;
 import com.example.cogor.navigationdrawer.Fragments.MainFragment;
+import com.example.cogor.navigationdrawer.Fragments.MyOrdersFragment;
 import com.example.cogor.navigationdrawer.Fragments.RegistrationFragment;
 import com.example.cogor.navigationdrawer.Fragments.UserFragment;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -153,24 +154,33 @@ public class MainActivity extends AppCompatActivity
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new MainFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_registration:
+                fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new RegistrationFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_login:
+                fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_logout:
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Username").commit();
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("Logged").commit();
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().remove("isVendor").commit();
                 navigationView.getMenu().clear();
                 navigationView.inflateMenu(R.menu.activity_main_drawer);
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
                 text.setText("MyShop");
                 break;
             case R.id.AdminArea:
+                fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new AdminFragment()).addToBackStack(null).commit();
                 break;
             case R.id.myData:
+                fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new UserFragment()).addToBackStack(null).commit();
+                break;
+            case R.id.myOrders:
+                fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new MyOrdersFragment()).addToBackStack(null).commit();
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

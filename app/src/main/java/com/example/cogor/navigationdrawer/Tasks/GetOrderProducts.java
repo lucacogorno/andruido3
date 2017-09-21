@@ -109,7 +109,8 @@ public class GetOrderProducts extends AsyncTask<Object, Object, ArrayList<OrderI
                     break;
             case "delieverd": nextStep.setText("Set Paied");
                 break;
-            case "paied": nextStep.setText("Delete Order");
+            case "paied":
+                nextStep.setVisibility(View.GONE);
         }
 
 
