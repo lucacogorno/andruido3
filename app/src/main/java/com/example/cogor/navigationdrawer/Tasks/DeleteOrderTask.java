@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,17 +21,17 @@ import java.util.Scanner;
  * Created by cogor on 21/09/2017.
  */
 
-public class UpdateProductsTask extends AsyncTask<Void, Void, Boolean> {
-    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/update_order_status.php";
+public class DeleteOrderTask extends AsyncTask<Void, Void, Boolean> {
+    private static String requestURL = "http://webdev.disi.unige.it/~S4110217/delete_order.php";
     Activity activity;
     View view;
-    String status;
+    String id;
 
 
-    public UpdateProductsTask(Activity activity, View view, String status) {
+    public DeleteOrderTask(Activity activity, View view, String id) {
         this.activity = activity;
         this.view = view;
-        this.status = status;
+        this.id = id;
     }
 
 
@@ -45,7 +46,7 @@ public class UpdateProductsTask extends AsyncTask<Void, Void, Boolean> {
             urlConnection.setDoOutput(true);
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
 
-            data += URLEncoder.encode("status", "UTF-8") + "=" + URLEncoder.encode(status, "UTF-8");
+            data += URLEncoder.encode("orderid", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
 
             outputStreamWriter.write(data);
             outputStreamWriter.flush();
@@ -71,4 +72,19 @@ public class UpdateProductsTask extends AsyncTask<Void, Void, Boolean> {
         }
         return false;
     }
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        if(!aBoolean)
+        {
+            Toast.makeText(activity.getApplicationContext(), "Connection Error", Toast.LENGTH_SHORT).show();
+
+        }
+        else
+        {
+            activity.getFragmentManager().popBackStack();
+        }
+
+    }
 }
+

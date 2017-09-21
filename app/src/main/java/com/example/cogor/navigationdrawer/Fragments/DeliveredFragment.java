@@ -22,7 +22,7 @@ public class DeliveredFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.delivered_fragment, container, false);
+        myView = inflater.inflate(R.layout.ordered_fragment, container, false);
 
         
         new GetOrdersTask(myView, getActivity(), "delivered").execute();

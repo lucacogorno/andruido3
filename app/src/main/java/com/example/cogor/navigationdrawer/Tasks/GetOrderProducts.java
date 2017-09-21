@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cogor.navigationdrawer.Item;
@@ -100,17 +101,40 @@ public class GetOrderProducts extends AsyncTask<Object, Object, ArrayList<OrderI
 
     @Override
     protected void onPostExecute(final ArrayList<OrderItem> orderItems) {
-
+        Button deleteOrder = (Button) view.findViewById(R.id.deleteOrder);
         Button nextStep = (Button) view.findViewById(R.id.nextStepOrder);
+        TextView textView = (TextView) view.findViewById(R.id.orderProductsTitle);
         ListView lv = (ListView) view.findViewById(R.id.order_products);
 
+        deleteOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DeleteOrderTask(atv, view, orderid).execute();
+            }
+        });
+
         switch (status) {
-            case "ordered": nextStep.setText("Set Delievered");
+            case "ordered": nextStep.setText("Set Delivered");
+                nextStep.setOnClickListener(    new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new UpdateOrderTask(atv, view, "delivered", orderid).execute();
+                    }
+                });
                     break;
-            case "delieverd": nextStep.setText("Set Paied");
+            case "delivered": nextStep.setText("Set Paied");
+                nextStep.setOnClickListener(    new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new UpdateOrderTask(atv, view, "paied", orderid).execute();
+                    }
+                });
+                textView.setText("Delivered Orders");
                 break;
             case "paied":
+                textView.setText("Delivered Orders");
                 nextStep.setVisibility(View.GONE);
+                break;
         }
 
 

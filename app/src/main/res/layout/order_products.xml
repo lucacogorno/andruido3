@@ -18,7 +18,7 @@
         android:id="@+id/deleteOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Delete"
         android:textColor="@color/colorPrimaryDark"
         android:background="@color/colorGrey"
         android:layout_alignParentBottom="true"
@@ -33,7 +33,8 @@
         android:textColor="@color/colorWhite"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/orderProductsTitle" />
 
     <ListView
         android:id="@+id/order_products"
