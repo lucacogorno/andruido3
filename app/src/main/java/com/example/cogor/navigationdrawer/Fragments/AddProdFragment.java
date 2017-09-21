@@ -72,11 +72,19 @@ public class AddProdFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 name = prodName.getText().toString();
                 quantity = prodQuantity.getText().toString();
                 price = prodPrice.getText().toString();
                 descr = description.getText().toString();
                 prodid = prodId.getText().toString();
+
+                if(name.isEmpty() || quantity.isEmpty() || price.isEmpty() || prodid.isEmpty())
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "No wrong fields exept description", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 try {
                     callAddProdTask(prodid, name, quantity, price, descr, photo);
                 } catch (ExecutionException | InterruptedException e) {

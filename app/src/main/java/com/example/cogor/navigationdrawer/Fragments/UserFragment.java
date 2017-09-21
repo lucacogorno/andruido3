@@ -68,7 +68,7 @@ public class UserFragment extends Fragment {
     }
 
     public void loadUserPic() {
-        String photoPath = Environment.getExternalStorageDirectory()
+        String photoPath = getActivity().getApplicationContext().getFilesDir()
                 + File.separator + "MyShopProfile.jpg";
         photo = BitmapFactory.decodeFile(photoPath);
         if (photo != null)
@@ -81,7 +81,7 @@ public class UserFragment extends Fragment {
             userImage.setImageBitmap(photo);
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.JPEG, 40, bytes);
-            File f = new File(Environment.getExternalStorageDirectory()
+            File f = new File(getActivity().getApplicationContext().getFilesDir()
                     + File.separator + "MyShopProfile.jpg");
             try {
                 f.createNewFile();

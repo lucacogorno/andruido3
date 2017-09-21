@@ -137,7 +137,11 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
         addProdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(Integer.parseInt(item.getQuantity()) == 0)
+                {
+                    Toast.makeText(activity.getApplicationContext(), "Product is not available", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
                 if (!prefs.contains("Logged") && !prefs.getBoolean("Logged", false)) {
                     Toast.makeText(activity.getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
@@ -171,9 +175,10 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
 
                     int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                     double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
-                    DecimalFormat twoDForm = new DecimalFormat("#.##");
-                    Double toInsert = Double.valueOf(currentAmount) + Double.valueOf(item.getPrice());
-                    toInsert = Double.valueOf(twoDForm.format(toInsert));
+
+                    Double toInsert = currentAmount + Double.valueOf(item.getPrice());
+                    toInsert = Math.round(toInsert*100.0)/100.0;
+
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity + 1);
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
                     db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);

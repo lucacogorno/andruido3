@@ -80,9 +80,8 @@ public class CartListAdapter extends BaseAdapter {
 
                 int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                 double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
-                DecimalFormat twoDForm = new DecimalFormat("#.##");
                 Double toInsert = currentAmount + (currentAmount / item.getQuantity());
-                toInsert = Double.valueOf(twoDForm.format(toInsert));
+                toInsert = Math.round(toInsert*100.0)/100.0;
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity + 1);
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
                 db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
@@ -113,9 +112,9 @@ public class CartListAdapter extends BaseAdapter {
                     reloadFrag(activity);
                     return;
                 }
-                DecimalFormat twoDForm = new DecimalFormat("#.##");
+
                 Double toInsert = currentAmount - (currentAmount / item.getQuantity());
-                toInsert = Double.valueOf(twoDForm.format(toInsert));
+                toInsert = Math.round(toInsert*100.0)/100.0;
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity - 1);
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
                 db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);

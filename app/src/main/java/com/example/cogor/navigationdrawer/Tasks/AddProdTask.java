@@ -37,6 +37,7 @@ public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
     String quantity;
     String price;
     String descr;
+    String photo_str;
     String id;
     Bitmap photo;
     Activity activity;
@@ -70,12 +71,12 @@ public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);
             urlConnection.setDoInput(true);
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.JPEG, 75, stream); //compress to which format you want.
-            byte[] byte_arr = stream.toByteArray();
-            String photo_str = Base64.encodeToString(byte_arr, Base64.DEFAULT);
-            Log.d("BYTE_ARRAY", photo_str);
+            if(photo!=null) {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                photo.compress(Bitmap.CompressFormat.JPEG, 75, stream); //compress to which format you want.
+                byte[] byte_arr = stream.toByteArray();
+                photo_str = Base64.encodeToString(byte_arr, Base64.DEFAULT);
+            }
             Uri.Builder builder = new Uri.Builder()
                     .appendQueryParameter("prodid", id)
                     .appendQueryParameter("name", name)
@@ -114,58 +115,6 @@ public class AddProdTask extends AsyncTask<Object, Object, Boolean> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
-        URL reqURL = null;
-        String data = "";
-        BufferedReader reader;
-
-
-        try {
-
-            reqURL = new URL(requestURL);
-
-            HttpURLConnection urlConnection = (HttpURLConnection) reqURL.openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setDoOutput(true);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(urlConnection.getOutputStream());
-
-            //bitmap
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            photo.compress(Bitmap.CompressFormat.PNG, 90, stream); //compress to which format you want.
-            byte[] byte_arr = stream.toByteArray();
-            String photo_str = Base64.encodeToString(byte_arr, Base64.DEFAULT);
-
-            data += URLEncoder.encode("prodid", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8") +
-                    "&" + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") +
-                    "&" + URLEncoder.encode("quantity", "UTF-8") + "=" + URLEncoder.encode(quantity, "UTF-8") +
-                    "&" + URLEncoder.encode("price", "UTF-8") + "=" + URLEncoder.encode(price, "UTF-8") +
-                    "&" + URLEncoder.encode("description", "UTF-8") + "=" + URLEncoder.encode(descr, "UTF-8") +
-                    "&" + URLEncoder.encode("productImage", "UTF-8") + "=" + URLEncoder.encode(photo_str, "UTF-8");
-            Log.d("OutputSent", data);
-            outputStreamWriter.write(data);
-            outputStreamWriter.flush();
-
-            int responseCode = urlConnection.getResponseCode();
-
-
-            reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-
-            Log.d("returnedFromAddProd", sb.toString());
-
-            return true;
-
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         return false;
     }

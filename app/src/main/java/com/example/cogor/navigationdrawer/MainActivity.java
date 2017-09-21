@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity
             text.setText("Ciao, " + sharedPreferences.getString("Username", null));
             if (sharedPreferences.getBoolean("isVendor", false)) {
                 navigationView.getMenu().findItem((R.id.AdminArea)).setVisible(true);
+
             }
         } else {
             navigationView.inflateMenu(R.menu.activity_main_drawer);
