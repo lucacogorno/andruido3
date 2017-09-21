@@ -24,7 +24,7 @@
         android:layout_below="@+id/myorderProductsTitle" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/totalAmountOrder"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_below="@+id/my_order_products"
