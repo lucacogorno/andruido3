@@ -172,7 +172,7 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
                     int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                     double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
                     DecimalFormat twoDForm = new DecimalFormat("#.##");
-                    Double toInsert = Double.valueOf(currentAmount + item.getPrice());
+                    Double toInsert = Double.valueOf(currentAmount) + Double.valueOf(item.getPrice());
                     toInsert = Double.valueOf(twoDForm.format(toInsert));
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity + 1);
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);

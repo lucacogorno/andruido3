@@ -81,7 +81,7 @@ public class CartListAdapter extends BaseAdapter {
                 int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                 double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
                 DecimalFormat twoDForm = new DecimalFormat("#.##");
-                Double toInsert = Double.valueOf(currentAmount + (currentAmount / item.getQuantity()));
+                Double toInsert = currentAmount + (currentAmount / item.getQuantity());
                 toInsert = Double.valueOf(twoDForm.format(toInsert));
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity + 1);
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
@@ -114,7 +114,7 @@ public class CartListAdapter extends BaseAdapter {
                     return;
                 }
                 DecimalFormat twoDForm = new DecimalFormat("#.##");
-                Double toInsert = Double.valueOf(currentAmount - (currentAmount / item.getQuantity()));
+                Double toInsert = currentAmount - (currentAmount / item.getQuantity());
                 toInsert = Double.valueOf(twoDForm.format(toInsert));
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity - 1);
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
