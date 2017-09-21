@@ -17,6 +17,7 @@ import com.example.cogor.navigationdrawer.Database.DbCart;
 import com.example.cogor.navigationdrawer.Database.DbCartHelper;
 import com.example.cogor.navigationdrawer.Fragments.CartFragment;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -79,8 +80,11 @@ public class CartListAdapter extends BaseAdapter {
 
                 int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                 double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
+                DecimalFormat twoDForm = new DecimalFormat("#.##");
+                Double toInsert = Double.valueOf(currentAmount + (currentAmount / item.getQuantity()));
+                toInsert = Double.valueOf(twoDForm.format(toInsert));
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity + 1);
-                contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount + currentAmount / item.getQuantity());
+                contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
                 db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
                 reloadFrag(activity);
             }
@@ -109,8 +113,11 @@ public class CartListAdapter extends BaseAdapter {
                     reloadFrag(activity);
                     return;
                 }
+                DecimalFormat twoDForm = new DecimalFormat("#.##");
+                Double toInsert = Double.valueOf(currentAmount - (currentAmount / item.getQuantity()));
+                toInsert = Double.valueOf(twoDForm.format(toInsert));
                 contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity - 1);
-                contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount - currentAmount / item.getQuantity());
+                contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
                 db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
                 reloadFrag(activity);
             }

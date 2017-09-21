@@ -37,6 +37,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 
@@ -170,8 +171,11 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
 
                     int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                     double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
+                    DecimalFormat twoDForm = new DecimalFormat("#.##");
+                    Double toInsert = Double.valueOf(currentAmount + item.getPrice());
+                    toInsert = Double.valueOf(twoDForm.format(toInsert));
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity + 1);
-                    contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount + Double.parseDouble(item.getPrice()));
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, toInsert);
                     db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
                 }
                 Toast.makeText(activity.getApplicationContext(), "Added to cart", Toast.LENGTH_SHORT).show();

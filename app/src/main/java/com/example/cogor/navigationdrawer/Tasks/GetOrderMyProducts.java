@@ -110,7 +110,7 @@ public class GetOrderMyProducts extends AsyncTask<Object, Object, ArrayList<Orde
             return;
         }
 
-        orderAmount.setText(totalOrderAmount);
+        orderAmount.setText("Amount: " + totalOrderAmount);
 
         OrderItemListAdapter orderItemListAdapter = new OrderItemListAdapter(orderItems, atv);
 
