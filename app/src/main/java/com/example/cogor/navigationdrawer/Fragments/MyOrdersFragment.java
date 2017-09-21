@@ -24,7 +24,6 @@ import java.util.ArrayList;
  */
 
 public class MyOrdersFragment extends Fragment {
-
     View myView;
 
     @Nullable

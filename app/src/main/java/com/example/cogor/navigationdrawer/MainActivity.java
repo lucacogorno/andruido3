@@ -39,7 +39,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     Toolbar toolbar;
     ListView lv;
     NavigationView navigationView;
@@ -98,14 +97,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        Log.d("length out", "" + fm.getBackStackEntryCount());
-        if (fm.getBackStackEntryCount() > 1) {
-            //do nothing you are on other fragments according to your work flow
-        } else {
-            // you are in your activity two or one so pop the fragment
-            fm.popBackStack();
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -182,7 +173,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.myOrders:
                 fragmentManager.popBackStack(null, fragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new MyOrdersFragment()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new MyOrdersFragment()).addToBackStack(MyOrdersFragment.class.getName()).commit();
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
