@@ -18,10 +18,11 @@ import com.example.cogor.navigationdrawer.R;
  * Created by cogor on 30/08/2017.
  */
 
-public class ItemFragment extends Fragment implements OnEditorActionListener, OnClickListener{
+public class ItemFragment extends Fragment implements OnEditorActionListener, OnClickListener {
 
     View view;
     long id;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,6 @@ public class ItemFragment extends Fragment implements OnEditorActionListener, On
         view = inflater.inflate(R.layout.fragment_item, container, false);
 
         id = Long.parseLong(getArguments().get("arg").toString());
-
 
 
         new GetItemInfoTask(id, view, getActivity()).execute();

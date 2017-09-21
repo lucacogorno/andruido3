@@ -18,7 +18,6 @@ import com.example.cogor.navigationdrawer.R;
 
 public class MainFragment extends Fragment {
 
-    SearchView search;
     View myView;
 
     @Nullable
@@ -28,15 +27,6 @@ public class MainFragment extends Fragment {
         //Task che riceve dal server le informazioni sui prodotti e li inserisce in una listview
         new GetItemsTask(myView, getActivity()).execute();
 
-
-        //campo di ricerca
-        search = (SearchView) myView.findViewById(R.id.searchView);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search.setIconified(false);
-            }
-        });
 
 
         return myView;

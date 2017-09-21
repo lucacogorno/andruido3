@@ -6,11 +6,15 @@ import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,11 +47,12 @@ import java.util.Scanner;
 public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_item_info.php";
     private long id;
+    ImageView imageView2;
     View view;
     Activity activity;
+    Bitmap bitmap;
 
-    public GetItemInfoTask(long id, View view, Activity activity)
-    {
+    public GetItemInfoTask(long id, View view, Activity activity) {
         this.id = id;
         this.view = view;
         this.activity = activity;
@@ -59,7 +64,6 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
         URL reqURL = null;
         String data = "";
         BufferedReader reader;
-
 
 
         try {
@@ -88,14 +92,18 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
 
             JSONArray jsonResp = new JSONArray(result);
             JSONObject jsonObject = jsonResp.getJSONObject(0);
-            Item temp =  new Item(jsonObject.getLong("id"),
+            Item temp = new Item(jsonObject.getLong("id"),
                     jsonObject.getString("name"),
                     jsonObject.getString("quantity"),
                     jsonObject.getString("price"),
-                    jsonObject.getString("description"));
-            
+                    jsonObject.getString("description"),
+                    jsonObject.getString("productImage")
+            );
+            byte[] encodeByte = Base64.decode(temp.getImage(), Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 
-           return temp;
+
+            return temp;
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -112,23 +120,24 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
 
 
         TextView title = (TextView) view.findViewById(R.id.itemname);
-       TextView descr = (TextView) view.findViewById(R.id.itemdescr);
+        TextView descr = (TextView) view.findViewById(R.id.itemdescr);
         TextView singlePrice = (TextView) view.findViewById(R.id.singlePrice);
-       final Button addProdButton = (Button) view.findViewById(R.id.addToCartButton);
+        final Button addProdButton = (Button) view.findViewById(R.id.addToCartButton);
+        imageView2 = (ImageView) view.findViewById(R.id.imageView2);
 
         title.setText(item.getName());
         descr.setText(item.getDescription());
         singlePrice.setText(item.getPrice());
+        imageView2.setImageBitmap(bitmap);
 
         addProdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-                if(!prefs.contains("Logged") && !prefs.getBoolean("Logged", false))
-                {
+                if (!prefs.contains("Logged") && !prefs.getBoolean("Logged", false)) {
                     Toast.makeText(activity.getApplicationContext(), "You aren't logged", Toast.LENGTH_SHORT).show();
-                   FragmentManager fragmentManager = activity.getFragmentManager();
+                    FragmentManager fragmentManager = activity.getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame, new LogInFragment()).addToBackStack(null).commit();
                     return;
 
@@ -141,32 +150,31 @@ public class GetItemInfoTask extends AsyncTask<Object, Object, Item> {
                 SQLiteDatabase db = dbCartHelper.getWritableDatabase();
 
 
-                String[] toCheck = new String[] {username, Long.toString(item.getId())};
+                String[] toCheck = new String[]{username, Long.toString(item.getId())};
 
-                Cursor checkCursor = db.query(DbCart.CartInit.TABLE_NAME , null, "username = ? AND prodid = ?" , toCheck, null, null, null);
-                if(checkCursor.getCount() < 1) {
+                Cursor checkCursor = db.query(DbCart.CartInit.TABLE_NAME, null, "username = ? AND prodid = ?", toCheck, null, null, null);
+                if (checkCursor.getCount() < 1) {
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_PRODID, item.getId());
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, 1);
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_USERNAME, username);
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_PRODNAME, item.getName());
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, item.getPrice());
                     db.insert(DbCart.CartInit.TABLE_NAME, null, contentValues);
-                }
-                else
-                {
+                } else {
                     String[] toUpdate = new String[]{"quantity", "singleamount"};
-                    Cursor infoCursor = db.query(DbCart.CartInit.TABLE_NAME , toUpdate, "username = ? AND prodid = ?" , toCheck, null, null, null);
+                    Cursor infoCursor = db.query(DbCart.CartInit.TABLE_NAME, toUpdate, "username = ? AND prodid = ?", toCheck, null, null, null);
                     infoCursor.moveToFirst();
 
                     int currentQuantity = infoCursor.getInt(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_QUANTITY));
                     double currentAmount = infoCursor.getDouble(infoCursor.getColumnIndex(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT));
-                    contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity +1);
+                    contentValues.put(DbCart.CartInit.COLUMN_NAME_QUANTITY, currentQuantity + 1);
                     contentValues.put(DbCart.CartInit.COLUMN_NAME_SINGLEAMOUNT, currentAmount + Double.parseDouble(item.getPrice()));
                     db.update(DbCart.CartInit.TABLE_NAME, contentValues, "username = ? AND prodid = ?", toCheck);
                 }
                 Toast.makeText(activity.getApplicationContext(), "Added to cart", Toast.LENGTH_SHORT).show();
                 db.close();
-    }});
+            }
+        });
     }
 
 }

@@ -13,13 +13,10 @@ import com.example.cogor.navigationdrawer.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Scanner;
@@ -35,8 +32,7 @@ public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
     View view;
     Activity activity;
 
-    public GetProdInfoTask(String id, View view, Activity activity)
-    {
+    public GetProdInfoTask(String id, View view, Activity activity) {
         this.id = id;
         this.view = view;
         this.activity = activity;
@@ -45,10 +41,8 @@ public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
     @Override
     protected Item doInBackground(Object... params) {
 
-        URL reqURL = null;
+        URL reqURL;
         String data = "";
-        BufferedReader reader;
-
 
 
         try {
@@ -65,8 +59,6 @@ public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
             outputStreamWriter.write(data);
             outputStreamWriter.flush();
 
-            int responseCode = urlConnection.getResponseCode();
-
 
             InputStream response = urlConnection.getInputStream();
             Scanner s = new Scanner(response).useDelimiter("\\A");
@@ -77,20 +69,15 @@ public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
 
             JSONArray jsonResp = new JSONArray(result);
             JSONObject jsonObject = jsonResp.getJSONObject(0);
-            Item temp =  new Item(jsonObject.getLong("id"),
+            Item temp = new Item(jsonObject.getLong("id"),
                     jsonObject.getString("name"),
                     jsonObject.getString("quantity"),
                     jsonObject.getString("price"),
-                    jsonObject.getString("description"));
-            
+                    jsonObject.getString("description"),
+                    jsonObject.getString("productImage"));
+            return temp;
 
-           return temp;
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -99,15 +86,14 @@ public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
     @Override
     protected void onPostExecute(final Item item) {
 
-        if(item == null)
-        {
+        if (item == null) {
             Toast.makeText(activity.getApplicationContext(), "Connection error", Toast.LENGTH_SHORT).show();
         }
 
-       TextView prodName = (TextView) view.findViewById(R.id.editName);
+        TextView prodName = (TextView) view.findViewById(R.id.editName);
         TextView prodQuantity = (TextView) view.findViewById(R.id.editQuantity);
-       TextView prodPrice = (TextView) view.findViewById(R.id.editPrice);
-       TextView description = (TextView) view.findViewById(R.id.editDescr);
+        TextView prodPrice = (TextView) view.findViewById(R.id.editPrice);
+        TextView description = (TextView) view.findViewById(R.id.editDescr);
 
         prodName.setText(item.getName());
         prodQuantity.setText(item.getQuantity());

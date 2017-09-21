@@ -78,7 +78,7 @@ public class AddProdFragment extends Fragment {
                 descr = description.getText().toString();
                 prodid = prodId.getText().toString();
                 try {
-                    callAddProdTask(prodid, name, quantity, price, descr);
+                    callAddProdTask(prodid, name, quantity, price, descr, photo);
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -128,8 +128,8 @@ public class AddProdFragment extends Fragment {
     }
 
 
-    public void callAddProdTask(String id, String name, String quantity, String price, String descr) throws ExecutionException, InterruptedException {
-        new AddProdTask(id, name, quantity, price, descr, myView, getActivity()).execute();
+    public void callAddProdTask(String id, String name, String quantity, String price, String descr, Bitmap photo) throws ExecutionException, InterruptedException {
+        new AddProdTask(id, name, quantity, price, descr, photo, myView, getActivity()).execute();
     }
 
 

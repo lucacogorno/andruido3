@@ -39,8 +39,7 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
     View view;
     Activity atv;
 
-    public GetItemsTask(View view, Activity atv)
-    {
+    public GetItemsTask(View view, Activity atv) {
         this.view = view;
         this.atv = atv;
     }
@@ -48,7 +47,7 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
     @Override
     protected ArrayList<Item> doInBackground(Object... params) {
         ArrayList<Item> temp = new ArrayList<>();
-        URL reqURL = null;
+        URL reqURL;
         try {
             reqURL = new URL(requestURL);
             HttpURLConnection urlConnection = (HttpURLConnection) reqURL.openConnection();
@@ -56,13 +55,12 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
             Scanner s = new Scanner(response).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
             JSONArray jsonResp = new JSONArray(result);
-            for(int i = 0; i < jsonResp.length(); i++)
-            {
+            for (int i = 0; i < jsonResp.length(); i++) {
                 Log.d("OUTSIDE ITEM",
                         jsonResp.getJSONObject(i).getInt("id") +
-                        jsonResp.getJSONObject(i).getString("name")+
-                        jsonResp.getJSONObject(i).getString("quantity")+
-                        jsonResp.getJSONObject(i).getString("price"));
+                                jsonResp.getJSONObject(i).getString("name") +
+                                jsonResp.getJSONObject(i).getString("quantity") +
+                                jsonResp.getJSONObject(i).getString("price"));
                 temp.add(
 
                         new Item(jsonResp.getJSONObject(i).getLong("id"),
@@ -72,13 +70,10 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
                                 jsonResp.getJSONObject(i).getString("description")
                         )
                 );
+
             }
             return temp;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
 
@@ -91,19 +86,15 @@ public class GetItemsTask extends AsyncTask<Object, Object, ArrayList<Item>> {
 
         final ArrayList<String> stringItems = new ArrayList<>();
         ListView lv = (ListView) view.findViewById(R.id.listView);
-        if(items.size() == 0)
-        {
-            Toast.makeText(view.getContext(), "Connection Error", Toast.LENGTH_SHORT);
+        if (items.size() == 0) {
+            Toast.makeText(view.getContext(), "Connection Error", Toast.LENGTH_SHORT).show();
             return;
         }
-        for(int i=0; i<items.size(); i++)
-        {
+        for (int i = 0; i < items.size(); i++) {
             stringItems.add(items.get(i).toString());
         }
         ItemListAdapter itemListAdapter = new ItemListAdapter(items, atv);
-
         lv.setAdapter(itemListAdapter);
-
         lv.setItemsCanFocus(false);
 
     }
