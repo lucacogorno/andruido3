@@ -98,7 +98,7 @@ public class GetOrderMyProducts extends AsyncTask<Object, Object, ArrayList<Orde
     protected void onPostExecute(final ArrayList<OrderItem> orderItems) {
 
 
-        ListView lv = (ListView) view.findViewById(R.id.order_products);
+        ListView lv = (ListView) view.findViewById(R.id.my_order_products);
 
         if(orderItems.size() == 0)
         {

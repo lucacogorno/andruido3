@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/confirmOrder"
-        android:layout_width="530dp"
+        android:layout_width="400dp"
         android:layout_height="50dp"
         android:text="CONFIRM ORDER"
         android:textColor="@color/colorWhite"
@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/totalAmount"
-        android:layout_width="400dp"
+        android:layout_width="500dp"
         android:layout_height="50dp"
         android:background="@color/colorGrey"
         android:gravity="center"

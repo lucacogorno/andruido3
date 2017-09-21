@@ -5,20 +5,20 @@
     <TextView
         android:id="@+id/myOrdersTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="80dp"
         android:text="My Orders"
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="30dp"
+        android:gravity="left|center"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentEnd="true" />
 
     <ListView
         android:id="@+id/ordered_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/deliveredTitle"
-        android:layout_marginTop="35dp" />
+        android:layout_below="@+id/myOrdersTitle" />
 </RelativeLayout>

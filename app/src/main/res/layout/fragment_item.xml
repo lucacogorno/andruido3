@@ -40,7 +40,7 @@
 
     <Button
         android:id="@+id/addToCartButton"
-        android:layout_width="500dp"
+        android:layout_width="400dp"
         android:layout_height="50dp"
         android:text="ADD TO CART"
         android:textColor="@color/colorWhite"
