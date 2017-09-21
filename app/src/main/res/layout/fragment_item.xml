@@ -55,6 +55,7 @@
         android:text="Prezzo"
         android:textColor="@color/colorPrimaryDark"
         android:background="@color/colorGrey"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/addToCartButton" />

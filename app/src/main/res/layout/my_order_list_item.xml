@@ -5,49 +5,54 @@
     <TextView
         android:id="@+id/myorderNumber"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="Order Number: "
         android:textSize="14sp"
 
+        android:layout_marginTop="71dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/myorderAdress"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="Address: "
         android:textSize="14sp"
-        android:layout_alignBottom="@+id/myorderDetails"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/myorderState"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/myorderDetails" />
 
     <TextView
         android:id="@+id/myorderState"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="State: "
-        android:layout_alignTop="@+id/myorderDetails"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/myorderNumber"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/myorderDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
         android:text="details"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/colorWhite"
-        android:layout_marginTop="29dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:textSize="15dp"
+        android:textStyle="italic"
+        android:layout_alignBottom="@+id/myorderDate"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/myorderState" />
 
     <TextView
         android:id="@+id/myorderDate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="Date: "
-        android:layout_below="@+id/myorderDetails"
+        android:layout_below="@+id/myorderAdress"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="12dp" />
+        android:layout_toStartOf="@+id/myorderDetails" />
 
 </RelativeLayout>
