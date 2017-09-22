@@ -1,9 +1,13 @@
 package com.example.cogor.navigationdrawer.Tasks;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,7 @@ import java.util.Scanner;
 public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
     private static String requestURL = "http://webdev.disi.unige.it/~S4110217/get_item_info.php";
     private String id;
+    Bitmap bitmap;
     View view;
     Activity activity;
 
@@ -75,6 +80,8 @@ public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
                     jsonObject.getString("price"),
                     jsonObject.getString("description"),
                     jsonObject.getString("productImage"));
+            byte[] encodeByte = Base64.decode(temp.getImage(), Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             return temp;
 
         } catch (JSONException | IOException e) {
@@ -94,7 +101,9 @@ public class GetProdInfoTask extends AsyncTask<Object, Object, Item> {
         TextView prodQuantity = (TextView) view.findViewById(R.id.editQuantity);
         TextView prodPrice = (TextView) view.findViewById(R.id.editPrice);
         TextView description = (TextView) view.findViewById(R.id.editDescr);
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageView3);
 
+        imageView.setImageBitmap(bitmap);
         prodName.setText(item.getName());
         prodQuantity.setText(item.getQuantity());
         prodPrice.setText(item.getPrice());
